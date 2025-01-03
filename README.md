@@ -1,1 +1,1 @@
-# notes-on-lattice-based-cryptography
+# notes on lattice-based cryptography
