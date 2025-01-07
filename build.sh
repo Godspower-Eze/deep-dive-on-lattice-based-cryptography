@@ -1,1 +1,0 @@
-jupyter nbconvert *.ipynb --to markdown --no-input
