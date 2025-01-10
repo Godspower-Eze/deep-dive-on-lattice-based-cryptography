@@ -74,17 +74,7 @@ Below, we will see what a lattice is and what is not.
   
   **Non-example**: $(1,0),(2,3),(−1,2)$
 
-
-    
-![png](fundamentals_files/fundamentals_10_0.png)
-    
-
-
-
-    
-![png](fundamentals_files/fundamentals_10_1.png)
-    
-
+- ***CASE 1**: Just even integers*
 
 
     
@@ -95,5 +85,19 @@ Below, we will see what a lattice is and what is not.
 
     
 ![png](fundamentals_files/fundamentals_11_1.png)
+    
+
+
+- ***CASE 2**: random 2-tuples with sum of even integer*
+
+
+    
+![png](fundamentals_files/fundamentals_13_0.png)
+    
+
+
+
+    
+![png](fundamentals_files/fundamentals_13_1.png)
     
 
