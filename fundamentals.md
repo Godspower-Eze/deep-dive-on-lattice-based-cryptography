@@ -16,6 +16,12 @@ Below, we will see what a lattice is and what is not.
     
 
 
+
+    
+![png](fundamentals_files/fundamentals_4_1.png)
+    
+
+
 - The integers $\mathbb{Z} \in \mathbb{R}$ form a 1-dimensional lattice
 
 
@@ -30,11 +36,35 @@ Below, we will see what a lattice is and what is not.
     
 
 
+
+    
+![png](fundamentals_files/fundamentals_6_2.png)
+    
+
+
+
+    
+![png](fundamentals_files/fundamentals_6_3.png)
+    
+
+
+
+    
+![png](fundamentals_files/fundamentals_6_4.png)
+    
+
+
 - The integer grid $\mathbb{Z}^n \in \mathbb{R}^n$ is an n-dimensional lattice
 
 
     
 ![png](fundamentals_files/fundamentals_8_0.png)
+    
+
+
+
+    
+![png](fundamentals_files/fundamentals_8_1.png)
     
 
 
@@ -44,7 +74,10 @@ Below, we will see what a lattice is and what is not.
   
   **Non-example**: $(1,0),(2,3),(−1,2)$
 
-    100
+
+    
+![png](fundamentals_files/fundamentals_10_0.png)
+    
 
 
 
@@ -56,5 +89,11 @@ Below, we will see what a lattice is and what is not.
 
     
 ![png](fundamentals_files/fundamentals_11_0.png)
+    
+
+
+
+    
+![png](fundamentals_files/fundamentals_11_1.png)
     
 
