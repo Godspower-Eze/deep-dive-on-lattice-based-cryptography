@@ -1,4 +1,4 @@
-# fundamentals of lattice-based cryptography
+# fundamentals and mathematical background of lattice-based cryptography
 
 ## what is a lattice?
 
@@ -126,3 +126,19 @@ Below, we will see what a lattice is and what is not.
   Recall, that a lattice $L$ is an addictive subgroup if it contains identity element $0 \in \mathbb{R}$(the all-zeros vector), and if any $x, y \in L$, we have $-x \in L$ and $x + y \in L$.
 
   The odd integers $2\mathbb{Z} + 1$ do not contain 0
+
+## basis
+
+A basis $B = \{b_1, b_2, ..., b_n\} \subset \mathbb{R}^n$ of a lattice $L$ is a set of linearly independent vector whose integer linear combinatios generate the lattice:$$L = L(B) := \{\sum_{i = 1}^{n}z_ib_i : z_i \in \mathbb{Z}\}$$
+
+Recall, two vectors $b_1$ and $b_2$ are said to be linearly independent if $w * b_1 \neq b_2$ and $w * b_2 \neq b_1$ where $w$ is an arbitrary number.
+
+For example, $b_1 = [1, 2, 3]$ and $b_2 = [5, 3, 7]$ are linearly independent while $b_3 = [1, 2, 3]$ and $b_4 = [2, 4, 6]$ are not. Why? $w_1 * b_3 = b_4$ and $w_2 * b_4 = b_3$ where $w_1$ and $w_2$ are $2$ and $\dfrac{1}{2}$ respectively.
+
+But, we can't find any $w_i$ for which $w_i * b_1 == b_2$ and vice versa.
+
+In this case, this is generalized to vectors of $B = \{b_1, b_2, ..., b_n\}$ where for any two vectors in the set $B$, they are linearly independent
+
+---
+
+
