@@ -137,8 +137,21 @@ For example, $b_1 = [1, 2, 3]$ and $b_2 = [5, 3, 7]$ are linearly independent wh
 
 But, we can't find any $w_i$ for which $w_i * b_1 == b_2$ and vice versa.
 
-In this case, this is generalized to vectors of $B = \{b_1, b_2, ..., b_n\}$ where for any two vectors in the set $B$, they are linearly independent
+In this case, this is generalized to vectors of $B = \{b_1, b_2, ..., b_n\}$ where for any two vectors in the set $B$, they are linearly independent.
 
----
+We can also represent a basic $B$ as a matrix. This is an $n*n$ matrix where the basis vectors are the ordered columns of the matrix. This is a non-singular matrix. 
 
+With this we can represent a lattice $L = B * \mathbb{Z}^n = \{Bz: z \in \mathbb{Z}^n \}$
 
+For example, given a basis $B = \{b_1, b_2, b_3\}$ where $b_1 = [1, 0, 0]$, $b_2 = [0, 1, 0]$ and $b_3 = [0, 0, 1]$ respectively, we have a matrix $B = \begin{bmatrix}1 & 0 & 0 \\[0.3em]0 & 1 & 0 \\[0.3em]0 & 0 & 1
+\end{bmatrix}$ and the finite set of integer vectors $z = \{v_1, v_2, v_3 \}$ where $v_1 = [1, 2, 5]$, $v_2 = [-5, 7, 9]$ and $v_3 = [-9, 3, 7]$ respectively, we can generate a lattice $L$ with three points $[1, 2, 5]$, $[-5, 7, 9]$ and $[-9, 3, 7]$.
+
+This way of representing the basis is instrumental in understanding the next topic: unimodular matrix
+
+### unimodular matrix
+
+Bases $B_1$, $B_2$ generate the same if lattice $L$ if and only if there exists a unimodular $U \in \mathbb{Z}^{n \times n}$ such that $B_1 = B_2U$.
+
+This property for two bases being able to generate the same lattice $L$ increases the hardness of solving problems in lattice-based cryptography.
+
+We can efficiently test whether two given matrices $B_1$, $B_2$ generate the same lattice, by checking whether $B_1^{-1}·B_2$ is unimodular.
