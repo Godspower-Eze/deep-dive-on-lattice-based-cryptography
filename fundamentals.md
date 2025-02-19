@@ -127,17 +127,19 @@ Below, we will see what a lattice is and what is not.
 
   The odd integers $2\mathbb{Z} + 1$ do not contain 0
 
+---
+
 ## basis
 
-A basis $B = \{b_1, b_2, ..., b_n\} \subset \mathbb{R}^n$ of a lattice $L$ is a set of linearly independent vector whose integer linear combinatios generate the lattice:$$L = L(B) := \{\sum_{i = 1}^{n}z_ib_i : z_i \in \mathbb{Z}\}$$
+A basis $B = \{b_1, b_2, ..., b_n\} \subset \mathbb{R}^n$ of a lattice $L$ is a set of linearly independent vector whose integer linear combinations generate the lattice:$$L = L(B):= \{\sum_{i = 1}^{n}z_ib_i: z_i \in \mathbb{Z}\}$$
 
-Recall, two vectors $b_1$ and $b_2$ are said to be linearly independent if $w * b_1 \neq b_2$ and $w * b_2 \neq b_1$ where $w$ is an arbitrary number.
+Recall two vectors $b_1$ and $b_2$ are said to be linearly independent if $w * b_1 \neq b_2$ and $w * b_2 \neq b_1$ where $w$ is an arbitrary integer.
 
 For example, $b_1 = [1, 2, 3]$ and $b_2 = [5, 3, 7]$ are linearly independent while $b_3 = [1, 2, 3]$ and $b_4 = [2, 4, 6]$ are not. Why? $w_1 * b_3 = b_4$ and $w_2 * b_4 = b_3$ where $w_1$ and $w_2$ are $2$ and $\dfrac{1}{2}$ respectively.
 
 But, we can't find any $w_i$ for which $w_i * b_1 == b_2$ and vice versa.
 
-In this case, this is generalized to vectors of $B = \{b_1, b_2, ..., b_n\}$ where for any two vectors in the set $B$, they are linearly independent.
+In this case, this is generalized to vectors of $B = \{b_1, b_2, ..., b_n\}$ where any two vectors in the set $B$ are linearly independent.
 
 We can also represent a basic $B$ as a matrix. This is an $n*n$ matrix where the basis vectors are the ordered columns of the matrix. This is a non-singular matrix. 
 
@@ -146,12 +148,88 @@ With this we can represent a lattice $L = B * \mathbb{Z}^n = \{Bz: z \in \mathbb
 For example, given a basis $B = \{b_1, b_2, b_3\}$ where $b_1 = [1, 0, 0]$, $b_2 = [0, 1, 0]$ and $b_3 = [0, 0, 1]$ respectively, we have a matrix $B = \begin{bmatrix}1 & 0 & 0 \\[0.3em]0 & 1 & 0 \\[0.3em]0 & 0 & 1
 \end{bmatrix}$ and the finite set of integer vectors $z = \{v_1, v_2, v_3 \}$ where $v_1 = [1, 2, 5]$, $v_2 = [-5, 7, 9]$ and $v_3 = [-9, 3, 7]$ respectively, we can generate a lattice $L$ with three points $[1, 2, 5]$, $[-5, 7, 9]$ and $[-9, 3, 7]$.
 
-This way of representing the basis is instrumental in understanding the next topic: unimodular matrix
+This way of representing the basis is instrumental in understanding the next topic: **unimodular matrix**
 
 ### unimodular matrix
 
 Bases $B_1$, $B_2$ generate the same if lattice $L$ if and only if there exists a unimodular $U \in \mathbb{Z}^{n \times n}$ such that $B_1 = B_2U$.
 
-This property for two bases being able to generate the same lattice $L$ increases the hardness of solving problems in lattice-based cryptography.
+An integer matrix is said to unimodular if it determinant is $\pm1$.
+
+This property for two bases being able to generate the same lattice $L$ is what makes lattice-based cryptography possible.
 
 We can efficiently test whether two given matrices $B_1$, $B_2$ generate the same lattice, by checking whether $B_1^{-1}·B_2$ is unimodular.
+
+---
+
+## norms
+
+A *norm* or *vector norm* is a generalization of what we would normally call the length or magnitude of a vector.
+
+Recall, $||{\mathbf{v}}|| = \sqrt{v_1^2 + v_2^2 + v_3^2 + .... + v_n^2}$, the **magnitude** or **length** or **size** of a vector ${\mathbf{v}}$. This is a type of norm called the **Euclidean norm** $||\mathbf{v}||_2$.
+
+Formally, a norm on a vector space $V$ over $\mathbb{R}$ or $\mathbb{C}$ is a function $||.||:V \to \mathbb{R}$ that satisfies the properties for all vectors $\mathbf{v}$, $\mathbf{w}$ $\in$ $V$ and all scalars $\alpha$:
+
+1. **Non-negativity**: $||\mathbf{v}|| \geq 0$, and $||\mathbf{v}|| = 0 \iff \mathbf{v} = 0$
+
+2. **Homogeneity**: $||\alpha \mathbf{v}|| = |\mathbf{\alpha}|||\mathbf{v}||$
+
+3. **Triangle Inequality**: $||\mathbf{v} + \mathbf{w}|| \leq ||\mathbf{v}|| + ||\mathbf{w}||$
+
+For example, the Euclidean norm for the vector $\mathbf{v} = [3, 4]$ is $||\mathbf{v}||_2 = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$.
+
+The graphical representation is displayed below. The length of the arrow is $5$.
+
+This graph would help us understand the next topic: ***$i$*-th successive minimum**
+
+
+    
+![png](fundamentals_files/fundamentals_24_0.png)
+    
+
+
+Other norms include the *Manhattan Norm*, *Maximum Norm* and *p-norm*. For now, we only care about Euclidean norms.
+
+---
+
+### $i$-th successive minimum
+
+The Euclidean Norm $||\mathbf{v}||_2$ of any vector $\mathbf{v}$ in a lattice $L$ can be interpreted as the **radius** $r$ of a circle (or sphere in higher dimensions) where the origin $(0, 0)$ of the graph is the centre of the circle as shown in the diagram below. 
+
+
+    
+![png](fundamentals_files/fundamentals_28_0.png)
+    
+
+
+Given a lattice $L$ and a norm(i.e. the Euclidean norm), the $i$-th successive minimum $\lambda_i(L)$ is the smallest radius $r$ such that $L$ contains at least $i$ linearly independent lattice vectors of norm at most $r$ within a ball of radius $r$ centered at the origin.
+
+In other words, what is the smallest radius $r$ such that there exists $i$ linearly independent vectors $\mathbf{v_1}, \mathbf{v_2}, ..., \mathbf{v_i}$ in the lattice $L$ if we draw a circle(or, sphere in higher dimensions) of radius $r$? Recall, that we interpret the norm of a vector as a radius $r$ when the centre is at the origin $(0, 0)$.  
+
+For example, if we generate the vectors $\mathbf{v_1} = [4, 2]$, $\mathbf{v_2} = [-5, -5]$ and $\mathbf{v_3} = [2, 11]$ given the basis points $b_1 = [2, 1]$ and $b_2 = [1, 3]$ creating a a lattice $L$, what is the 1st successive minimum $\lambda_1(L)$? Or, What is $i$-th successive minimum when $i$ is 1?
+
+We start by finding the norm of the vectors(including the basis vectors):
+
+- $||\mathbf{b_1}||_2 = \sqrt{2^2 + 1^2} = \sqrt{4 + 1} = \sqrt{5} = 2.24$
+- $||\mathbf{b_2}||_2 = \sqrt{1^2 + 3^2} = \sqrt{1 + 9} = \sqrt{10} = 3.16$
+- $||\mathbf{v_1}||_2 = \sqrt{4^2 + 2^2} = \sqrt{16 + 4} = \sqrt{20} = 4.47$
+- $||\mathbf{v_2}||_2 = \sqrt{-5^2 + -5^2} = \sqrt{25 + 25} = \sqrt{50} = 7.07$
+- $||\mathbf{v_3}||_2 = \sqrt{2^2 + 11^2} = \sqrt{4 + 121} = \sqrt{125} = 11.18$
+
+The smallest radius is $2.24$ and we have one linearly independent vector $b_1 = [2, 1]$. Notice how it is the closest vector to the origin. It is called the smallest nonzero vector in the lattice.
+
+
+    
+![png](fundamentals_files/fundamentals_30_0.png)
+    
+
+
+Again, what is the 2nd successive minimum? We are looking for the smallest linearly independent set of two vectors.
+
+From the computed norms, we know that the second smallest vector is $b_2 = [1, 3]$ with norm of $3.16$ and the two smallest linearly independent vectors are $b_1$ and $b_2$
+
+
+    
+![png](fundamentals_files/fundamentals_32_0.png)
+    
+
