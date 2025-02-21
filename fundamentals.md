@@ -1,6 +1,6 @@
 # Mathematical Background of Lattices
 
-## what is a lattice?
+## What is a Lattice?
 
 An $n$-dimensional *lattice* $L$ is a discrete addictive subgroup of $\mathbb{R}^n$
 
@@ -11,27 +11,63 @@ Below, we will see what a lattice is and what is not.
 
 - The singleton set $\{0\} \in \mathbb{R}^n$ is a lattice(for any positive integer $n$). That is, the zero set in any dimension is a lattice.
 
-![png](fundamentals_files/fundamentals_4_0.png)
 
+    
+![png](fundamentals_files/fundamentals_4_0.png)
+    
+
+
+
+    
 ![png](fundamentals_files/fundamentals_4_1.png)
+    
+
 
 - The integers $\mathbb{Z} \in \mathbb{R}$ form a 1-dimensional lattice
 
+
+    
 ![png](fundamentals_files/fundamentals_6_0.png)
+    
 
+
+
+    
 ![png](fundamentals_files/fundamentals_6_1.png)
+    
 
+
+
+    
 ![png](fundamentals_files/fundamentals_6_2.png)
+    
 
+
+
+    
 ![png](fundamentals_files/fundamentals_6_3.png)
+    
 
+
+
+    
 ![png](fundamentals_files/fundamentals_6_4.png)
+    
+
 
 - The integer grid $\mathbb{Z}^n \in \mathbb{R}^n$ is an n-dimensional lattice
 
-![png](fundamentals_files/fundamentals_8_0.png)
 
+    
+![png](fundamentals_files/fundamentals_8_0.png)
+    
+
+
+
+    
 ![png](fundamentals_files/fundamentals_8_1.png)
+    
+
 
 - The set $\{x ∈ \mathbb{Z}^n : \sum_{i=1}^nx_i ∈ 2\mathbb{Z}\}$ is a lattice; it is often called the “checkerboard” or “chessboard” lattice, especially in two dimensions. It contains all n-tuples of integers $x = (x_1, x_2,...,x_n) \in \mathbb{Z}$ such the sum of the components of $x$, i.e $\sum_{i = 1}^{x_i}$, is an even integer.
 
@@ -41,15 +77,31 @@ Below, we will see what a lattice is and what is not.
 
 - ***CASE 1**: Just even integers*
 
-![png](fundamentals_files/fundamentals_11_0.png)
 
+    
+![png](fundamentals_files/fundamentals_11_0.png)
+    
+
+
+
+    
 ![png](fundamentals_files/fundamentals_11_1.png)
+    
+
 
 - ***CASE 2**: random 2-tuples with sum of even integer*
 
-![png](fundamentals_files/fundamentals_13_0.png)
 
+    
+![png](fundamentals_files/fundamentals_13_0.png)
+    
+
+
+
+    
 ![png](fundamentals_files/fundamentals_13_1.png)
+    
+
 
 - The rationals $\mathbb{Q} \subset \mathbb{R}$ do not form a lattice, because although they form a subgroup, it is not discrete: there exist rational numbers that are arbitrarily close to zero.
 
@@ -57,9 +109,17 @@ Below, we will see what a lattice is and what is not.
 
   For example, below is a graph of points in $\mathbb{Q}$ between 1 and 2.
 
-![png](fundamentals_files/fundamentals_15_0.png)
 
+    
+![png](fundamentals_files/fundamentals_15_0.png)
+    
+
+
+
+    
 ![png](fundamentals_files/fundamentals_15_1.png)
+    
+
 
 - The odd integers $2\mathbb{Z} + 1$ do not form a lattice, because although they are discrete, they do not form a subgroup of $\mathbb{R}$.
 
@@ -69,7 +129,7 @@ Below, we will see what a lattice is and what is not.
 
 ---
 
-## basis
+## Basis
 
 A basis $B = \{b_1, b_2, ..., b_n\} \subset \mathbb{R}^n$ of a lattice $L$ is a set of linearly independent vector whose integer linear combinations generate the lattice:$$L = L(B):= \{\sum_{i = 1}^{n}z_ib_i: z_i \in \mathbb{Z}\}$$
 
@@ -81,7 +141,7 @@ But, we can't find any $w_i$ for which $w_i * b_1 == b_2$ and vice versa.
 
 In this case, this is generalized to vectors of $B = \{b_1, b_2, ..., b_n\}$ where any two vectors in the set $B$ are linearly independent.
 
-We can also represent a basic $B$ as a matrix. This is an $n*n$ matrix where the basis vectors are the ordered columns of the matrix. This is a non-singular matrix.
+We can also represent a basic $B$ as a matrix. This is an $n*n$ matrix where the basis vectors are the ordered columns of the matrix. This is a non-singular matrix. 
 
 With this we can represent a lattice $L = B * \mathbb{Z}^n = \{Bz: z \in \mathbb{Z}^n \}$
 
@@ -90,7 +150,7 @@ For example, given a basis $B = \{b_1, b_2, b_3\}$ where $b_1 = [1, 0, 0]$, $b_2
 
 This way of representing the basis is instrumental in understanding the next topic: **unimodular matrix**
 
-### unimodular matrix
+### Unimodular Matrix
 
 Bases $B_1$, $B_2$ generate the same if lattice $L$ if and only if there exists a unimodular $U \in \mathbb{Z}^{n \times n}$ such that $B_1 = B_2U$.
 
@@ -102,7 +162,7 @@ We can efficiently test whether two given matrices $B_1$, $B_2$ generate the sam
 
 ---
 
-## norms
+## Norms
 
 A *norm* or *vector norm* is a generalization of what we would normally call the length or magnitude of a vector.
 
@@ -122,17 +182,25 @@ The graphical representation is displayed below. The length of the arrow is $5$.
 
 This graph would help us understand the next topic: ***$i$*-th successive minimum**
 
+
+    
 ![png](fundamentals_files/fundamentals_24_0.png)
+    
+
 
 Other norms include the *Manhattan Norm*, *Maximum Norm* and *p-norm*. For now, we only care about Euclidean norms.
 
 ---
 
-### $i$-th successive minimum
+### Successive Minimum
 
-The Euclidean Norm $||\mathbf{v}||_2$ of any vector $\mathbf{v}$ in a lattice $L$ can be interpreted as the **radius** $r$ of a circle (or sphere in higher dimensions) where the origin $(0, 0)$ of the graph is the centre of the circle as shown in the diagram below.
+The Euclidean Norm $||\mathbf{v}||_2$ of any vector $\mathbf{v}$ in a lattice $L$ can be interpreted as the **radius** $r$ of a circle (or sphere in higher dimensions) where the origin $(0, 0)$ of the graph is the centre of the circle as shown in the diagram below. 
 
+
+    
 ![png](fundamentals_files/fundamentals_28_0.png)
+    
+
 
 Given a lattice $L$ and a norm(i.e. the Euclidean norm), the $i$-th successive minimum $\lambda_i(L)$ is the smallest radius $r$ such that $L$ contains at least $i$ linearly independent lattice vectors of norm at most $r$ within a ball of radius $r$ centered at the origin.
 
@@ -150,10 +218,18 @@ We start by finding the norm of the vectors(including the basis vectors):
 
 The smallest radius is $2.24$ and we have one linearly independent vector $b_1 = [2, 1]$. Notice how it is the closest vector to the origin. It is called the smallest nonzero vector in the lattice.
 
+
+    
 ![png](fundamentals_files/fundamentals_30_0.png)
+    
+
 
 Again, what is the 2nd successive minimum? We are looking for the smallest linearly independent set of two vectors.
 
 From the computed norms, we know that the second smallest vector is $b_2 = [1, 3]$ with norm of $3.16$ and the two smallest linearly independent vectors are $b_1$ and $b_2$
 
+
+    
 ![png](fundamentals_files/fundamentals_32_0.png)
+    
+
