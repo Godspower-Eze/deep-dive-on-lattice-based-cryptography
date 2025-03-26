@@ -348,11 +348,12 @@ Second half:
 Did you notice anything in this construction!? Here are some observations:
 
 1. The sets in the second half are a repetition of the sets in the first half and because of this we will only focus on the first half moving on. Try this with numbers greater than $9$ or less than $0$.
-2. The sets are distinct. Every element appears in only one set.
-3. If we add any element from a set to any element from another set, you get an element from a set. For example, if we add a number in $\underline{0}$ to a number in $\underline{1}$, we get a number in $\underline{1}$ and if we add a number in $\underline{2}$ to a number in $\underline{4}$, we get a number in $\underline{1}$.
-4. If we add any number from a set to any number in $\underline{0}$, we get back a number in the same set. For example, if we add $14$ from $\underline{4}$ to $15$ from $\underline{0}$, we get $4$ from $\underline{4}$.
-5. If we add any number from $\underline{2}$ to any number from $\underline{3}$, we get a number from $\underline{0}$, if we add any number from $\underline{1}$ to any number from $\underline{4}$, we get a number from $\underline{0}$ and if we add any number from $\underline{0}$ to any number from itself, we get a number from $\underline{0}$.
-6. The last three observations implies **closure**, presence of an **identity element** and presence of an **inverse element** respectively. The sets are called **cosets** and they form a **group** called the **quotient group** $\mathbb{Z}/5\mathbb{Z} = \{\underline{0}, \underline{1}, \underline{2}, \underline{3}, \underline{4}\}$. We call it a quotient group because we use a subgroup to divide the group into cosets. Not all subgroups like $5\mathbb{Z}$ create cosets that form a quotient group, but when they do we call them **normal subgroups**. Our observations doesn't show **associativity** but it holds and I urge you to try it out
+2. The sets are disjoint(i.e, they have no elements in common). Every element appears in only one set.
+3. The "combination" of the sets makes up the set of integers $\mathbb{Z}$. That is, $\underline{0} \cup \underline{1} \cup \underline{2} \cup \underline{3} \cup \underline{4} = \mathbb{Z}$
+4. If we add any element from a set to any element from another set, you get an element from a set. For example, if we add a number in $\underline{0}$ to a number in $\underline{1}$, we get a number in $\underline{1}$ and if we add a number in $\underline{2}$ to a number in $\underline{4}$, we get a number in $\underline{1}$.
+5. If we add any number from a set to any number in $\underline{0}$, we get back a number in the same set. For example, if we add $14$ from $\underline{4}$ to $15$ from $\underline{0}$, we get $4$ from $\underline{4}$.
+6. If we add any number from $\underline{2}$ to any number from $\underline{3}$, we get a number from $\underline{0}$, if we add any number from $\underline{1}$ to any number from $\underline{4}$, we get a number from $\underline{0}$ and if we add any number from $\underline{0}$ to any number from itself, we get a number from $\underline{0}$.
+7. The last three observations implies **closure**, presence of an **identity element** and presence of an **inverse element** respectively. The sets are called **cosets** and they form a **group** called the **quotient group** $\mathbb{Z}/5\mathbb{Z} = \{\underline{0}, \underline{1}, \underline{2}, \underline{3}, \underline{4}\}$. We call it a quotient group because we use a subgroup to divide the group into cosets. Not all subgroups like $5\mathbb{Z}$ create cosets that form a quotient group, but when they do we call them **normal subgroups**. Our observations doesn't show **associativity** but it holds and I urge you to try it out
  
 Formally, a **coset** is formed when you take a subgroup $H$ of a group $G$ and partition $G$ into sets of the form $$gH = \{g * h | h \in H\}$$ where $g \in G$ and $*$ is an operation.
 
@@ -360,6 +361,22 @@ Formally, a **coset** is formed when you take a subgroup $H$ of a group $G$ and 
 - **identity element**: $0$, the identity element is not in the set.
 - **inverse element**: It doesn't contain the identity element so it cannot have an inverse element.
 - **closure**: $3 + 8 = 11$ but $11$ is not in $\underline{3}$.
+
+Now, back to lattices. How does all these help in understanding fundamental domain and parallelepipeds?
+
+Since a lattice $L$ is a subgroup of $\mathbb{R}^n$, we can define the quotient group $\mathbb{R}^n/L$, which consists of cosets of $L$ in $\mathbb{R}^n$. A quotient group $\mathbb{R}^n/L$ of this form is corresponds to a **fundamental domain** of $L$. A fundamental domain is a region in $\mathbb{R}^n$ that contains exactly one representative from each coset. 
+
+Similar to how $\mathbb{Z}/5\mathbb{Z}$ encompasses to full set of integers $\mathbb{Z}$ using four cosets, the fundamental domain encompasses all the elements of $\mathbb{R}^n$ by taking one element from each coset.
+
+Formally, a coset of $L$ in $\mathbb{R}^n$ is a set of the form $v + L = \{v + \lambda | \lambda \in L \}$ where $v$ is a vector in $\mathbb{R}^n$. If $v_1, v_2 \in \mathbb{R}^n$, then $v_1 + L$ and $v_2 + L$ are either the same set or disjoint. The set of all such cosets forms the quotient group $\mathbb{R}^n/L$.
+
+For example, given a lattice $L = \{[5, 2, 1], [2, 1, 3], [4, 5, 1], [7, 2, 1], [10, 7, 7]\}$ and $v_1 = [1, 2, 3]$, $v_2 = [1, 5, 1]$ and $v_3 = [5, 2, 3]$, we can form the following cosets:
+
+- $\underline{v_1} = v_1 + L = [1, 2, 3] + L = \{[6,  4,  4], [3,  3,  6],[5,  7,  4], [8,  4,  4], [11,  9, 10]\}$
+- $\underline{v_2} = v_2 + L = [1, 5, 1] + L = \{[6,  7,  2], [3,  6,  4], [5, 10,  2], [8,  7,  2], [11, 12,  8]\}$
+- $\underline{v_3} = v_3 + L = [5, 2, 3] + L = \{[10,  4,  4], [7,  3,  6], [9,  7,  4], [12,  4,  4], [15,  9, 10]\}$
+
+A fundamental domain from these cosets could be the set $\{[5,  7,  4], [3,  6,  4], [15,  9, 10]\}$.
 
 ---
 
