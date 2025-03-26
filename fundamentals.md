@@ -293,9 +293,75 @@ With this, it is safe to say the 3rd successive minimum and above does not exist
 
 In general, the maximum $i$ in the $i$-th successive minimum is the number of basis vectors.
 
-It's important to point out that a lattice $L$ might have multiple basis vectors and this is an instrumental property of lattices that makes certain types of lattice-based cryptography possible. 
+It's important to point out that a lattice $L$ might have multiple basis vectors and this is an instrumental property of lattices that makes certain types of lattice-based cryptography possible.
 
-----
+____
+
+### Fundamental domains and parallelepipeds
+
+In order to understand fundamental domain and parallelepipeds, here's a quick crash course on abstract algebra.
+
+A **group** is a set $G$ with an operation $*$ that satisfies four properties:
+- **Closure**: if $a$, $b \in G$, then $a * b \in G$
+- **Associativity**: $(a * b) * c = a * (b * c)$ for all $a, b, c \in G$
+- **Identity Element**: There exists an element $i \in G$ such that $i * a = i * a = a$ for all $a \in G$
+- **Inverse Element**: For every $a \in G$, there exists an element $a^{-1} \in G$ such that $a * a^{-1} = a^{-1} * a = i$(the identity element)
+
+Example of a group:
+- The set of integers $\mathbb{Z}$ under the operation, addition $+$ forms a group:
+   - **Closure:** if $a, b \in \mathbb{Z}$, then $a + b \in \mathbb{Z}$. For example, $1 + 5 = 6$
+   - **Associativity**: $(a + b) + c = a + (b + c)$. For example, $(5 + 3) + 9 = 5 + (3 + 9)$
+   - **Identity**: The number $0$ satisfies $0 + a = a + 0 = a$
+   - **Inverses**: Each $a \in \mathbb{Z}$ has an inverse $-a$, since $a + (-a) = 0$.
+
+A **subgroup** $H$ of a **group** $G$ is a subset of $G$ that is itself a group under the same operation. That is:
+- **Closure**: if $a$, $b \in H$, then $a * b \in H$
+- **Identity Element**: The identity element of the group $G$ is in $H$
+- **Inverse Element**: If $a \in H$, then $a^{-1} \in H$
+
+Example of a subgroup:
+- The set of integers mod 5 $5\mathbb{Z} = \{..., -15, -10, -5, 0, 5, 10, 15,...\}$(i.e multipling $5$ by all integers) is a subgroup of $\mathbb{Z}$ under addition because:
+   - **Closure:** The sum of two numbers divisible by $5$ is divisible by $5$ making it closed under addition. 
+   - **Identity**: $0$ is in $5\mathbb{Z}$
+   - **Inverses**: Each $a \in 5\mathbb{Z}$ has an inverse $-a$, since $a + (-a) = 0$. For example, $10 + (-10) = 0$
+
+**Note**: **Associativity** is automatically holds for subgroups. Ponder on why this is the case.
+
+Let's do a little experiment!
+
+Imagine we added the numbers $0$ to $9$ to the elements in $5\mathbb{Z}$ to create new sets $\underline{b}$ and displayed them in two halves. That is:
+
+First half:
+- $\underline{0} = 0 + 5\mathbb{Z} = \{..., -15, -10, -5, 0, 5, 10, 15,...\}$
+- $\underline{1} = 1 + 5\mathbb{Z} = \{..., -14, -9, -4, 1, 6, 11, 16,...\}$
+- $\underline{2} = 2 + 5\mathbb{Z} = \{..., -13, -8, -3, 2, 7, 12, 17,...\}$
+- $\underline{3} = 3 + 5\mathbb{Z} = \{..., -12, -7, -2, 3, 8, 13, 18,...\}$
+- $\underline{4} = 4 + 5\mathbb{Z} = \{..., -11, -6, -1, 4, 9, 14, 19,...\}$
+
+Second half:
+- $\underline{5} = 5 + 5\mathbb{Z} = \{..., -10, -5, 0, 5, 10, 15, 20,...\}$
+- $\underline{6} = 6 + 5\mathbb{Z} = \{..., -9, -4, 1, 6, 11, 16, 21,...\}$
+- $\underline{7} = 7 + 5\mathbb{Z} = \{..., -8, -3, 2, 7, 12, 17, 22,...\}$
+- $\underline{8} = 8 + 5\mathbb{Z} = \{..., -7, -2, 3, 8, 13, 18, 23,...\}$
+- $\underline{9} = 9 + 5\mathbb{Z} = \{..., -6, -1, 4, 9, 14, 19, 24,...\}$
+
+Did you notice anything in this construction!? Here are some observations:
+
+1. The sets in the second half are a repetition of the sets in the first half and because of this we will only focus on the first half moving on. Try this with numbers greater than $9$ or less than $0$.
+2. The sets are distinct. Every element appears in only one set.
+3. If we add any element from a set to any element from another set, you get an element from a set. For example, if we add a number in $\underline{0}$ to a number in $\underline{1}$, we get a number in $\underline{1}$ and if we add a number in $\underline{2}$ to a number in $\underline{4}$, we get a number in $\underline{1}$.
+4. If we add any number from a set to any number in $\underline{0}$, we get back a number in the same set. For example, if we add $14$ from $\underline{4}$ to $15$ from $\underline{0}$, we get $4$ from $\underline{4}$.
+5. If we add any number from $\underline{2}$ to any number from $\underline{3}$, we get a number from $\underline{0}$, if we add any number from $\underline{1}$ to any number from $\underline{4}$, we get a number from $\underline{0}$ and if we add any number from $\underline{0}$ to any number from itself, we get a number from $\underline{0}$.
+6. The last three observations implies **closure**, presence of an **identity element** and presence of an **inverse element** respectively. The sets are called **cosets** and they form a **group** called the **quotient group** $\mathbb{Z}/5\mathbb{Z} = \{\underline{0}, \underline{1}, \underline{2}, \underline{3}, \underline{4}\}$. We call it a quotient group because we use a subgroup to divide the group into cosets. Not all subgroups like $5\mathbb{Z}$ create cosets that form a quotient group, but when they do we call them **normal subgroups**. Our observations doesn't show **associativity** but it holds and I urge you to try it out
+ 
+Formally, a **coset** is formed when you take a subgroup $H$ of a group $G$ and partition $G$ into sets of the form $$gH = \{g * h | h \in H\}$$ where $g \in G$ and $*$ is an operation.
+
+**Note**: The cosets from $\underline{1}$ to $\underline{4}$ are **not** subgroups of $\mathbb{Z}$ under addition. They don't contain the identity element, they are not closed under addition and they don't contain their inverses. Using $\underline{3}$ as an example:
+- **identity element**: $0$, the identity element is not in the set.
+- **inverse element**: It doesn't contain the identity element so it cannot have an inverse element.
+- **closure**: $3 + 8 = 11$ but $11$ is not in $\underline{3}$.
+
+---
 
 The goal of this material was to introduce these concepts independently; appreciating their beauty without drawing parallels to their applications in lattice-based cryptography; we will do that in the other posts in this series.
 
