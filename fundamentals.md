@@ -304,15 +304,15 @@ In order to understand fundamental domain and parallelepipeds, here's a quick cr
 A **group** is a set $G$ with an operation $*$ that satisfies four properties:
 - **Closure**: if $a$, $b \in G$, then $a * b \in G$
 - **Associativity**: $(a * b) * c = a * (b * c)$ for all $a, b, c \in G$
-- **Identity Element**: There exists an element $i \in G$ such that $i * a = i * a = a$ for all $a \in G$
-- **Inverse Element**: For every $a \in G$, there exists an element $a^{-1} \in G$ such that $a * a^{-1} = a^{-1} * a = i$(the identity element)
+- **Identity Element**: There exists an element $i \in G$ such that $i * a = a * i= a$ for all $a \in G$
+- **Inverse Element**: For every $a \in G$, there exists an element $a^{-1} \in G$ such that $a * a^{-1} = a^{-1} * a = i$(*the identity element*)
 
 Example of a group:
 - The set of integers $\mathbb{Z}$ under the operation, addition $+$ forms a group:
    - **Closure:** if $a, b \in \mathbb{Z}$, then $a + b \in \mathbb{Z}$. For example, $1 + 5 = 6$
    - **Associativity**: $(a + b) + c = a + (b + c)$. For example, $(5 + 3) + 9 = 5 + (3 + 9)$
-   - **Identity**: The number $0$ satisfies $0 + a = a + 0 = a$
-   - **Inverses**: Each $a \in \mathbb{Z}$ has an inverse $-a$, since $a + (-a) = 0$.
+   - **Identity**: The number $0$ satisfies $0 + a = a + 0 = a$. $0$ is the identity element.
+   - **Inverses**: Each $a \in \mathbb{Z}$ has an inverse $-a$, since $a + (-a) = 0$. For example, $3 + (-3) = 0$
 
 A **subgroup** $H$ of a **group** $G$ is a subset of $G$ that is itself a group under the same operation. That is:
 - **Closure**: if $a$, $b \in H$, then $a * b \in H$
@@ -320,16 +320,16 @@ A **subgroup** $H$ of a **group** $G$ is a subset of $G$ that is itself a group 
 - **Inverse Element**: If $a \in H$, then $a^{-1} \in H$
 
 Example of a subgroup:
-- The set of integers mod 5 $5\mathbb{Z} = \{..., -15, -10, -5, 0, 5, 10, 15,...\}$(i.e multipling $5$ by all integers) is a subgroup of $\mathbb{Z}$ under addition because:
+- The set of integers divisible by $5$ $5\mathbb{Z} = \{..., -15, -10, -5, 0, 5, 10, 15,...\}$(i.e multipling $5$ by all integers) is a subgroup of $\mathbb{Z}$ under addition because:
    - **Closure:** The sum of two numbers divisible by $5$ is divisible by $5$ making it closed under addition. 
    - **Identity**: $0$ is in $5\mathbb{Z}$
-   - **Inverses**: Each $a \in 5\mathbb{Z}$ has an inverse $-a$, since $a + (-a) = 0$. For example, $10 + (-10) = 0$
+   - **Inverses**: Every $a \in 5\mathbb{Z}$ has an inverse $-a$. For example, $10 + (-10) = 0$
 
 **Note**: **Associativity** is automatically holds for subgroups. Ponder on why this is the case.
 
 Let's do a little experiment!
 
-Imagine we added the numbers $0$ to $9$ to the elements in $5\mathbb{Z}$ to create new sets $\underline{b}$ and displayed them in two halves. That is:
+Imagine we added the numbers $0$ to $9$ to the elements in $5\mathbb{Z}$ to create new sets and displayed them in two halves. That is:
 
 First half:
 - $\underline{0} = 0 + 5\mathbb{Z} = \{..., -15, -10, -5, 0, 5, 10, 15,...\}$
@@ -345,15 +345,16 @@ Second half:
 - $\underline{8} = 8 + 5\mathbb{Z} = \{..., -7, -2, 3, 8, 13, 18, 23,...\}$
 - $\underline{9} = 9 + 5\mathbb{Z} = \{..., -6, -1, 4, 9, 14, 19, 24,...\}$
 
-Did you notice anything in this construction!? Here are some observations:
+Do you notice anything about these sets!? Here are some observations:
 
-1. The sets in the second half are a repetition of the sets in the first half and because of this we will only focus on the first half moving on. Try this with numbers greater than $9$ or less than $0$.
+1. The sets in the second half are a repetition of the sets in the first half so we will only focus on the first half moving on. Try creating more sets with numbers greater than $9$ or less than $0$.
 2. The sets are disjoint(i.e, they have no elements in common). Every element appears in only one set.
 3. The "combination" of the sets makes up the set of integers $\mathbb{Z}$. That is, $\underline{0} \cup \underline{1} \cup \underline{2} \cup \underline{3} \cup \underline{4} = \mathbb{Z}$
-4. If we add any element from a set to any element from another set, you get an element from a set. For example, if we add a number in $\underline{0}$ to a number in $\underline{1}$, we get a number in $\underline{1}$ and if we add a number in $\underline{2}$ to a number in $\underline{4}$, we get a number in $\underline{1}$.
-5. If we add any number from a set to any number in $\underline{0}$, we get back a number in the same set. For example, if we add $14$ from $\underline{4}$ to $15$ from $\underline{0}$, we get $4$ from $\underline{4}$.
-6. If we add any number from $\underline{2}$ to any number from $\underline{3}$, we get a number from $\underline{0}$, if we add any number from $\underline{1}$ to any number from $\underline{4}$, we get a number from $\underline{0}$ and if we add any number from $\underline{0}$ to any number from itself, we get a number from $\underline{0}$.
-7. The last three observations implies **closure**, presence of an **identity element** and presence of an **inverse element** respectively. The sets are called **cosets** and they form a **group** called the **quotient group** $\mathbb{Z}/5\mathbb{Z} = \{\underline{0}, \underline{1}, \underline{2}, \underline{3}, \underline{4}\}$. We call it a quotient group because we use a subgroup to divide the group into cosets. Not all subgroups like $5\mathbb{Z}$ create cosets that form a quotient group, but when they do we call them **normal subgroups**. Our observations doesn't show **associativity** but it holds and I urge you to try it out
+4. Each set contains element with the same remainder when divided by $5$. For example, every element in $\underline{2}$ would result in a remainder of $2$ when divided by $5$. These sets are called **equivalent classes**. In this case, they are equivalent because they share the same remainders but equivalence relations can be of different forms as we will see later.
+5. If we add any element from a set to any element from another set, you get an element from a set. For example, if we add a number in $\underline{0}$ to a number in $\underline{1}$, we get a number in $\underline{1}$ and if we add a number in $\underline{2}$ to a number in $\underline{4}$, we get a number in $\underline{1}$.
+6. If we add any number from a set to any number in $\underline{0}$, we get back a number in the same set. For example, if we add $14$ from $\underline{4}$ to $15$ from $\underline{0}$, we get $4$ from $\underline{4}$.
+7. If we add any number from $\underline{2}$ to any number from $\underline{3}$, we get a number from $\underline{0}$, if we add any number from $\underline{1}$ to any number from $\underline{4}$, we get a number from $\underline{0}$ and if we add any number from $\underline{0}$ to any number from itself, we get a number from $\underline{0}$.
+8. The last three observations implies **closure**, presence of an **identity element** and presence of an **inverse element** respectively. The sets are called **cosets** and they form a **group** called the **quotient group** $\mathbb{Z}/5\mathbb{Z} = \{\underline{0}, \underline{1}, \underline{2}, \underline{3}, \underline{4}\}$. We call it a quotient group because we use a subgroup to divide the group into cosets. Not all subgroups like $5\mathbb{Z}$ create cosets that form a quotient group, but when they do we call them **normal subgroups**. Our observations doesn't show **associativity** but it holds and I urge you to try it out
  
 Formally, a **coset** is formed when you take a subgroup $H$ of a group $G$ and partition $G$ into sets of the form $$gH = \{g * h | h \in H\}$$ where $g \in G$ and $*$ is an operation.
 
@@ -364,7 +365,9 @@ Formally, a **coset** is formed when you take a subgroup $H$ of a group $G$ and 
 
 Now, back to lattices. How does all these help in understanding fundamental domain and parallelepipeds?
 
-Since a lattice $L$ is a subgroup of $\mathbb{R}^n$, we can define the quotient group $\mathbb{R}^n/L$, which consists of cosets of $L$ in $\mathbb{R}^n$. A quotient group $\mathbb{R}^n/L$ of this form is corresponds to a **fundamental domain** of $L$. A fundamental domain is a region in $\mathbb{R}^n$ that contains exactly one representative from each coset. 
+The above example shows we could take any arbitrary integer $\mathbb{Z}$ and we **must** be able to represent it using one of the elements of the quotient group $\mathbb{Z}/5\mathbb{Z}$. A **fundamental domain** is synonymous to this in lattices.
+
+Since a lattice $L$ is a subgroup of $\mathbb{R}^n$, we can define the quotient group $\mathbb{R}^n/L$, which consists of cosets of $L$ in $\mathbb{R}^n$. A quotient group $\mathbb{R}^n/L$ of this form corresponds to a fundamental domain of $L$. A fundamental domain is a region in $\mathbb{R}^n$ that contains exactly one representative from each coset. 
 
 Similar to how $\mathbb{Z}/5\mathbb{Z}$ encompasses to full set of integers $\mathbb{Z}$ using four cosets, the fundamental domain encompasses all the elements of $\mathbb{R}^n$ by taking one element from each coset.
 
@@ -376,7 +379,57 @@ For example, given a lattice $L = \{[5, 2, 1], [2, 1, 3], [4, 5, 1], [7, 2, 1], 
 - $\underline{v_2} = v_2 + L = [1, 5, 1] + L = \{[6,  7,  2], [3,  6,  4], [5, 10,  2], [8,  7,  2], [11, 12,  8]\}$
 - $\underline{v_3} = v_3 + L = [5, 2, 3] + L = \{[10,  4,  4], [7,  3,  6], [9,  7,  4], [12,  4,  4], [15,  9, 10]\}$
 
-A fundamental domain from these cosets could be the set $\{[5,  7,  4], [3,  6,  4], [15,  9, 10]\}$.
+An example of a fundamental domain is $F = \{t_1v_1 + t_2v_2 + ... + t_nv_n\ : 0 \leq t_i \lt 1 \}$ where $v_1, v_2, ..., v_n$ is the basis of the a lattice and $t_i$ is a real number $\mathbb{R}$ not an integer $\mathbb{Z}$. This fundamental domain is the **fundamental parallelepipeds**.
+
+We are saying that is for any vector $v \in \mathbb{R}^n$, we would be able to find a represent it using the fundamental parallelepipeds.
+
+Let's look at an example using basis $v_1 = (2, 1)$ and $v_2 = (1, 3)$.
+
+First, the diagram below shows the lattice generate by this basis.
+
+
+    
+![png](fundamentals_files/fundamentals_43_0.png)
+    
+
+
+Next, let's create the fundamental parallelepiped and show it.
+
+As stated above, the fundamental parallelepiped would be generated using $F = \{t_1v_1 + t_2v_2 : 0 \leq t_i \lt 1 \}$. There are infinitely many real numbers in the interval $0 \leq t_i \lt 1$ so we will show generate a few and show more in the diagram.
+
+- $t_1 = 0, t_2 = 0$, then $t_1v_1 + t_2v_2 = 0 * (2, 1) + 0 * (1, 3) = (0, 0)$
+- $t_1 = 0, t_2 = 0.1$, then $t_1v_1 + t_2v_2 = 0 * (2, 1) + 0.1 * (1, 3) = (0.1, 0.3)$
+- $t_1 = 0.1, t_2 = 0.1$, then $t_1v_1 + t_2v_2 = 0.1 * (2, 1) + 0.1 * (1, 3) = (0.2, 0.1) + (0.1, 0.3) = (0.3, 0.4)$
+- $...$
+- $t_1 = 0.9, t_2 = 0.9$, then $t_1v_1 + t_2v_2 = 0.9 * (2, 1) + 0.9 * (1, 3) = (1.8, 0.9) + (0.9, 2.7) = (2.7, 3.6)$
+
+That is, the fundamental parallelepiped $F = \{(0, 0), (0.1, 0.3), (0.3, 0.4), ..., (2.7, 3.6)\}$.
+
+Below is the what it looks like on a graph.
+
+
+    
+![png](fundamentals_files/fundamentals_45_0.png)
+    
+
+
+Notice how it looks like a scaled down and compressed version of the lattice.
+
+Now, let's verify our claim that we can find a representative of any vector $v \in \mathbb{R}^n$ in the fundamental domain. We will pick $v = (5.2, 6.3)$.
+
+This means that there exists $t_1$ and $t_2$ such that $t_1 * (2, 1) + t_2 * (1, 3) = (5.2, 6.3)$ and we will find them. Right now, it might not be obvious why this is the case but please follow me.
+
+Expanding the expression, we have that $2t_1 + t_2 = 5.2$ and $t_1 + 3t_2 = 6.3$. Solving this we have that $t_1 = 1.86$ and $t_2 = 1.48$(i.e using any of the methods for solving simultaneous equations like gaussian elimination).
+
+Recall that $t_1$ and $t_2$ are supposed to be in the interval $0 \leq t_i \lt 1$. We would have to wrap $t_1$ and $t_2$ this interval. In other words, we would have to compute $t_1 \mod 1$ and $t_2 \mod 1$. Doing that we have that $t_1 = 0.86$ and $t_2 = 0.48$.
+
+To get to representative $r$ of $v$ in the fundamental parallelepiped, we compute $r = t_1v_1 + t_2v_2 = 0.86 * (2, 1) + 0.48 * (1, 3) = (1.72, 0.86) + (0.48, 1.44) = (2.2, 2.3)$. Therefore, $r = (2.2, 2.3)$ is the representative of $v = (5.2, 6.3)$.
+
+We are not done yet.
+
+Do you see any similarity between $r$ and $v$? You would notice they both end in the same decimals $.2$ and $.3$. That means their difference is an integer vector. That is, $v - r = (5.2, 6.3) - (2.2, 2.3) = (3, 4)$.
+
+Recall that, a coset of $L$ in $\mathbb{R}^n$ is a set of the form $v + L = \{v + \lambda | \lambda \in L \}$.
 
 ---
 
