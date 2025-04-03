@@ -440,22 +440,3 @@ Lastly, note that **a fundamental domain is not a lattice**.
 The goal of this material was to introduce these concepts independently; appreciating their beauty without drawing parallels to their applications in lattice-based cryptography; we will do that in the other posts in this series.
 
 In the next post, we will be looking into *Hard Problems in Lattice-Based Cryptography*. See you there!
-
-
-
-
-    array([[  4.2,   3.3],
-           [  3.2,   5.3],
-           [  0.2,  -8.7],
-           [  5.2,   6.3],
-           [ -8.8, -10.7],
-           [ 11.2,   9.3],
-           [  3.2,  10.3],
-           [  6.2,   9.3],
-           [ -2.8,  -7.7],
-           [ 10.2,  11.3]])
-
-
-
-    {t_1: 3.86000000000000, t_2: 2.48000000000000}
-
