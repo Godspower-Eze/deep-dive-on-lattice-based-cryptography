@@ -183,9 +183,9 @@ Bases $B_1$, $B_2$ generate the same lattice $L$ if and only if there exists a u
 
 An integer matrix is said to be unimodular if it determinant is $\pm1$.
 
-This property for two bases being able to generate the same lattice $L$ is what makes lattice-based cryptography possible. We will see why this is true later in this series.
+This property of two bases being able to generate the same lattice $L$ and *some bases been better than others* is what makes lattice-based cryptography possible. We will take about **good and bad bases** below.
 
-We can efficiently test whether two given matrices $B_1$, $B_2$ generate the same lattice, by checking whether $B_1^{-1}·B_2$ is unimodular.
+We can efficiently test whether two given matrices $B_1$, $B_2$ generate the same lattice, by checking whether $B_1^{-1}·B_2$(i.e dot product) is unimodular.
 
 ---
 
@@ -253,13 +253,47 @@ Notice how it is the closest vector to the origin. It is called the smallest non
     
 
 
+### Good and Bad Bases
+
+Given two bases $B_1 = \{ [1, 0], [0, 1] \}$ and $B_2 = \{[10, 1], [9, 1] \}$ that generate the same lattice(see *unimodular matrix* above), below they are labelled on the lattice they generate respectively.
+
+
+    
+![png](fundamentals_files/fundamentals_34_0.png)
+    
+
+
+
+    
+![png](fundamentals_files/fundamentals_34_1.png)
+    
+
+
+If you are given basis $B_1$ and this lattice, and you are asked to find the first successive minimum $\lambda_{1}$, it's very easy to see that $B_1$ is the answer because it obviously has the smallest norm. But then, what if you are given only $B_2$ and this lattice and you asked to find the first successive minimum $\lambda_1$, how hard could this be? 
+
+You can already see that this is a search problem and it gets harder to solve as the dimension increases. This is in two dimensions so it's easy to solve but in practice we work in extremely higher dimensions.
+
+That is the point of good and bad bases. Given a good basis it's easy to find $\lambda_1$ but it's extremely hard to find given a bad basis.
+
+Formally, we check that a basis is good or bad using the following:
+
+- **Good bases are close to being orthogonal**: Two vectors $\mathbf{v}, \mathbf{w}$ are orthogonal if their dot product is zero (i.e $\mathbf{v} . \mathbf{w} = 0$). For example:
+    - For $B_1$, $[1, 0].[0, 1] = 0$. This is called **perfect orthogonality**.
+    - For $v_1 = [2, 1]$ and $v_2 = [1, 3]$, $v_1.v_2 = 5$. This is not the "best basis" but it's nothing close to a bad basis. Wait until you see that of $B_2$
+    - For $B_2$, $[10, 1].[9, 1] = 91$. Now, this is not close to being orthogonal.
+- **Bad bases have large Gram-Schmidt Norms**: I won't go into details of Gram-Schmidt Norms but keep this in mind.
+
+Back to understanding successive minimum.
+
+### Successive Minimum (Cont'd)
+
 Again, what is the 2nd successive minimum? We are looking for the smallest radius(i.e norm) that creates a circle containing two linearly independent vectors.
 
 From the computed norms, we know that the second smallest vector is $\mathbf{b_2} = [1, 3]$ with norm of $3.16$. Drawing a circle using this norm as the radius, the circle contains $\mathbf{b_1}$ and $\mathbf{b_2}$. Therefore, $3.16$ is the 2nd successive minimum.
 
 
     
-![png](fundamentals_files/fundamentals_34_0.png)
+![png](fundamentals_files/fundamentals_38_0.png)
     
 
 
@@ -269,7 +303,7 @@ Probably $4.47$, the third smallest norm. It turns out this is not the case. The
 
 
     
-![png](fundamentals_files/fundamentals_36_0.png)
+![png](fundamentals_files/fundamentals_40_0.png)
     
 
 
@@ -277,7 +311,7 @@ How about $7.07$? The fourth smallest norm. This is still not the 3rd successive
 
 
     
-![png](fundamentals_files/fundamentals_38_0.png)
+![png](fundamentals_files/fundamentals_42_0.png)
     
 
 
@@ -285,7 +319,7 @@ And, lastly, how about $11.18$? The largest norm. Is it the 3rd successive minim
 
 
     
-![png](fundamentals_files/fundamentals_40_0.png)
+![png](fundamentals_files/fundamentals_44_0.png)
     
 
 
@@ -297,7 +331,7 @@ It's important to point out that a lattice $L$ might have multiple basis vectors
 
 ____
 
-### Fundamental domains and parallelepipeds
+## Fundamental domains and parallelepipeds
 
 In order to understand fundamental domain and parallelepipeds, here's a quick crash course on abstract algebra.
 
@@ -332,7 +366,7 @@ Let's do a little experiment!
 Imagine we added the numbers $0$ to $9$ to the elements in $5\mathbb{Z}$ to create new sets and displayed them in two halves. That is:
 
 First half:
-- $\underline{0} = 0 + 5\mathbb{Z} = \{..., -15, -10, -5, 0, 5, 10, 15,...\}$
+- $\underline{0} = 0 + 5\mathbb{Z} = \lbrace..., -15, -10, -5, 0, 5, 10, 15,...\rbrace$
 - $\underline{1} = 1 + 5\mathbb{Z} = \{..., -14, -9, -4, 1, 6, 11, 16,...\}$
 - $\underline{2} = 2 + 5\mathbb{Z} = \{..., -13, -8, -3, 2, 7, 12, 17,...\}$
 - $\underline{3} = 3 + 5\mathbb{Z} = \{..., -12, -7, -2, 3, 8, 13, 18,...\}$
@@ -387,7 +421,7 @@ First, the diagram below shows the lattice generate by this basis.
 
 
     
-![png](fundamentals_files/fundamentals_43_0.png)
+![png](fundamentals_files/fundamentals_47_0.png)
     
 
 
@@ -407,7 +441,7 @@ Below is the what it looks like on a graph.
 
 
     
-![png](fundamentals_files/fundamentals_45_0.png)
+![png](fundamentals_files/fundamentals_49_0.png)
     
 
 
