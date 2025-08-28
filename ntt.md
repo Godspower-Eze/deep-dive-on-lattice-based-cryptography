@@ -269,7 +269,7 @@ In summary, we have:
 
 Soon, you will see why exponential and polar form are best suited for understanding and working with roots of unity.
 
-Now, back to the where this it all started: finding the roots of the polynomial $P(x) = 1 + x + x^2$. We saw that the roots are $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$.
+Now, back to where this it all started: finding the roots of the polynomial $P(x) = 1 + x + x^2$. We saw that the roots are $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$.
 
 Let's represent them using the argand diagram.
 
@@ -341,7 +341,7 @@ Starting with $e^{2\pi\mathrm{i}/3}$:
     
 
 
-- The third power $(e^{2\pi\mathrm{i}/3})^3 = e^{6\pi\mathrm{i}/3}$
+- The third power $(e^{2\pi\mathrm{i}/3})^3 = e^{2\pi\mathrm{i}}$
 
 
     
@@ -377,7 +377,7 @@ Then, for $e^{4\pi\mathrm{i}/3}$:
     
 
 
-- The third power: $(e^{4\pi\mathrm{i}/3})^3 = e^{12\pi\mathrm{i}/3}$
+- The third power: $(e^{4\pi\mathrm{i}/3})^3 = e^{4\pi\mathrm{i}}$
 
 
     
@@ -393,18 +393,18 @@ The powers go cycles back to $1$ at the third power. If we continued this cycle,
 
 Let's try this again for another polynomial.
 
-Given the polynomial $P(x) = x^4 - 1$, let's the find the roots.
+Given the polynomial $G(x) = x^4 - 1$, let's the find the roots.
 
 We get that:
 
-- $P(x) = x^4 - 1 = (x^2 - 1)(x^2 + 1) = (x - 1)(x + 1)(x^2 + 1)$
+- $G(x) = x^4 - 1 = (x^2 - 1)(x^2 + 1) = (x - 1)(x + 1)(x^2 + 1)$
 
 Setting them to zero, we have that:
 - $(x - 1) = 0$, $x = 1$
 - $(x + 1) = 0$, $x = -1$
 - $(x^2 + 1) = 0$, $x^2 = -1$, $x = \pm\sqrt{-1} = \pm\mathrm{i}$
 
-Therefore, the roots of $P(x)$ are $1$, $-1$, $-\mathrm{i}$ and $\mathrm{i}$
+Therefore, the roots of $G(x)$ are $1$, $-1$, $-\mathrm{i}$ and $\mathrm{i}$
 
 Let's show them on the argand diagram.
 
@@ -435,7 +435,7 @@ Converting them to exponential form, being that $r = 1$ for all roots, we have t
 -  $1 = e^{0\mathrm{i}} = e^0$
 -  $-1 = e^{\pi\mathrm{i}}$
 -  $\mathrm{i} = e^{\pi\mathrm{i}/{2}}$
--  $\mathrm{i} = e^{3\pi\mathrm{i}/{2}}$
+-  $-\mathrm{i} = e^{3\pi\mathrm{i}/{2}}$
 
 Now, let's compute the powers of each root up the fourth power.
 
@@ -579,3 +579,47 @@ For $e^{3\pi\mathrm{i}/{2}}$:
 ![png](ntt_files/ntt_81_0.png)
     
 
+
+----
+
+What do we notice?
+
+- For $e^0$:
+  - They are no rotations. It just remains at $1$
+- For $e^{\pi\mathrm{i}}$:
+  - It rotates between $1$ and $-1$ and at the powers divisible by $2$($2$ and $4$), the point is at $1$.
+- For $e^{\pi\mathrm{i}/{2}}$:
+  - It rotates across all roots and meets $1$ at the fourth power.
+- For $e^{3\pi\mathrm{i}/{2}}$:
+  - Same as $e^{\pi\mathrm{i}/{2}}$
+
+Finally, what are roots of unity and why does all this matter?
+
+The $n$th roots are unity are simply values of $x$ that satisfy the function $x^n = 1$ for an arbitrary $n$ value.
+
+Having known this, notice how the roots $1$, $-1$, $\mathrm{i}$ and $-\mathrm{i}$ all satisfy function $x^4 = 1$. That is:
+
+- $1^4 = 1$ and $(e^0)^4 = 1$
+- $-1^4 = 1$ and $(e^{\pi\mathrm{i}})^4 = 1$
+- $\mathrm{i}^4 = 1$ and $(e^{\pi\mathrm{i}/{2}})^4 = e^{2\pi\mathrm{i}} = 1$
+- $(-\mathrm{i})^4 = 1$ and $(e^{3\pi\mathrm{i}/{2}})^4 = e^{6\pi\mathrm{i}} = 1$
+
+And, how $x^4 - 1 = 0$ is equals $x^4 = 1$.
+
+These are $4$th roots of unity.
+
+But then, what about the polynomial $P(x) = 1 + x + x^2$, does that hold for it too? Let's find out.
+
+Given the polynomial $x^3 - 1$, let's find the roots.
+
+- $(x^3 - 1) = (x - 1)(1 + x + x^2) = (x - 1)P(x)$
+
+Setting them to zero, we have that: 
+- $x - 1 = 0$, $x = 1$
+- $P(x) = 0$, we already know the roots are $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$.
+
+Therefore, $1$, $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$ are the 3rd roots of unity. That is:
+
+- $1^3 = 1$ and $(e^0)^3 = 1$
+- $(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2})^3 = 1$ and $(e^{2\pi\mathrm{i}/3})^3 = e^{2\pi\mathrm{i}} = 1$
+- $(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2})^3 = 1$ and $(e^{4\pi\mathrm{i}/3})^3 = e^{4\pi\mathrm{i}} = 1$
