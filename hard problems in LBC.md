@@ -1,5 +1,9 @@
 # Hard Problems in Lattice-Based Cryptography - Introduction to Lattice-based Cryptography
 
+## Worse-case to Average-case Reduction
+
+what's the worst case of SVP?
+
 ## Shortest Vector Problems(SVP)
 
 In the first post, we talked about the first successive minimum $\lambda_1$ and good and bad bases. This problem is based on the hardness of finding $\lambda_1$ given a bad basis. 
