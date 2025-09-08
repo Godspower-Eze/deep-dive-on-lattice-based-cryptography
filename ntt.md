@@ -36,7 +36,7 @@ for i in range(d + 1):
 
 This algorithm takes $O(d^2)$ time. Is there a faster way to perform polynomial multiplication?
 
-From the implementation above, you can tell that the polynomial is represented as a list of its *coefficients*. Are there other representations?
+From the implementation above, you can tell that the polynomial is represented as a list of its *coefficients*. There are other representations.
 
 According to the **uniqueness theorem,** a polynomial of degree at most $d$ is uniquely determined by its values at $d + 1$ **distinct** points. That is, a polynomial $f(x)$ of degree $d$ can be uniquely constructed by the points: $(x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))$. Let's call this representation **point representation**.
 
@@ -69,7 +69,7 @@ What does this all mean? We just achieved an $O(d)$ time polynomial multiplicati
 
 Does that mean we just achieved $O(d)$ for polynomial multiplication? Not really. 
 
-Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdots + a_{d}x^{d}$, here's the process:
+Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdots + a_{d}x^{d}$, here's the full process:
 
 1. **Convert from coefficient to point representation**: we pick a set of $x$ values and evaluate the polynomials at those points thereby converting the polynomials to the point representation.
 
@@ -197,7 +197,7 @@ Having known this; let's adjust out diagram.
 
 From the diagram, we can see that we have two unknowns the hypotenuse which will be denoted as $r$ and the angle $\theta$.
 
-From pythagoras theorem, we know $r^2 = a^2 + b^2$. Therefore:$$r^2 = 2^2 + 3^2 = r^2 = 4 + 9 = 13$$
+From pythagoras theorem, we know $r^2 = a^2 + b^2$. Therefore:$$r^2 = 2^2 + 3^2 = 4 + 9 = 13$$
 $$r = \sqrt{13}$$
 
 Now we know $r$, how do we find $\theta$? Do you remember the acronym SOHCAHTOA from high school? This implies:
@@ -213,7 +213,7 @@ We have that $r = \sqrt{13}$ and $\theta = 0.983$. Given these two values, we re
 
 The polar representation might not be simplest way to express a complex number but it's going to help us understand roots of unity.
 
-Formally, $r$ is distance from the point of the complex number to the origin and it is called the *modulus* or the *absolute value*. $\theta$ is called the *argument* of the complex number and it is the angle that the modulus $r$ makes with the positive real axis.
+Formally, $r$ is distance from the point of the complex number to the origin and it is called the *modulus* or the *absolute value*. $\theta$ is called the *argument* of the complex number and it is the angle that the modulus $r$ makes from the positive real axis.
 
 
     
@@ -222,8 +222,6 @@ Formally, $r$ is distance from the point of the complex number to the origin and
 
 
 Let's look at another representation of complex numbers.
-
-Let's take a quick detour.
 
 Have you ever wondered how calculators computed trignometric functions like $\sin(x)$, $\cos(x)$ and the exponential function $e^x$? The answer lies in approximation using power series.
 
@@ -297,7 +295,7 @@ Let's show our $r$ and $\theta$ values to our diagram.
 
 This is our argand diagram represented in respect to $r$ and $\theta$. But, it's not exactly correct.
 
-Recall that the argument $\theta$ is "the angle that the modulus makes with the positive real axis". The key phrase is *positive real axis*.
+Recall that the argument $\theta$ is "the angle that the modulus makes from the positive real axis". The key phrase is *from the positive real axis*.
 
 Let's show this:
 
@@ -389,7 +387,7 @@ Then, for $e^{4\pi\mathrm{i}/3}$:
 
 What do you notice?
 
-The powers go cycles back to $1$ at the third power. If we continued this cycle, you would notice that it doesn't just cycle back to $1$ at the third power but every power that's a multiple of $3$. I urge you to try this out.
+The powers cycles back to $1$ at the third power. If we continued this cycle, you would notice that it doesn't just cycle back to $1$ at the third power but every power that's a multiple of $3$. I urge you to try this out.
 
 Let's try this again for another polynomial.
 
@@ -437,7 +435,7 @@ Converting them to exponential form, being that $r = 1$ for all roots, we have t
 -  $\mathrm{i} = e^{\pi\mathrm{i}/{2}}$
 -  $-\mathrm{i} = e^{3\pi\mathrm{i}/{2}}$
 
-Now, let's compute the powers of each root up the fourth power.
+Now, let's compute the powers of each root up to the fourth power.
 
 Starting with $e^0$:
 
@@ -587,7 +585,7 @@ What do we notice?
 - For $e^0$:
   - They are no rotations. It just remains at $1$
 - For $e^{\pi\mathrm{i}}$:
-  - It rotates between $1$ and $-1$ and at the powers divisible by $2$($2$ and $4$), the point is at $1$.
+  - It rotates between $1$ and $-1$ and it's at point $1$ at the powers divisible by $2$($2$ and $4$).
 - For $e^{\pi\mathrm{i}/{2}}$:
   - It rotates across all roots and meets $1$ at the fourth power.
 - For $e^{3\pi\mathrm{i}/{2}}$:
@@ -618,8 +616,27 @@ Setting them to zero, we have that:
 - $x - 1 = 0$, $x = 1$
 - $P(x) = 0$, we already know the roots are $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$.
 
-Therefore, $1$, $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$ are the 3rd roots of unity. That is:
+Therefore, $1$, $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$ are the $3$rd roots of unity. That is:
 
 - $1^3 = 1$ and $(e^0)^3 = 1$
 - $(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2})^3 = 1$ and $(e^{2\pi\mathrm{i}/3})^3 = e^{2\pi\mathrm{i}} = 1$
 - $(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2})^3 = 1$ and $(e^{4\pi\mathrm{i}/3})^3 = e^{4\pi\mathrm{i}} = 1$
+
+Let's extract more insights from our argand diagrams.
+
+Notice how in the $3$rd roots of unity, $e^{2\pi\mathrm{i}/3}$ and $e^{4\pi\mathrm{i}/3}$ generates every other root in the set and in the $4$th roots of unity $e^{\pi\mathrm{i}/{2}}$ and $e^{3\pi\mathrm{i}/{2}}$ also generates every other other roots in the set. For example,
+- For $e^{2\pi\mathrm{i}/3}$ in the $3$rd roots of unity:
+  - $(e^{2\pi\mathrm{i}/3})^ 0 = 1$
+  - $(e^{2\pi\mathrm{i}/3})^ 1 = e^{2\pi\mathrm{i}/3}$
+  - $(e^{2\pi\mathrm{i}/3})^ 2 = e^{4\pi\mathrm{i}/3}$
+- For $e^{3\pi\mathrm{i}/{2}}$ in the $4$th roots of unity:
+  - $(e^{3\pi\mathrm{i}/{2}})^ 0 = 1$
+  - $(e^{3\pi\mathrm{i}/{2}})^ 1 = e^{3\pi\mathrm{i}/{2}}$
+  - $(e^{3\pi\mathrm{i}/{2}})^ 2 = e^{3\pi\mathrm{i}} = e^{\pi\mathrm{i}}$
+  - $(e^{3\pi\mathrm{i}/{2}})^ 3 = e^{9\pi\mathrm{i}/{2}} = e^{\pi\mathrm{i}/{2}}$
+
+When a root generates all other roots in the set, it is called a **primitive root of unity**.
+
+There's something that has been recurring ever since we started talking about roots of polynomials: the modulus $r$ has always been $1$. This is not a concidence.
+
+If you interpret $r$ as the radius of a circle being the **unit circle**(i.e a circle of radius $1$) then every root of unity is a point on the unit circle thereby the name *roots of unity*.
