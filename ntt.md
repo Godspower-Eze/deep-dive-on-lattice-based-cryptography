@@ -77,17 +77,19 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
    There's a way of expressing this in a matrix form:
 
-   $$ V = \begin{bmatrix}x_0^0 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\x_1^0 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]x_n^0 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} = \begin{bmatrix}1 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\1 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]1 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix}$$
+   $$ V = \begin{bmatrix}x_0^0 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ x_1^0 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]x_n^0 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} = \begin{bmatrix}1 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\1 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]1 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix}$$
 
    $$a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_n\end{bmatrix}$$
 
-   $$f(x_i) = \begin{bmatrix}f(x_0) \\ f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \end{bmatrix}$$
+   $$Va = \begin{bmatrix}a_0x_0^0 + a_1x_0^1 + a_2x_0^2 + \cdots + a_nx_0^n\\ a_0x_1^0 + a_1x_1^1 + a_2x_1^2 + \cdots + a_nx_1^n \\ a_0x_2^0 + a_1x_2^1 + a_2x_2^2 + \cdots + a_nx_2^n \\ \vdots \\ a_0x_n^0 + a_1x_n^1 + a_2x_n^2 + \cdots + a_nx_n^n \end{bmatrix} = \begin{bmatrix} f(x_0) \\ f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \end{bmatrix}$$
 
    $$ Va = f(x_i)$$
 
    where $V$ is the matrix of $x_i$ and their powers, $a$ is a vector of coefficients and $f(x_i)$ are the evaluations. $V$ is called the **vandermonde** matrix.
 
-   This shows that the process of evaluating the polynomial $f(x_i)$ is a *matrix-vector multiplication* which is an $O(n^2)$ operation and it will be helpful to use moving on.
+   This shows that the process of evaluating the polynomial $f(x_i)$ is a *matrix-vector multiplication* which is an $O(n^2)$ operation. $f(x_i)$ can also be written as follows: $$f(x_i) = \sum^{n}_{j=0}a_jx^j_i$$
+
+   Keep this in mind, as this formula for expressing $f(x_i)$ is important in understanding FFT later.
 
    Using $A(x)$ as an example, choosing $n = 4$ and $x =\{x_0, x_1, x_2, x_3, x_4\}= \{-5, -4, -3, -2, -1\}$, we have the following:
 
@@ -97,8 +99,8 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
    $$Va = A(x_i) = \begin{bmatrix}A(x_0) \\ A(x_1) \\ A(x_2) \\ A(x_3) \\ A(x_4)\end{bmatrix} = \begin{bmatrix}48 \\ 35 \\ 24 \\ 15 \\ 8 \end{bmatrix}$$
    
-2. **Multiply pairwise** (*i.e* $C(x) = A(x) \ast B(x)$). This runs in $O(n)$ time.
-3. **Convert back from the point represention to the coefficient representation**: This is the reverse of step one. We want to find $a$, given $V$ and $f(x_i)$. To compute this, we find the **inverse of $V$** denoted by $V^{-1}$ and multiply by $f(x_i)$. That is:
+3. **Multiply pairwise** (*i.e* $C(x) = A(x) \ast B(x)$). This runs in $O(n)$ time.
+4. **Convert back from the point represention to the coefficient representation**: This is the reverse of step one. We want to find $a$, given $V$ and $f(x_i)$. To compute this, we find the **inverse of $V$** denoted by $V^{-1}$ and multiply by $f(x_i)$. That is:
 
    $$Va = f(x_i)$$
 
@@ -126,9 +128,9 @@ To understand FFT, we need to understand the concept of **complex numbers** and 
 
 ### Complex Numbers and Roots of Unity
 
-The magic of FFT is based on the beautiful concept of roots of unity but that in turn is only made possible by the unique properties of complex numbers. So, here's a deep dive on complex numbers.
+The magic of FFT is based on the beautiful concept of roots of unity but that in turn is only made possible by the unique properties of complex numbers. So, here's a deep dive on complex numbers and roots of unity.
 
-Given the polynomial $P(x) = 1 + x + x^2$, find the roots(*i.e*, the values of $x$ for which $P(x) = 0$) of the polynomial? The simple answer is the roots does not exist.
+Given the polynomial $P(x) = 1 + x + x^2$, find the roots(*i.e*, the values of $x$ for which $P(x) = 0$) of the polynomial. The simple answer is the roots does not exist.
 
 Using the quadratic formula $x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$, let's solve anyways:
 - $a = 1$, $b = 1$ and $c = 1$
@@ -143,7 +145,7 @@ Let's further simplify the roots. $\sqrt{-3}$ can be written $\sqrt{3} * \sqrt{-
 
 We can rewrite our roots as follows: $\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}$ and $\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}$. Therefore, a complex number $\mathbb{C}$ is a number of the form: $a + b\mathrm{i}$ where $a$ and $b$ are real numbers and $\mathrm{i}$ is the imaginary unit. $a$ is called the *real part* and $b\mathrm{i}$ is called the *imaginary part*. This form of representing a complex number is called the *rectangular form*. You'll see why soon.
 
-The set of real numbers $\mathbb{R}$ is a subset of the complex numbers $\mathbb{C}$ (*i.e*, $\mathbb{R} \subset \mathbb{C}$). Every real number can be written as a complex number where $b = 0$ (*e.g* $5 = 5 + 0\mathrm{i}$).
+The set of real numbers $\mathbb{R}$ is a proper subset of the complex numbers $\mathbb{C}$ (*i.e*, $\mathbb{R} \subset \mathbb{C}$). Every real number can be written as a complex number where $b = 0$ (*e.g* $5 = 5 + 0\mathrm{i}$).
 
 One way to describe a real number is as follows: a real number is any number that can be located on the infinite number line. That means, real numbers are represented on a number line as shown below.
 
@@ -211,7 +213,7 @@ Now we find $\theta$ using $\tan^{-1}(\dfrac{b}{a})$, $\quad \theta = \tan^{-1}(
 
 We have that $r = \sqrt{13}$ and $\theta = 0.983$. Given these two values, we represent the complex number $2 + 3\mathrm{i}$ as $\sqrt{13}(\cos(0.983) + \mathrm{i}\sin(0.983))$. $0.983$ radians is $56.3^\circ$ in degrees and it's better for visualization as shown below.
 
-The polar representation might not be simplest way to express a complex number but it's going to help us understand roots of unity.
+The polar representation might not look like the simplest way to express a complex number but it's going to help us understand roots of unity.
 
 Formally, $r$ is distance from the point of the complex number to the origin and it is called the *modulus* or the *absolute value*. $\theta$ is called the *argument* of the complex number and it is the angle that the modulus $r$ makes from the positive real axis.
 
@@ -225,7 +227,7 @@ Let's look at another representation of complex numbers.
 
 Have you ever wondered how calculators computed trignometric functions like $\sin(x)$, $\cos(x)$ and the exponential function $e^x$? The answer lies in approximation using power series.
 
-$\cos(x)$ and $\sin(x)$ are approximated using the power series $1\ -\frac{x^{2}}{2!} + \frac{x^{4}}{4!} - \frac{x^{6}}{6!} + \frac{x^{8}}{8!} + \cdots$ and $x\ -\frac{x^{3}}{3!} + \frac{x^{5}}{5!} - \frac{x^{7}}{7!} + \frac{x^{9}}{9!} + \cdots$ respectively. I urge you to verify this using a graph(*i.e* compare their graphs while extending the series).
+$\cos(x)$ and $\sin(x)$ are approximated using the power series $1\ -\frac{x^{2}}{2!} + \frac{x^{4}}{4!} - \frac{x^{6}}{6!} + \frac{x^{8}}{8!} + \cdots$ and $x\ -\frac{x^{3}}{3!} + \frac{x^{5}}{5!} - \frac{x^{7}}{7!} + \frac{x^{9}}{9!} + \cdots$ respectively. I urge you to verify this using a graph(*i.e* compare their graphs against each other while extending the series).
 
 Let's substitute $\theta$ for $x$:
 
@@ -256,13 +258,13 @@ We will compute the powers of $(\mathrm{i}\theta)$. From indices we know that $(
 - $\mathrm{i}^8 = 1$
 - $\mathrm{i}^9 = \mathrm{i}$
 
-Do you see the pattern? The values are cyclic in nature; $\mathrm{i}$ to $1$, it repeats and continues like that. We will come back to this but for now let's go back to computing $e^{\mathrm{i}\theta}$. It now becomes: $$e^{\mathrm{i}\theta} = 1 + \mathrm{i}\theta - \frac{\theta^2}{2!} - \frac{\mathrm{i}\theta^3}{3!} + \frac{\theta^4}{4!} + \frac{\mathrm{i}\theta^5}{5!} - \frac{\theta^6}{6!} - \frac{\mathrm{i}\theta^7}{7!} + \frac{\theta^8}{8!} + \frac{\mathrm{i}\theta^9}{9!} + \cdots$$
+Do you see the pattern? The values are cyclic in nature; $\mathrm{i}$ to $1$, it repeats and continues like that. We will come back to this but for now let's go back to computing $e^{\mathrm{i}\theta}$. It now becomes: $$e^{\mathrm{i}\theta} = 1 + \mathrm{i}\theta - \frac{\theta^2}{2!} - \mathrm{i}\frac{\theta^3}{3!} + \frac{\theta^4}{4!} + \mathrm{i}\frac{\theta^5}{5!} - \frac{\theta^6}{6!} - \mathrm{i}\frac{\theta^7}{7!} + \frac{\theta^8}{8!} + \mathrm{i}\frac{\theta^9}{9!} + \cdots$$
 
 From this we can see that $e^{\mathrm{i}\theta} = \cos(\theta) + \mathrm{i}\sin(\theta)$. Therefore, we have our third representation, the *exponential form*: $re^{\mathrm{i}\theta}$.
 
 In summary, we have:
 - rectangular form: $a + b\mathrm{i}$
-- polar form: $r(\cos(\theta) + \mathrm{i}\sin(\theta))$
+- polar form: $r(\cos\theta + \mathrm{i}\sin\theta)$
 - exponential form: $re^{\mathrm{i}\theta}$
 
 Soon, you will see why exponential and polar form are best suited for understanding and working with roots of unity.
@@ -635,8 +637,36 @@ Notice how in the $3$rd roots of unity, $e^{2\pi\mathrm{i}/3}$ and $e^{4\pi\math
   - $(e^{3\pi\mathrm{i}/{2}})^ 2 = e^{3\pi\mathrm{i}} = e^{\pi\mathrm{i}}$
   - $(e^{3\pi\mathrm{i}/{2}})^ 3 = e^{9\pi\mathrm{i}/{2}} = e^{\pi\mathrm{i}/{2}}$
 
-When a root generates all other roots in the set, it is called a **primitive root of unity**.
+When a root generates all other roots in the set, it is called a **primitive root of unity**. This is evident in the diagrams as $e^{\pi\mathrm{i}/{2}}$ and $e^{3\pi\mathrm{i}/{2}}$ hits every root of unity as it rotates around the circle.
 
 There's something that has been recurring ever since we started talking about roots of polynomials: the modulus $r$ has always been $1$. This is not a concidence.
 
-If you interpret $r$ as the radius of a circle being the **unit circle**(i.e a circle of radius $1$) then every root of unity is a point on the unit circle thereby the name *roots of unity*.
+If you interpret $r$ as the radius of a circle being the **unit circle**(i.e a circle of radius $1$) then every root of unity is a point on the unit circle therefore the name *roots of unity*.
+
+And, there's a general formular for representing every $n$th root of unity: $$e^{{2\pi\mathrm{i} \ast k}/n}$$ where $n$ is an arbitrary value and $k = 0, 1, \cdots, n - 1$.
+
+For example:
+
+- The $5$th roots of unity are $\{e^{{2\pi\mathrm{i} \ast 0}/5}, e^{{2\pi\mathrm{i}\ast 1}/5}, e^{{2\pi\mathrm{i} \ast 2}/5}, e^{{2\pi\mathrm{i} \ast 3}/5}, e^{{2\pi\mathrm{i} \ast 4}/5}\} = \{e^0, e^{{2\pi\mathrm{i}}/5}, e^{{4\pi\mathrm{i}}/5}, e^{{6\pi\mathrm{i}}/5}, e^{{8\pi\mathrm{i}}/5}\}$
+
+
+    
+![png](ntt_files/ntt_84_0.png)
+    
+
+
+- The $8$th roots of unity are $\{ e^{{2\pi\mathrm{i} \ast 0}/8}, e^{{2\pi\mathrm{i} \ast 1}/8}, e^{{2\pi\mathrm{i} \ast 2}/8}, e^{{2\pi\mathrm{i} \ast 3}/8}, e^{{2\pi\mathrm{i} \ast 4}/8}, e^{{2\pi\mathrm{i} \ast 5}/8}, e^{{2\pi\mathrm{i} \ast 6}/8}, e^{{2\pi\mathrm{i} \ast 7}/8} \} = \{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} $
+
+
+    
+![png](ntt_files/ntt_86_0.png)
+    
+
+
+Also, Using the 
+
+### Understanding FFT
+
+Recall, 
+
+The properties of roots of unity that makes FFT possible are it's symemetry and periodicity.
