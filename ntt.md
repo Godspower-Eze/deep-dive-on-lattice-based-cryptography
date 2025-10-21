@@ -641,7 +641,7 @@ When a root generates all other roots in the set, it is called a **primitive roo
 
 There's something that has been recurring ever since we started talking about roots of polynomials: the modulus $r$ has always been $1$. This is not a concidence.
 
-If you interpret $r$ as the radius of a circle being the **unit circle**(i.e a circle of radius $1$) then every root of unity is a point on the unit circle therefore the name *roots of unity*.
+If you interpret $r$ as the radius of a circle being the **unit circle**(i.e a circle of radius $1$) then every root of unity is a point on the unit circle hence the name *roots of unity*.
 
 And, there's a general formular for representing every $n$th root of unity: $$e^{{2\pi\mathrm{i} \ast k}/n}$$ where $n$ is an arbitrary value and $k = 0, 1, \cdots, n - 1$.
 
@@ -663,10 +663,25 @@ For example:
     
 
 
-Also, Using the 
+---
 
-### Understanding FFT
+An important property of roots of unity is that every root has a *complex conjugate* and that complex conjugate is the point symmetric to it on the unit circle.
 
-Recall, 
+The complex conjugate of a complex number $a + b\mathrm{i}$ is $a - b\mathrm{i}$ and that of $a - b\mathrm{i}$ is $a + b\mathrm{i}$. But then, when these are on the unit circle, the complex conjugate of any root is simply it's vertical reflexion. 
 
-The properties of roots of unity that makes FFT possible are it's symemetry and periodicity.
+For example, from the $8$th roots of unity above, Here are the complex conjugates:
+- $e^{3\pi\mathrm{i}/4}$ is $e^{5\pi\mathrm{i}/4}$
+- $e^{\pi\mathrm{i}/4}$ is $e^{7\pi\mathrm{i}/4}$
+- $e^{\pi\mathrm{i}/2}$ is $e^{3\pi\mathrm{i}/2}$
+
+Here are the $8$th roots of unity in rectangular form for clarification: $\{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} = \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \}$.
+
+A good mental model for complex conjugates is anticlockwise vs clockwise rotations. For example $e^{3\pi\mathrm{i}/4}$ is the angle $3\pi/4$ in the anticlockwise direction while $e^{5\pi\mathrm{i}/4}$ is the same angle in clockwise direction.
+
+An even better way to interprete this perform a rotation and undoing that rotation. For example, in the diagram below, we have a value $2$.
+
+
+    
+![png](ntt_files/ntt_89_0.png)
+    
+
