@@ -665,7 +665,15 @@ For example:
 
 ---
 
-An important property of roots of unity is that every root has a *complex conjugate* and that complex conjugate is the point symmetric to it on the unit circle.
+An common way of representing roots of unity is in terms of the primitive root of unity. Recall that a primitive root of unity generates all other roots of unity.
+
+Given a primitive root of unity $w_n$, the roots of unity are $\{w_n^{0}, w_n^{1}, ... , w_n^{n - 1}\}$ where $n$ is an arbitrary positive number.
+
+For example, from the $8$th roots of unity, we pick the primitive root $w_8 = e^{{\pi\mathrm{i}}/4}$. That $8$th roots of unity are as follows: $$\{w_8^0, w_8^1, w_8^2, w_8^3, w_8^4, w_8^5, w_8^6, w_8^7\}$$
+
+---
+
+Another important property of roots of unity is that every root has a *complex conjugate* and that complex conjugate is the point symmetric to it on the unit circle.
 
 The complex conjugate of a complex number $a + b\mathrm{i}$ is $a - b\mathrm{i}$ and that of $a - b\mathrm{i}$ is $a + b\mathrm{i}$. But then, when these are on the unit circle, the complex conjugate of any root is simply it's vertical reflexion. 
 
@@ -676,12 +684,48 @@ For example, from the $8$th roots of unity above, Here are the complex conjugate
 
 Here are the $8$th roots of unity in rectangular form for clarification: $\{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} = \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \}$.
 
+Interestingly, the complex conjugate of any root $e^{a\mathrm{i}}$ is $e^{-a\mathrm{i}}$. That is:
+
+- $e^{5\pi\mathrm{i}/4} = e^{-3\pi\mathrm{i}/4}$
+- $e^{7\pi\mathrm{i}/4} = e^{-\pi\mathrm{i}/4}$
+- $e^{3\pi\mathrm{i}/2} = e^{-\pi\mathrm{i}/2}$
+
 A good mental model for complex conjugates is anticlockwise vs clockwise rotations. For example $e^{3\pi\mathrm{i}/4}$ is the angle $3\pi/4$ in the anticlockwise direction while $e^{5\pi\mathrm{i}/4}$ is the same angle in clockwise direction.
 
-An even better way to interprete this perform a rotation and undoing that rotation. For example, in the diagram below, we have a value $2$.
+An even better way to interprete this *performing a rotation and undoing that rotation*.
+
+For example, in the diagram below, we have a value $2$.
 
 
     
-![png](ntt_files/ntt_89_0.png)
+![png](ntt_files/ntt_91_0.png)
     
 
+
+Let's multiply 2 by $e^{{3\pi\mathrm{i}}/4}$. We have $2e^{{3\pi\mathrm{i}}/4}$.
+
+
+    
+![png](ntt_files/ntt_93_0.png)
+    
+
+
+Now, let's multiply $2e^{{3\pi\mathrm{i}}/4}$ by the complex conjugate of $e^{{3\pi\mathrm{i}}/4}$, $e^{5\pi\mathrm{i}/4}$. That is $2e^{{3\pi\mathrm{i}}/4} * e^{5\pi\mathrm{i}/4} = 2e^{{2\pi\mathrm{i}}}$.
+
+
+    
+![png](ntt_files/ntt_95_0.png)
+    
+
+
+As you can see in the diagrams $e^{{3\pi\mathrm{i}}/4}$ rotated $2$ by ${3\pi}/4$ and $e^{{5\pi\mathrm{i}}/4}$ undid that rotation taking $2e^{{3\pi\mathrm{i}}/4}$ back to $2$.
+
+This is a key concept in next our topic: **Discrete Fourier Transform** as we get closer to understanding FFT.
+
+### Discrete Fourier Transform (DFT)
+
+Let's go to where it all started: *Polynomial multiplication*.
+
+Recall, we chose a set of $x$ values, $x_i = \{x_0, x_1,..., x_n\}$ and evaluated $f(x_i)$ to get the set of points $(x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))$ and we called it the **point representation**.
+
+Now, let's use roots of unit as those set $x$ values.
