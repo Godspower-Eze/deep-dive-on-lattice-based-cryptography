@@ -73,11 +73,11 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
 1. **Convert from coefficient to point representation**: we pick a set of $x$ values and evaluate the polynomials at those points thereby converting the polynomials to the point representation.
 
-   That is, we pick $x_i = \{x_0, x_1, ... ,x_n \}$ where $n$ is at least $d + 1$. Then, we compute $f(x_i) = \{f(x_0), f(x_1),...,f(x_n)\}$ and $g(x_i) = \{g(x_0), g(x_1),...,g(x_n)\}$.
+   That is, we pick $x_i = \{x_0, x_1, ... ,x_d \}$. Then, we compute $f(x_i) = \{f(x_0), f(x_1),...,f(x_d)\}$ and $g(x_i) = \{g(x_0), g(x_1),...,g(x_d)\}$.
 
    There's a way of expressing this in a matrix form:
 
-   $$ V = \begin{bmatrix}x_0^0 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ x_1^0 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]x_n^0 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} = \begin{bmatrix}1 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\1 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]1 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix}$$
+   $$ V = \begin{bmatrix}x_0^0 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ x_1^0 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ x_2^0 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]x_n^0 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} = \begin{bmatrix}1 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ 1 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ 1 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]1 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix}$$
 
    $$a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_n\end{bmatrix}$$
 
@@ -85,7 +85,7 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
    $$ Va = f(x_i)$$
 
-   where $V$ is the matrix of $x_i$ and their powers, $a$ is a vector of coefficients and $f(x_i)$ are the evaluations. $V$ is called the **vandermonde** matrix.
+   where $n$ is at least $d$, $V$ is the matrix of $x_i$ and their powers, $a$ is a vector of coefficients and $f(x_i)$ are the evaluations. $V$ is called the **vandermonde** matrix.
 
    This shows that the process of evaluating the polynomial $f(x_i)$ is a *matrix-vector multiplication* which is an $O(n^2)$ operation. $f(x_i)$ can also be written as follows: $$f(x_i) = \sum^{n}_{j=0}a_jx^j_i$$
 
@@ -665,7 +665,7 @@ For example:
 
 ---
 
-An common way of representing roots of unity is in terms of the primitive root of unity. Recall that a primitive root of unity generates all other roots of unity.
+A common way of representing roots of unity is in terms of the primitive root of unity. Recall that a primitive root of unity generates all other roots of unity.
 
 Given a primitive root of unity $w_n$, the roots of unity are $\{w_n^{0}, w_n^{1}, ... , w_n^{n - 1}\}$ where $n$ is an arbitrary positive number.
 
@@ -724,8 +724,18 @@ This is a key concept in next our topic: **Discrete Fourier Transform** as we ge
 
 ### Discrete Fourier Transform (DFT)
 
-Let's go to where it all started: *Polynomial multiplication*.
+Let's go back to where it all started: *Polynomial multiplication*.
 
 Recall, we chose a set of $x$ values, $x_i = \{x_0, x_1,..., x_n\}$ and evaluated $f(x_i)$ to get the set of points $(x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))$ and we called it the **point representation**.
 
-Now, let's use roots of unit as those set $x$ values.
+Now, let's use roots of unit as those set $x$ values; our evaluation points. Given a primitive root of unity $w_n$ from the $n$th roots of unity, we have our root of unit $x_i = \{w_n^0, w_n^1, w_n^2, ..., w_n^{n - 1} \}$.
+
+With this, we have the following:
+
+   $$ V = \begin{bmatrix} w_n^{0*0} & w_n^{0*1} & {w_n}^{0*2} & \cdots & w_n^{0*(n - 1)} \\ w_n^{1*0} & w_n^{1*1} & w_n^{1*2} & \cdots & w_n^{1*(n - 1)} \\ w_n^{2*0} & w_n^{2*1} & w_n^{2*2} & \cdots & w_n^{2*(n - 1)} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]w_n^{(n - 1)*0} & w_n^{(n - 1)*1} & w_n^{(n - 1)*2} & \cdots & w_n^{(n - 1)(n - 1)} \end{bmatrix} = \begin{bmatrix}w_n^0 & w_n^0 & w_n^0 & \cdots & w_n^0 \\ w_n^0 & w_n^1 & w_n^2 & \cdots & w_n^{n - 1} \\ w_n^0 & w_n^2 & w_n^4 & \cdots & w_n^{2n - 2} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em] w_n^0 & w_n^{n - 1} & w_n^{2n - 2} & \cdots & w_n^{n^2 - 2n + 1} \end{bmatrix}$$
+
+   $$a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_{n - 1}\end{bmatrix}$$
+
+   $$Va = \begin{bmatrix}a_0w_n^0 + a_1w_n^0 + a_2w_n^0 + \cdots + a_{n - 1}w_n^0 \\ a_0w_n^0 + a_1w_n^1 + a_2w_n^2 + \cdots + a_{n - 1}w_n^{n - 1} \\ a_0w_n^0 + a_1w_n^2 + a_2w_n^4 + \cdots + a_{n - 1}w_n^{2n - 2} \\ \vdots \\ a_0w_n^0 + a_1w_n^{n - 1} + a_2w_n^{2n - 2} + \cdots + a_{n - 1}w_n^{n^2 - 2n + 1} \end{bmatrix} = \begin{bmatrix} f(w_n^0) \\ f(w_n^1) \\ f(w_n^2) \\ \vdots \\ f(w_n^{n - 1}) \end{bmatrix}$$
+
+   $$ Va = f(x_i)$$
