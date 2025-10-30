@@ -682,7 +682,7 @@ For example, from the $8$th roots of unity above, Here are the complex conjugate
 - $e^{\pi\mathrm{i}/4}$ is $e^{7\pi\mathrm{i}/4}$
 - $e^{\pi\mathrm{i}/2}$ is $e^{3\pi\mathrm{i}/2}$
 
-Here are the $8$th roots of unity in rectangular form for clarification: $\{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} = \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \}$.
+Here are the $8$th roots of unity in rectangular form for clarification: $\{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} = \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \}$
 
 Interestingly, the complex conjugate of any root $e^{a\mathrm{i}}$ is $e^{-a\mathrm{i}}$. That is:
 
@@ -728,7 +728,7 @@ Let's go back to where it all started: *Polynomial multiplication*.
 
 Recall, we chose a set of $x$ values, $x_i = \{x_0, x_1,..., x_n\}$ and evaluated $f(x_i)$ to get the set of points $(x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))$ and we called it the **point representation**.
 
-Now, let's use roots of unit as those set $x$ values; our evaluation points. Given a primitive root of unity $w_n$ from the $n$th roots of unity, we have our root of unit $x_i = \{w_n^0, w_n^1, w_n^2, ..., w_n^{n - 1} \}$.
+Now, let's use roots of unit as those set $x$ values; our evaluation points. Given a primitive root of unity $w_n$, we have our roots of unit $x_i = \{w_n^0, w_n^1, w_n^2, ..., w_n^{n - 1} \}$.
 
 With this, we have the following:
 
@@ -739,3 +739,24 @@ With this, we have the following:
    $$Va = \begin{bmatrix}a_0w_n^0 + a_1w_n^0 + a_2w_n^0 + \cdots + a_{n - 1}w_n^0 \\ a_0w_n^0 + a_1w_n^1 + a_2w_n^2 + \cdots + a_{n - 1}w_n^{n - 1} \\ a_0w_n^0 + a_1w_n^2 + a_2w_n^4 + \cdots + a_{n - 1}w_n^{2n - 2} \\ \vdots \\ a_0w_n^0 + a_1w_n^{n - 1} + a_2w_n^{2n - 2} + \cdots + a_{n - 1}w_n^{n^2 - 2n + 1} \end{bmatrix} = \begin{bmatrix} f(w_n^0) \\ f(w_n^1) \\ f(w_n^2) \\ \vdots \\ f(w_n^{n - 1}) \end{bmatrix}$$
 
    $$ Va = f(x_i)$$
+
+Breifly, what is DFT? DFT is an algorithm that turns a signal from the time domain into the frequency domain. It used in Signal analysis, Image Compression and a lot more. 
+
+A good way to look at DFT is an algorithm that seeks to get more information from individual values that were created out of a combination of different measurements of values. For instance, given an chord(a chord is a set of notes played together), DFT can be used to get the frequency of the individual notes that makes up the chord.
+
+
+Why do we care about DFT? The DFT algorithm is equalivent to polynomial evaluation using roots of unity as we shown above. It runs in $O(n^2)$ time and FFT was created to make DFT run in $O(n\log(n))$ time.
+
+We are going to see how DFT is used and after that we are going to see how FFT is derived from the construction of DFT. 
+
+Let's see an example. Using the $8$th roots of unity $w_8$, let's compute $A(x) * B(x)$.
+
+- **Step 1**: Define the the vandermonde matrix $V$
+
+  $$w_8 = \{ w_8^{0}, w_8^{1}, w_8^{2}, w_8^{3}, w_8^{4}, w_8^{5}, w_8^{6}, w_8^{7} \} = \{ 1, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \}$$  
+
+     $$ V = 
+     \begin{bmatrix} w_8^{0*0} & w_8^{0*1} & {w_8}^{0*2} & w_8^{0*3} & w_8^{0*4} & w_8^{0*5} & w_8^{0*6} & w_8^{0*7} \\ w_8^{1*0} & w_8^{1*1} & {w_8}^{1*2} & w_8^{1*3} & w_8^{1*4} & w_8^{1*5} & w_8^{1*6} & w_8^{1*7} \\ w_8^{2*0} & w_8^{2*1} & {w_8}^{2*2} & w_8^{2*3} & w_8^{2*4} & w_8^{2*5} & w_8^{2*6} & w_8^{2*7} \\  w_8^{3*0} & w_8^{3*1} & {w_8}^{3*2} & w_8^{3*3} & w_8^{3*4} & w_8^{3*5} & w_8^{3*6} & w_8^{3*7} \\ w_8^{4*0} & w_8^{4*1} & {w_8}^{4*2} & w_8^{4*3} & w_8^{4*4} & w_8^{4*5} & w_8^{4*6} & w_8^{4*7} \\ w_8^{5*0} & w_8^{5*1} & {w_8}^{5*2} & w_8^{5*3} & w_8^{5*4} & w_8^{5*5} & w_8^{5*6} & w_8^{5*7} \\ w_8^{6*0} & w_8^{6*1} & {w_8}^{6*2} & w_8^{6*3} & w_8^{6*4} & w_8^{6*5} & w_8^{6*6} & w_8^{6*7} \\ w_8^{7*0} & w_8^{7*1} & {w_8}^{7*2} & w_8^{7*3} & w_8^{7*4} & w_8^{7*5} & w_8^{7*6} & w_8^{7*7} \end{bmatrix} = 
+     \begin{bmatrix} w_8^{0} & w_8^{0} & {w_8}^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0} \\ w_8^{0} & w_8^{1} & {w_8}^{2} & w_8^{3} & w_8^{4} & w_8^{5} & w_8^{6} & w_8^{7} \\ w_8^{0} & w_8^{2} & {w_8}^{4} & w_8^{6} & w_8^{8} & w_8^{10} & w_8^{12} & w_8^{14} \\  w_8^{0} & w_8^{3} & {w_8}^{6} & w_8^{9} & w_8^{12} & w_8^{15} & w_8^{18} & w_8^{21} \\ w_8^{0} & w_8^{4} & {w_8}^{8} & w_8^{12} & w_8^{16} & w_8^{20} & w_8^{24} & w_8^{28} \\ w_8^{0} & w_8^{5} & {w_8}^{10} & w_8^{15} & w_8^{20} & w_8^{25} & w_8^{30} & w_8^{35} \\ w_8^{0} & w_8^{6} & {w_8}^{12} & w_8^{18} & w_8^{24} & w_8^{30} & w_8^{36} & w_8^{42} \\ w_8^{0} & w_8^{7} & {w_8}^{14} & w_8^{21} & w_8^{28} & w_8^{35} & w_8^{42} & w_8^{49} \end{bmatrix} = 
+     \begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ 1 & e^{{\pi\mathrm{i}}/4} & e^{{\pi\mathrm{i}}/2} & e^{{3\pi\mathrm{i}}/4} & e^{\pi\mathrm{i}} & e^{{5\pi\mathrm{i}}/4} & e^{{3\pi\mathrm{i}}/2} & e^{{7\pi\mathrm{i}}/4} \\ 1 & e^{{\pi\mathrm{i}}/2} & e^{{\pi\mathrm{i}}} & e^{{3\pi\mathrm{i}}/2} & e^{{2\pi\mathrm{i}}} & e^{{5\pi\mathrm{i}}/2} & e^{{3\pi\mathrm{i}}} & e^{{7\pi\mathrm{i}}/2} \\ 1 & e^{{3\pi\mathrm{i}}/4} & {w_8}^{6} & w_8^{9} & w_8^{12} & w_8^{15} & w_8^{18} & w_8^{21} \\ 1 & e^{\pi\mathrm{i}} & {w_8}^{8} & w_8^{12} & w_8^{16} & w_8^{20} & w_8^{24} & w_8^{28} \\ 1 & e^{{5\pi\mathrm{i}}/4} & {w_8}^{10} & w_8^{15} & w_8^{20} & w_8^{25} & w_8^{30} & w_8^{35} \\ 1 & e^{{3\pi\mathrm{i}}/2} & {w_8}^{12} & w_8^{18} & w_8^{24} & w_8^{30} & w_8^{36} & w_8^{42} \\ 1 & e^{{7\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}/2} & e^{{49\pi\mathrm{i}}/4} \end{bmatrix}$$
+- **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively. 
