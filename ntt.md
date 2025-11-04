@@ -751,12 +751,52 @@ We are going to see how DFT is used and after that we are going to see how FFT i
 
 Let's see an example. Using the $8$th roots of unity $w_8$, let's compute $A(x) * B(x)$.
 
-- **Step 1**: Define the the vandermonde matrix $V$
+- **Step 1**: Pick the primitive root of unity and define the the vandermonde matrix $V$
 
-  $$w_8 = \{ w_8^{0}, w_8^{1}, w_8^{2}, w_8^{3}, w_8^{4}, w_8^{5}, w_8^{6}, w_8^{7} \} = \{ 1, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \}$$  
+  $$w_8 = e^{{7\pi\mathrm{i}}/4}$$
+
+  $$w_8 = \{ w_8^{0}, w_8^{1}, w_8^{2}, w_8^{3}, w_8^{4}, w_8^{5}, w_8^{6}, w_8^{7} \} = \{ 1, e^{{7\pi\mathrm{i}}/4}, e^{{7\pi\mathrm{i}}/2}, e^{{21\pi\mathrm{i}}/4}, e^{{7\pi\mathrm{i}}}, e^{{35\pi\mathrm{i}}/4}, e^{{21\pi\mathrm{i}}/2}, e^{{49\pi\mathrm{i}}/4} \}$$  
 
      $$ V = 
-     \begin{bmatrix} w_8^{0*0} & w_8^{0*1} & {w_8}^{0*2} & w_8^{0*3} & w_8^{0*4} & w_8^{0*5} & w_8^{0*6} & w_8^{0*7} \\ w_8^{1*0} & w_8^{1*1} & {w_8}^{1*2} & w_8^{1*3} & w_8^{1*4} & w_8^{1*5} & w_8^{1*6} & w_8^{1*7} \\ w_8^{2*0} & w_8^{2*1} & {w_8}^{2*2} & w_8^{2*3} & w_8^{2*4} & w_8^{2*5} & w_8^{2*6} & w_8^{2*7} \\  w_8^{3*0} & w_8^{3*1} & {w_8}^{3*2} & w_8^{3*3} & w_8^{3*4} & w_8^{3*5} & w_8^{3*6} & w_8^{3*7} \\ w_8^{4*0} & w_8^{4*1} & {w_8}^{4*2} & w_8^{4*3} & w_8^{4*4} & w_8^{4*5} & w_8^{4*6} & w_8^{4*7} \\ w_8^{5*0} & w_8^{5*1} & {w_8}^{5*2} & w_8^{5*3} & w_8^{5*4} & w_8^{5*5} & w_8^{5*6} & w_8^{5*7} \\ w_8^{6*0} & w_8^{6*1} & {w_8}^{6*2} & w_8^{6*3} & w_8^{6*4} & w_8^{6*5} & w_8^{6*6} & w_8^{6*7} \\ w_8^{7*0} & w_8^{7*1} & {w_8}^{7*2} & w_8^{7*3} & w_8^{7*4} & w_8^{7*5} & w_8^{7*6} & w_8^{7*7} \end{bmatrix} = 
-     \begin{bmatrix} w_8^{0} & w_8^{0} & {w_8}^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0} \\ w_8^{0} & w_8^{1} & {w_8}^{2} & w_8^{3} & w_8^{4} & w_8^{5} & w_8^{6} & w_8^{7} \\ w_8^{0} & w_8^{2} & {w_8}^{4} & w_8^{6} & w_8^{8} & w_8^{10} & w_8^{12} & w_8^{14} \\  w_8^{0} & w_8^{3} & {w_8}^{6} & w_8^{9} & w_8^{12} & w_8^{15} & w_8^{18} & w_8^{21} \\ w_8^{0} & w_8^{4} & {w_8}^{8} & w_8^{12} & w_8^{16} & w_8^{20} & w_8^{24} & w_8^{28} \\ w_8^{0} & w_8^{5} & {w_8}^{10} & w_8^{15} & w_8^{20} & w_8^{25} & w_8^{30} & w_8^{35} \\ w_8^{0} & w_8^{6} & {w_8}^{12} & w_8^{18} & w_8^{24} & w_8^{30} & w_8^{36} & w_8^{42} \\ w_8^{0} & w_8^{7} & {w_8}^{14} & w_8^{21} & w_8^{28} & w_8^{35} & w_8^{42} & w_8^{49} \end{bmatrix} = 
-     \begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\ 1 & e^{{\pi\mathrm{i}}/4} & e^{{\pi\mathrm{i}}/2} & e^{{3\pi\mathrm{i}}/4} & e^{\pi\mathrm{i}} & e^{{5\pi\mathrm{i}}/4} & e^{{3\pi\mathrm{i}}/2} & e^{{7\pi\mathrm{i}}/4} \\ 1 & e^{{\pi\mathrm{i}}/2} & e^{{\pi\mathrm{i}}} & e^{{3\pi\mathrm{i}}/2} & e^{{2\pi\mathrm{i}}} & e^{{5\pi\mathrm{i}}/2} & e^{{3\pi\mathrm{i}}} & e^{{7\pi\mathrm{i}}/2} \\ 1 & e^{{3\pi\mathrm{i}}/4} & {w_8}^{6} & w_8^{9} & w_8^{12} & w_8^{15} & w_8^{18} & w_8^{21} \\ 1 & e^{\pi\mathrm{i}} & {w_8}^{8} & w_8^{12} & w_8^{16} & w_8^{20} & w_8^{24} & w_8^{28} \\ 1 & e^{{5\pi\mathrm{i}}/4} & {w_8}^{10} & w_8^{15} & w_8^{20} & w_8^{25} & w_8^{30} & w_8^{35} \\ 1 & e^{{3\pi\mathrm{i}}/2} & {w_8}^{12} & w_8^{18} & w_8^{24} & w_8^{30} & w_8^{36} & w_8^{42} \\ 1 & e^{{7\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}/2} & e^{{49\pi\mathrm{i}}/4} \end{bmatrix}$$
-- **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively. 
+     \begin{bmatrix}
+     w_8^{0*0} & w_8^{0*1} & {w_8}^{0*2} & w_8^{0*3} & w_8^{0*4} & w_8^{0*5} & w_8^{0*6} & w_8^{0*7}
+     \\ w_8^{1*0} & w_8^{1*1} & {w_8}^{1*2} & w_8^{1*3} & w_8^{1*4} & w_8^{1*5} & w_8^{1*6} & w_8^{1*7}
+     \\ w_8^{2*0} & w_8^{2*1} & {w_8}^{2*2} & w_8^{2*3} & w_8^{2*4} & w_8^{2*5} & w_8^{2*6} & w_8^{2*7}
+     \\  w_8^{3*0} & w_8^{3*1} & {w_8}^{3*2} & w_8^{3*3} & w_8^{3*4} & w_8^{3*5} & w_8^{3*6} & w_8^{3*7}
+     \\ w_8^{4*0} & w_8^{4*1} & {w_8}^{4*2} & w_8^{4*3} & w_8^{4*4} & w_8^{4*5} & w_8^{4*6} & w_8^{4*7}
+     \\ w_8^{5*0} & w_8^{5*1} & {w_8}^{5*2} & w_8^{5*3} & w_8^{5*4} & w_8^{5*5} & w_8^{5*6} & w_8^{5*7}
+     \\ w_8^{6*0} & w_8^{6*1} & {w_8}^{6*2} & w_8^{6*3} & w_8^{6*4} & w_8^{6*5} & w_8^{6*6} & w_8^{6*7}
+     \\ w_8^{7*0} & w_8^{7*1} & {w_8}^{7*2} & w_8^{7*3} & w_8^{7*4} & w_8^{7*5} & w_8^{7*6} & w_8^{7*7}
+     \end{bmatrix} = 
+     \begin{bmatrix} w_8^{0} & w_8^{0} & {w_8}^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0}
+     \\ w_8^{0} & w_8^{1} & {w_8}^{2} & w_8^{3} & w_8^{4} & w_8^{5} & w_8^{6} & w_8^{7}
+     \\ w_8^{0} & w_8^{2} & {w_8}^{4} & w_8^{6} & w_8^{8} & w_8^{10} & w_8^{12} & w_8^{14}
+     \\  w_8^{0} & w_8^{3} & {w_8}^{6} & w_8^{9} & w_8^{12} & w_8^{15} & w_8^{18} & w_8^{21}
+     \\ w_8^{0} & w_8^{4} & {w_8}^{8} & w_8^{12} & w_8^{16} & w_8^{20} & w_8^{24} & w_8^{28}
+     \\ w_8^{0} & w_8^{5} & {w_8}^{10} & w_8^{15} & w_8^{20} & w_8^{25} & w_8^{30} & w_8^{35}
+     \\ w_8^{0} & w_8^{6} & {w_8}^{12} & w_8^{18} & w_8^{24} & w_8^{30} & w_8^{36} & w_8^{42}
+     \\ w_8^{0} & w_8^{7} & {w_8}^{14} & w_8^{21} & w_8^{28} & w_8^{35} & w_8^{42} & w_8^{49} 
+     \end{bmatrix} = 
+     \begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 
+     \\ 1 & e^{{7\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}/2} & e^{{49\pi\mathrm{i}}/4} 
+     \\ 1 & e^{{7\pi\mathrm{i}}/2} & e^{{7\pi\mathrm{i}}} & e^{{21\pi\mathrm{i}}/2} & e^{{14\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}} & e^{{49\pi\mathrm{i}}/2} 
+     \\ 1 & e^{{21\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}/2} & e^{{63\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}} & e^{{105\pi\mathrm{i}}/4} & e^{{63\pi\mathrm{i}}/2} & e^{{147\pi\mathrm{i}}/4} 
+     \\ 1 & e^{{7\pi\mathrm{i}}} & e^{{14\pi\mathrm{i}}} & e^{{21\pi\mathrm{i}}} & e^{{28\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}} & e^{{42\pi\mathrm{i}}} & e^{{49\pi\mathrm{i}}}
+     \\ 1 & e^{{35\pi\mathrm{i}}/4} & e^{{35\pi\mathrm{i}}/2} & e^{{105\pi\mathrm{i}}/4} & e^{{35\pi\mathrm{i}}} & e^{{185\pi\mathrm{i}}/4} & e^{{105\pi\mathrm{i}}/2} & e^{{245\pi\mathrm{i}}/4}
+     \\ 1 & e^{{21\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}} & e^{{63\pi\mathrm{i}}/2} & e^{{42\pi\mathrm{i}}} & e^{{105\pi\mathrm{i}}/2} & e^{{63\pi\mathrm{i}}} & e^{{147\pi\mathrm{i}}/2}
+     \\ 1 & e^{{49\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}/2} & e^{{147\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}} & e^{{245\pi\mathrm{i}}/4} & e^{{147\pi\mathrm{i}}/2} & e^{{343\pi\mathrm{i}}/4} \end{bmatrix}$$
+- **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively.
+  
+  $DFT(A)$:
+
+  $$a = \begin{bmatrix}3 \\ -4 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}$$
+
+     $$Va = \begin{bmatrix}
+     (3 \cdot 1) + (-4 \cdot 1) + (1 \cdot 1) + (0 \cdot 1) + (0 \cdot 1) + (0 \cdot 1) + (0 \cdot 1) + (0 \cdot 1)
+     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4})
+     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4}
+     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4}
+     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4}
+     \end{bmatrix} = 
+     \begin{bmatrix} 0 \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} 
+     \end{bmatrix}$$
