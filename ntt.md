@@ -1,10 +1,10 @@
-# Fast-fourier Transform (FTT), Number-theoretic Transform (NTT) and Lattice-based Cryptography
+# Fast-fourier Transform (FTT) and Number-theoretic Transform (NTT) - FFT, NTT and LBC
 
 The need to make systems and algorithms faster so as to make them more practical has been ever constant in the world of software engineering and cryptography at large, and lattice-based cryptography is not left out.
 
 Number-theoretic Transform (NTT) was used in ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism), a lattice-based cryptographic algorithm used in establishing a shared secret key between two parties over a public channel. NTT is an analogue to the beautiful yet powerful Fast-fourier Transform (FTT).
 
-The goal of this post is to take a deep dive into FFT, NTT and how NTT is used in ML-KEM. 
+This article is part one of two-part series  titled **Fast-fourier Transform (FTT), Number-theoretic Transform (NTT) and Lattice-based Cryptography**. The goal of this post is to take a deep dive into FFT and NTT while part two will explore how NTT is used in lattice-based algorithms like [ML-KEM](https://github.com/Godspower-Eze/pqc-ml-kem.rs) and [ML-DSA](https://csrc.nist.gov/pubs/fips/204/final).
 
 As always, we are going to take a discovery approach, building up slowly from the familiar to the unfamiliar.
 
@@ -197,7 +197,7 @@ Having known this; let's adjust out diagram.
     
 
 
-From the diagram, we can see that we have two unknowns the hypotenuse which will be denoted as $r$ and the angle $\theta$.
+From the diagram, we can see that we have two unknowns, the hypotenuse which will be denoted as $r$ and the angle $\theta$.
 
 From pythagoras theorem, we know $r^2 = a^2 + b^2$. Therefore:$$r^2 = 2^2 + 3^2 = 4 + 9 = 13$$
 $$r = \sqrt{13}$$
@@ -686,13 +686,13 @@ Here are the $8$th roots of unity in rectangular form for clarification: $\{ e^{
 
 Interestingly, the complex conjugate of any root $e^{a\mathrm{i}}$ is $e^{-a\mathrm{i}}$. That is:
 
-- $e^{5\pi\mathrm{i}/4} = e^{-3\pi\mathrm{i}/4}$
-- $e^{7\pi\mathrm{i}/4} = e^{-\pi\mathrm{i}/4}$
-- $e^{3\pi\mathrm{i}/2} = e^{-\pi\mathrm{i}/2}$
+- $e^{5\pi\mathrm{i}/4} = e^{-5\pi\mathrm{i}/4} = e^{3\pi\mathrm{i}/4}$
+- $e^{7\pi\mathrm{i}/4} = e^{-7\pi\mathrm{i}/4} = e^{\pi\mathrm{i}/4}$
+- $e^{3\pi\mathrm{i}/2} = e^{-3\pi\mathrm{i}/2} = e^{\pi\mathrm{i}/2}$
 
 A good mental model for complex conjugates is anticlockwise vs clockwise rotations. For example $e^{3\pi\mathrm{i}/4}$ is the angle $3\pi/4$ in the anticlockwise direction while $e^{5\pi\mathrm{i}/4}$ is the same angle in clockwise direction.
 
-An even better way to interprete this *performing a rotation and undoing that rotation*.
+An even better way to interprete this is *performing a rotation and undoing that rotation*.
 
 For example, in the diagram below, we have a value $2$.
 
@@ -751,7 +751,7 @@ We are going to see how DFT is used and after that we are going to see how FFT i
 
 Let's see an example. Using the $8$th roots of unity $w_8$, let's compute $A(x) * B(x)$.
 
-- **Step 1**: Pick the primitive root of unity and define the the vandermonde matrix $V$
+- **Step 1**: Pick a primitive root of unity and define the the vandermonde matrix $V$
 
   $$w_8 = e^{{7\pi\mathrm{i}}/4}$$
 
