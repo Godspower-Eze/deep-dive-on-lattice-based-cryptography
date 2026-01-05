@@ -785,7 +785,7 @@ Let's see an example. Using the $8$th roots of unity $w_8$, let's compute $A(x) 
      \\ 1 & e^{{35\pi\mathrm{i}}/4} & e^{{35\pi\mathrm{i}}/2} & e^{{105\pi\mathrm{i}}/4} & e^{{35\pi\mathrm{i}}} & e^{{185\pi\mathrm{i}}/4} & e^{{105\pi\mathrm{i}}/2} & e^{{245\pi\mathrm{i}}/4}
      \\ 1 & e^{{21\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}} & e^{{63\pi\mathrm{i}}/2} & e^{{42\pi\mathrm{i}}} & e^{{105\pi\mathrm{i}}/2} & e^{{63\pi\mathrm{i}}} & e^{{147\pi\mathrm{i}}/2}
      \\ 1 & e^{{49\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}/2} & e^{{147\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}} & e^{{245\pi\mathrm{i}}/4} & e^{{147\pi\mathrm{i}}/2} & e^{{343\pi\mathrm{i}}/4} \end{bmatrix}$$
-- **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively.
+- **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively. The formula is computing the DFT is $X[k] = \sum_{n=0}^{N-1} x[n]\, e^{-j\,2\pi kn/N}$. This is the same as $f(x_i) = \sum^{n}_{j=0}a_jx^j_i$ but updated to show that we are using the roots of unity as our evaluations points.
 
 $DFT(A)$:
 
@@ -835,7 +835,7 @@ $DFT(B)$:
      \\ 6 - 5e^{{49\pi\mathrm{i}}/4} + e^{{49\pi\mathrm{i}}/2}
      \end{bmatrix}$$
 
-- Step 3: Compute pairwise multiplication $DFT(A) \cdot DFT(B)$
+- Step 3: Compute the pairwise multiplication $DFT(A) \cdot DFT(B)$
 
 $DFT(A) \cdot DFT(B)$:
 
@@ -871,4 +871,41 @@ $$
      \end{bmatrix}
 $$
 
-- Step 4: 
+- Step 4: Compute the inverse DFT of $DFT(A) \cdot DFT(B)$.
+
+  This takes us back to coefficient form. The formula for this is $$x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, e^{+j\,2\pi kn/N}$$ This simply means we perform the same operation as before but now we pick the positive primitive root of unity and pick $a = DFT(A).DFT(B)$, then we divide the result by N being $8$ in this case.
+
+  This formula is different from the one we used this process earlier because of the percularities of complex numbers and roots of unity but it's requires less operations. For instance, we don't need to find the inverse of the matrix $V$.
+
+    $$w_8 = e^{{\pi\mathrm{i}}/4}$$
+
+  $$w_8 = \{ w_8^{0}, w_8^{1}, w_8^{2}, w_8^{3}, w_8^{4}, w_8^{5}, w_8^{6}, w_8^{7} \} = \{ 1, e^{{7\pi\mathrm{i}}/4}, e^{{7\pi\mathrm{i}}/2}, e^{{21\pi\mathrm{i}}/4}, e^{{7\pi\mathrm{i}}}, e^{{35\pi\mathrm{i}}/4}, e^{{21\pi\mathrm{i}}/2}, e^{{49\pi\mathrm{i}}/4} \}$$  
+
+     $$ V = 
+     \begin{bmatrix}
+     w_8^{0*0} & w_8^{0*1} & {w_8}^{0*2} & w_8^{0*3} & w_8^{0*4} & w_8^{0*5} & w_8^{0*6} & w_8^{0*7}
+     \\ w_8^{1*0} & w_8^{1*1} & {w_8}^{1*2} & w_8^{1*3} & w_8^{1*4} & w_8^{1*5} & w_8^{1*6} & w_8^{1*7}
+     \\ w_8^{2*0} & w_8^{2*1} & {w_8}^{2*2} & w_8^{2*3} & w_8^{2*4} & w_8^{2*5} & w_8^{2*6} & w_8^{2*7}
+     \\  w_8^{3*0} & w_8^{3*1} & {w_8}^{3*2} & w_8^{3*3} & w_8^{3*4} & w_8^{3*5} & w_8^{3*6} & w_8^{3*7}
+     \\ w_8^{4*0} & w_8^{4*1} & {w_8}^{4*2} & w_8^{4*3} & w_8^{4*4} & w_8^{4*5} & w_8^{4*6} & w_8^{4*7}
+     \\ w_8^{5*0} & w_8^{5*1} & {w_8}^{5*2} & w_8^{5*3} & w_8^{5*4} & w_8^{5*5} & w_8^{5*6} & w_8^{5*7}
+     \\ w_8^{6*0} & w_8^{6*1} & {w_8}^{6*2} & w_8^{6*3} & w_8^{6*4} & w_8^{6*5} & w_8^{6*6} & w_8^{6*7}
+     \\ w_8^{7*0} & w_8^{7*1} & {w_8}^{7*2} & w_8^{7*3} & w_8^{7*4} & w_8^{7*5} & w_8^{7*6} & w_8^{7*7}
+     \end{bmatrix} = 
+     \begin{bmatrix} w_8^{0} & w_8^{0} & {w_8}^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0} & w_8^{0}
+     \\ w_8^{0} & w_8^{1} & {w_8}^{2} & w_8^{3} & w_8^{4} & w_8^{5} & w_8^{6} & w_8^{7}
+     \\ w_8^{0} & w_8^{2} & {w_8}^{4} & w_8^{6} & w_8^{8} & w_8^{10} & w_8^{12} & w_8^{14}
+     \\  w_8^{0} & w_8^{3} & {w_8}^{6} & w_8^{9} & w_8^{12} & w_8^{15} & w_8^{18} & w_8^{21}
+     \\ w_8^{0} & w_8^{4} & {w_8}^{8} & w_8^{12} & w_8^{16} & w_8^{20} & w_8^{24} & w_8^{28}
+     \\ w_8^{0} & w_8^{5} & {w_8}^{10} & w_8^{15} & w_8^{20} & w_8^{25} & w_8^{30} & w_8^{35}
+     \\ w_8^{0} & w_8^{6} & {w_8}^{12} & w_8^{18} & w_8^{24} & w_8^{30} & w_8^{36} & w_8^{42}
+     \\ w_8^{0} & w_8^{7} & {w_8}^{14} & w_8^{21} & w_8^{28} & w_8^{35} & w_8^{42} & w_8^{49} 
+     \end{bmatrix} = 
+     \begin{bmatrix} 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 
+     \\ 1 & e^{{7\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}/4} & e^{{7\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}/2} & e^{{49\pi\mathrm{i}}/4} 
+     \\ 1 & e^{{7\pi\mathrm{i}}/2} & e^{{7\pi\mathrm{i}}} & e^{{21\pi\mathrm{i}}/2} & e^{{14\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}} & e^{{49\pi\mathrm{i}}/2} 
+     \\ 1 & e^{{21\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}/2} & e^{{63\pi\mathrm{i}}/4} & e^{{21\pi\mathrm{i}}} & e^{{105\pi\mathrm{i}}/4} & e^{{63\pi\mathrm{i}}/2} & e^{{147\pi\mathrm{i}}/4} 
+     \\ 1 & e^{{7\pi\mathrm{i}}} & e^{{14\pi\mathrm{i}}} & e^{{21\pi\mathrm{i}}} & e^{{28\pi\mathrm{i}}} & e^{{35\pi\mathrm{i}}} & e^{{42\pi\mathrm{i}}} & e^{{49\pi\mathrm{i}}}
+     \\ 1 & e^{{35\pi\mathrm{i}}/4} & e^{{35\pi\mathrm{i}}/2} & e^{{105\pi\mathrm{i}}/4} & e^{{35\pi\mathrm{i}}} & e^{{185\pi\mathrm{i}}/4} & e^{{105\pi\mathrm{i}}/2} & e^{{245\pi\mathrm{i}}/4}
+     \\ 1 & e^{{21\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}} & e^{{63\pi\mathrm{i}}/2} & e^{{42\pi\mathrm{i}}} & e^{{105\pi\mathrm{i}}/2} & e^{{63\pi\mathrm{i}}} & e^{{147\pi\mathrm{i}}/2}
+     \\ 1 & e^{{49\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}/2} & e^{{147\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}} & e^{{245\pi\mathrm{i}}/4} & e^{{147\pi\mathrm{i}}/2} & e^{{343\pi\mathrm{i}}/4} \end{bmatrix}$$
