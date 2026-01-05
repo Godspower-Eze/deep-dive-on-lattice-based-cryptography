@@ -786,17 +786,89 @@ Let's see an example. Using the $8$th roots of unity $w_8$, let's compute $A(x) 
      \\ 1 & e^{{21\pi\mathrm{i}}/2} & e^{{21\pi\mathrm{i}}} & e^{{63\pi\mathrm{i}}/2} & e^{{42\pi\mathrm{i}}} & e^{{105\pi\mathrm{i}}/2} & e^{{63\pi\mathrm{i}}} & e^{{147\pi\mathrm{i}}/2}
      \\ 1 & e^{{49\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}/2} & e^{{147\pi\mathrm{i}}/4} & e^{{49\pi\mathrm{i}}} & e^{{245\pi\mathrm{i}}/4} & e^{{147\pi\mathrm{i}}/2} & e^{{343\pi\mathrm{i}}/4} \end{bmatrix}$$
 - **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively.
-  
-  $DFT(A)$:
+
+$DFT(A)$:
 
   $$a = \begin{bmatrix}3 \\ -4 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}$$
 
-     $$Va = \begin{bmatrix}
-     (3 \cdot 1) + (-4 \cdot 1) + (1 \cdot 1) + (0 \cdot 1) + (0 \cdot 1) + (0 \cdot 1) + (0 \cdot 1) + (0 \cdot 1)
-     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4})
-     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4}
-     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4}
-     \\ (3 \cdot 1) + (-4 \cdot e^{{7\pi\mathrm{i}}/4}) + (1 \cdot e^{{7\pi\mathrm{i}}/2}) + (0 \cdot e^{{21\pi\mathrm{i}}/4}) + (0 \cdot e^{{7\pi\mathrm{i}}}) + (0 \cdot e^{{35\pi\mathrm{i}}/4}) + (0 \cdot e^{{21\pi\mathrm{i}}/2}) + (0 \cdot e^{{49\pi\mathrm{i}}/4}
+  $$Va = \begin{bmatrix}
+     (1 \cdot 3) + (1 \cdot -4) + (1 \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 3) + (e^{{7\pi\mathrm{i}}/4} \cdot -4) + (e^{{7\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 3) + (e^{{7\pi\mathrm{i}}/2} \cdot -4) + (e^{{7\pi\mathrm{i}}} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 3) + (e^{{21\pi\mathrm{i}}/4} \cdot -4) + (e^{{21\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 3) + (e^{{7\pi\mathrm{i}}} \cdot -4) + (e^{{14\pi\mathrm{i}}} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 3) + (e^{{35\pi\mathrm{i}}/4} \cdot -4) + (e^{{35\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 3) + (e^{{21\pi\mathrm{i}}/2} \cdot -4) + (e^{{21\pi\mathrm{i}}} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 3) + (e^{{49\pi\mathrm{i}}/4} \cdot -4) + (e^{{49\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
      \end{bmatrix} = 
-     \begin{bmatrix} 0 \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2} 
+     \begin{bmatrix} 0 
+     \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2}
+     \\ 3 - 4e^{{7\pi\mathrm{i}}/2} + e^{{7\pi\mathrm{i}}}
+     \\ 3 - 4e^{{21\pi\mathrm{i}}/4} + e^{{21\pi\mathrm{i}}/2}
+     \\ 3 - 4e^{{7\pi\mathrm{i}}} + e^{{14\pi\mathrm{i}}}
+     \\ 3 - 4e^{{35\pi\mathrm{i}}/4} + e^{{35\pi\mathrm{i}}/2}
+     \\ 3 - 4e^{{21\pi\mathrm{i}}/2} + e^{{21\pi\mathrm{i}}}
+     \\ 3 - 4e^{{49\pi\mathrm{i}}/4} + e^{{49\pi\mathrm{i}}/2}
      \end{bmatrix}$$
+
+$DFT(B)$:
+
+  $$a = \begin{bmatrix}6 \\ -5 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}$$
+
+  $$Va = \begin{bmatrix}
+     (1 \cdot 6) + (1 \cdot -5) + (1 \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 6) + (e^{{7\pi\mathrm{i}}/4} \cdot -5) + (e^{{7\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 6) + (e^{{7\pi\mathrm{i}}/2} \cdot -5) + (e^{{7\pi\mathrm{i}}} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 6) + (e^{{21\pi\mathrm{i}}/4} \cdot -5) + (e^{{21\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 6) + (e^{{7\pi\mathrm{i}}} \cdot -5) + (e^{{14\pi\mathrm{i}}} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 6) + (e^{{35\pi\mathrm{i}}/4} \cdot -5) + (e^{{35\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 6) + (e^{{21\pi\mathrm{i}}/2} \cdot -5) + (e^{{21\pi\mathrm{i}}} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \\ (1 \cdot 6) + (e^{{49\pi\mathrm{i}}/4} \cdot -5) + (e^{{49\pi\mathrm{i}}/2} \cdot 1) + 0 + 0 + 0 + 0 + 0
+     \end{bmatrix} = 
+     \begin{bmatrix} 2 
+     \\ 6 - 5e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2}
+     \\ 6 - 5e^{{7\pi\mathrm{i}}/2} + e^{{7\pi\mathrm{i}}}
+     \\ 6 - 5e^{{21\pi\mathrm{i}}/4} + e^{{21\pi\mathrm{i}}/2}
+     \\ 6 - 5e^{{7\pi\mathrm{i}}} + e^{{14\pi\mathrm{i}}}
+     \\ 6 - 5e^{{35\pi\mathrm{i}}/4} + e^{{35\pi\mathrm{i}}/2}
+     \\ 6 - 5e^{{21\pi\mathrm{i}}/2} + e^{{21\pi\mathrm{i}}}
+     \\ 6 - 5e^{{49\pi\mathrm{i}}/4} + e^{{49\pi\mathrm{i}}/2}
+     \end{bmatrix}$$
+
+- Step 3: Compute pairwise multiplication $DFT(A) \cdot DFT(B)$
+
+$DFT(A) \cdot DFT(B)$:
+
+$$
+     \begin{bmatrix} 0 
+     \\ 3 - 4e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2}
+     \\ 3 - 4e^{{7\pi\mathrm{i}}/2} + e^{{7\pi\mathrm{i}}}
+     \\ 3 - 4e^{{21\pi\mathrm{i}}/4} + e^{{21\pi\mathrm{i}}/2}
+     \\ 3 - 4e^{{7\pi\mathrm{i}}} + e^{{14\pi\mathrm{i}}}
+     \\ 3 - 4e^{{35\pi\mathrm{i}}/4} + e^{{35\pi\mathrm{i}}/2}
+     \\ 3 - 4e^{{21\pi\mathrm{i}}/2} + e^{{21\pi\mathrm{i}}}
+     \\ 3 - 4e^{{49\pi\mathrm{i}}/4} + e^{{49\pi\mathrm{i}}/2}
+     \end{bmatrix}
+     \cdot
+     \begin{bmatrix} 2 
+     \\ 6 - 5e^{{7\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}/2}
+     \\ 6 - 5e^{{7\pi\mathrm{i}}/2} + e^{{7\pi\mathrm{i}}}
+     \\ 6 - 5e^{{21\pi\mathrm{i}}/4} + e^{{21\pi\mathrm{i}}/2}
+     \\ 6 - 5e^{{7\pi\mathrm{i}}} + e^{{14\pi\mathrm{i}}}
+     \\ 6 - 5e^{{35\pi\mathrm{i}}/4} + e^{{35\pi\mathrm{i}}/2}
+     \\ 6 - 5e^{{21\pi\mathrm{i}}/2} + e^{{21\pi\mathrm{i}}}
+     \\ 6 - 5e^{{49\pi\mathrm{i}}/4} + e^{{49\pi\mathrm{i}}/2}
+     \end{bmatrix} = 
+     \begin{bmatrix}
+     0
+     \\ 18 - 39e^{{7\pi\mathrm{i}}/4} + 29e^{{7\pi\mathrm{i}}/2} - 9e^{{21\pi\mathrm{i}}/4} + e^{{7\pi\mathrm{i}}}
+     \\ 18 - 39e^{{7\pi\mathrm{i}}/2} + 29e^{7\pi\mathrm{i}} - 9e^{{21\pi\mathrm{i}}/2} + e^{{14\pi\mathrm{i}}}
+     \\ 18 - 39e^{{21\pi\mathrm{i}}/4} + 29e^{{21\pi\mathrm{i}}/2} - 9e^{{63\pi\mathrm{i}}/4} + e^{{21\pi\mathrm{i}}}
+     \\ 18 - 39e^{7\pi\mathrm{i}} + 29e^{14\pi\mathrm{i}} - 9e^{21\pi\mathrm{i}} + e^{{28\pi\mathrm{i}}}
+     \\ 18 - 39e^{{35\pi\mathrm{i}}/4} + 29e^{{35\pi\mathrm{i}}/2} - 9e^{{125\pi\mathrm{i}}/4} + e^{{35\pi\mathrm{i}}}
+     \\ 18 - 39e^{{21\pi\mathrm{i}}/2} + 29e^{21\pi\mathrm{i}} - 9e^{{63\pi\mathrm{i}}/2} + e^{{42\pi\mathrm{i}}}
+     \\ 18 - 39e^{{49\pi\mathrm{i}}/4} + 29e^{{49\pi\mathrm{i}}/2} - 9e^{{147\pi\mathrm{i}}/4} + e^{{49\pi\mathrm{i}}}
+     \end{bmatrix}
+$$
+
+- Step 4: 
