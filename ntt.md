@@ -954,3 +954,12 @@ Secondly, here are the two properties of roots of unity that ultimately makes FF
 As you probably guessed, these only holds when $N$ is even.
 
 Haven set the foundation, let's look at the FFT algorithm step by step.
+
+Starting from the DFT formula: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
+
+- **Step 1**: We are going to split the formula into even/odd indices. Setting $n = 2m$ and $n = 2m + 1$ so that: $$X[k] = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_N^{k(2m)} + \sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_N^{k(2m + 1)} = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km} + \omega_N^{k}\sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}$$
+
+  Notice the second property at play here.
+- **Step 2**: Let's label the parts:$$E[k] = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km}$$$$O[k] = \sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}$$ So that: $$X[k] = E[k] + \omega_N^{k}O[k]$$
+- **Step 3**: Let's compute: $$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] + \omega_N^{k + N/2}O[k]$$From the first property, we can update the as follows:$$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] - \omega_N^{k}O[k]$$So, we just have to compute $E[k]$, $O[k]$ and $\omega_N^k$ and use it for both computations, flipping the sign on the second one.
+- **Step 4**: We perform same steps recursively for $E[k]$ and $O[k]$ until $N = 1$.
