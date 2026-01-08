@@ -1,4 +1,4 @@
-# Fast-fourier Transform (FTT) and Number-theoretic Transform (NTT) - FFT, NTT and LBC
+# Fast-Fourier Transform (FTT) and Number-Theoretic Transform (NTT) - FFT, NTT and LBC
 
 The need to make systems and algorithms faster so as to make them more practical has been ever constant in the world of software engineering and cryptography at large, and lattice-based cryptography is not left out.
 
@@ -745,7 +745,7 @@ Breifly, what is DFT? DFT is an algorithm that turns a signal from the time doma
 A good way to look at DFT is an algorithm that seeks to get more information from individual values that were created out of a combination of different measurements of values. For instance, given an chord(a chord is a set of notes played together), DFT can be used to get the frequency of the individual notes that makes up the chord.
 
 
-Why do we care about DFT? The DFT algorithm is equalivent to polynomial evaluation using roots of unity as we shown above. It runs in $O(n^2)$ time and FFT was created to make DFT run in $O(n\log(n))$ time.
+Why do we care about DFT? The DFT algorithm is equalivent to polynomial evaluation using roots of unity as we shown above. It runs in $O(n^2)$ time and **FFT is an optimization of DFT and it run in $O(n\log(n))$ time**.
 
 We are going to see how DFT is used and after that we are going to see how FFT is derived from the construction of DFT. 
 
@@ -808,7 +808,7 @@ $$ V =
      \\ (1 \cdot 3) + (e^{{9\pi\mathrm{i}}/2} \cdot 4) 
      \end{bmatrix} = 
      \begin{bmatrix} 7 
-     \\ 3 - 4e^{{3\pi\mathrm{i}}/2}
+     \\ 3 + 4e^{{3\pi\mathrm{i}}/2}
      \\ 3 + 4e^{3\pi\mathrm{i}} 
      \\ 3 + 4e^{{9\pi\mathrm{i}}/2} 
      \end{bmatrix}$$
@@ -915,3 +915,37 @@ To better understand $Va$, recall that $e^{{3\pi\mathrm{i}}/2}$ is $-\mathrm{i}$
 As you can see, we have successfully performed polynomial multiplication using DFT! Finally, let's see how FFT works!
 
 ### How FFT works
+
+FFT is a recursive exploits the structure of the DFT construction and two properties of roots of unity.
+
+So far, we have explored DFT using matrices and matrix multiplication. But, to better understand FFT you need to view DFT in terms of the formulas $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$ and $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$ so let's do that.
+
+Using same $A(x)$ and $B(x)$ from above, let's compute $DFT$ and $IDFT$ using the formulas
+
+For DFT: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
+
+- $A(x)$:
+  
+  - $X[0] = x[0] + x[1] + x[2] + x[3] = 1 + 2 + 0 + 0 = 3$
+  - $X[1] = x[0] + x[1]\omega_4 + x[2]\omega_4^{2} + x[3]\omega_4^{3} = 1 + 2\omega_4$
+  - $X[2] = x[0] + x[1]\omega_4^{2} + x[2]\omega_4^{4} + x[3]\omega_4^{6} = 1 + 2\omega_4^2$
+  - $X[3] = x[0] + x[1]\omega_4^{3} + x[2]\omega_4^{6} + x[3]\omega_4^{9} = 1 + 2\omega_4^3$
+
+    
+- $B(x)$:
+  
+  - $X[0] = x[0] + x[1] + x[2] + x[3] = 3 + 4 + 0 + 0 = 7$
+  - $X[1] = x[0] + x[1]\omega_4 + x[2]\omega_4^{2} + x[3]\omega_4^{3} = 3 + 4\omega_4$
+  - $X[2] = x[0] + x[1]\omega_4^{2} + x[2]\omega_4^{4} + x[3]\omega_4^{6} = 3 + 4\omega_4^2$
+  - $X[3] = x[0] + x[1]\omega_4^{3} + x[2]\omega_4^{6} + x[3]\omega_4^{9} = 3 + 4\omega_4^3$
+
+
+For IDFT: $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$ 
+  - $x[0] = \dfrac{1}{4}(X[0] + X[1] + X[2] + X[3]) = 3$
+  - $x[1] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-1} + X[2]\omega_4^{-2} + X[3]\omega_4^{-3}) = 10$
+  - $x[2] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-2} + X[2]\omega_4^{-4} + X[3]\omega_4^{-6}) = 8$
+  - $x[3] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-3} + X[2]\omega_4^{-6} + X[3]\omega_4^{-9}) = 0$
+
+Secondly, here are the two properties of roots of unity that ultimately makes FFT possible.
+
+1. 
