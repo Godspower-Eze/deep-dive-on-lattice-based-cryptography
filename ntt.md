@@ -948,4 +948,9 @@ For IDFT: $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$
 
 Secondly, here are the two properties of roots of unity that ultimately makes FFT possible.
 
-1. 
+1. $-\omega_N^k = \omega_N^{k + N/2}$. This is gotten from the fact that $\omega_N^{N/2} = -1$
+2. $\omega_N^2 = \omega_{N/2}$. For example, $e^{{\pi\mathrm{i}}/4}$ is a primitive root from the $8$th of unity and $(e^{{\pi\mathrm{i}}/4})^2$ is $e^{{\pi\mathrm{i}}/2}$ being a primitive root from the $4$th roots of unity.
+
+As you probably guessed, these only holds when $N$ is even.
+
+Haven set the foundation, let's look at the FFT algorithm step by step.
