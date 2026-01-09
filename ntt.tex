@@ -1,0 +1,1902 @@
+\documentclass[11pt]{article}
+
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Keep aspect ratio if custom image width or height is specified
+    \setkeys{Gin}{keepaspectratio}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+
+    \usepackage{iftex}
+    \ifPDFTeX
+        \usepackage[T1]{fontenc}
+        \IfFileExists{alphabeta.sty}{
+              \usepackage{alphabeta}
+          }{
+              \usepackage[mathletters]{ucs}
+              \usepackage[utf8x]{inputenc}
+          }
+    \else
+        \usepackage{fontspec}
+        \usepackage{unicode-math}
+    \fi
+
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage{array}     % table support for pandoc >= 2.11.3
+    \usepackage{calc}      % table minipage width calculation for pandoc >= 2.11.1
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{soul}      % strikethrough (\st) support for pandoc >= 3.0.0
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{ntt}
+    
+    
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.61,0.40,0.00}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.80,0.25,0.22}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.46,0.46,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.41,0.47,0.13}{##1}}}
+\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.36,0.12}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.64,0.35,0.47}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.52,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{0.89,0.00,0.00}{##1}}}
+\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.44,0.44,0.44}{##1}}}
+\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.24,0.48,0.48}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb.
+    \makeatletter
+        \newbox\Wrappedcontinuationbox
+        \newbox\Wrappedvisiblespacebox
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}}
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}}
+        \newcommand*\Wrappedcontinuationindent {3ex }
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox}
+        % Take advantage of the already applied Pygments mark-up to insert
+        % potential linebreaks for TeX processing.
+        %        {, <, #, %, $, ' and ": go to next line.
+        %        _, }, ^, &, >, - and ~: stay at end of broken line.
+        % Use of \textquotesingle for straight quote.
+        \newcommand*\Wrappedbreaksatspecials {%
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}%
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}%
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}%
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}%
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}%
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}%
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}%
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}%
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}%
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}%
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}%
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}%
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}%
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}%
+        }
+        % Some characters . , ; ? ! / are not pygmentized.
+        % This macro makes them "active" and they will insert potential linebreaks
+        \newcommand*\Wrappedbreaksatpunct {%
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}%
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}%
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}%
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}%
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}%
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}%
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}%
+            \catcode`\.\active
+            \catcode`\,\active
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active
+            \lccode`\~`\~
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+\begin{document}
+    
+    \maketitle
+    
+    
+
+    
+    \section{Fast-Fourier Transform (FTT) and Number-Theoretic Transform
+(NTT) - FFT, NTT and
+LBC}\label{fast-fourier-transform-ftt-and-number-theoretic-transform-ntt---fft-ntt-and-lbc}
+
+    The need to make systems and algorithms faster so as to make them more
+practical has been ever constant in the world of software engineering
+and cryptography at large, and lattice-based cryptography is not left
+out.
+
+Number-theoretic Transform (NTT) was used in ML-KEM
+(Module-Lattice-Based Key-Encapsulation Mechanism), a lattice-based
+cryptographic algorithm used in establishing a shared secret key between
+two parties over a public channel. NTT is an analogue to the beautiful
+yet powerful Fast-fourier Transform (FTT).
+
+This article is part one of two-part series titled \textbf{Fast-fourier
+Transform (FTT), Number-theoretic Transform (NTT) and Lattice-based
+Cryptography}. The goal of this post is to take a deep dive into FFT and
+NTT while part two will explore how NTT is used in lattice-based
+algorithms like
+\href{https://github.com/Godspower-Eze/pqc-ml-kem.rs}{ML-KEM} and
+\href{https://csrc.nist.gov/pubs/fips/204/final}{ML-DSA}.
+
+As always, we are going to take a discovery approach, building up slowly
+from the familiar to the unfamiliar.
+
+    \subsection{Fast-fourier Transform
+(FFT)}\label{fast-fourier-transform-fft}
+
+    Given two polynomials \(A\) and \(B\) of degree 2 : -
+\(A = 3 - 4x + x^2\) - \(B = 6 - 5x + x^2\)
+
+    We are asked to multiply them. Easy, right?
+
+\begin{itemize}
+\tightlist
+\item
+  \(C = A\ast B = (3 - 4x + x^2)(6 - 5x + x^2) = 3 * (6 - 5x + x^2) - 4x * (6 - 5x + x^2) + x^2 * (6 - 5x + x^2) = 18 + 39x + 29x^2 - 9x^3 + x^4\)
+\end{itemize}
+
+    Below is an implementation of this in Python:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A }\OperatorTok{=}\NormalTok{ [}\DecValTok{3}\NormalTok{, }\OperatorTok{{-}}\DecValTok{4}\NormalTok{, }\DecValTok{1}\NormalTok{] }\CommentTok{\# coefficients of A}
+
+\NormalTok{B }\OperatorTok{=}\NormalTok{ [}\DecValTok{6}\NormalTok{, }\OperatorTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{1}\NormalTok{] }\CommentTok{\# coefficients of B}
+
+\NormalTok{d }\OperatorTok{=} \DecValTok{2} \CommentTok{\# degree}
+
+\NormalTok{C }\OperatorTok{=}\NormalTok{ [}\DecValTok{0} \ControlFlowTok{for}\NormalTok{ \_ }\KeywordTok{in} \BuiltInTok{range}\NormalTok{((}\DecValTok{2} \OperatorTok{*}\NormalTok{ d) }\OperatorTok{+} \DecValTok{1}\NormalTok{)]}
+
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(d }\OperatorTok{+} \DecValTok{1}\NormalTok{):}
+    \ControlFlowTok{for}\NormalTok{ j }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(d }\OperatorTok{+} \DecValTok{1}\NormalTok{):}
+\NormalTok{        C[i }\OperatorTok{+}\NormalTok{ j] }\OperatorTok{=}\NormalTok{ A[i] }\OperatorTok{*}\NormalTok{ B[j]}
+\end{Highlighting}
+\end{Shaded}
+
+    This algorithm takes \(O(d^2)\) time. Is there a faster way to perform
+polynomial multiplication?
+
+From the implementation above, you can tell that the polynomial is
+represented as a list of its \emph{coefficients}. There are other
+representations.
+
+According to the \textbf{uniqueness theorem,} a polynomial of degree at
+most \(d\) is uniquely determined by its values at \(d + 1\)
+\textbf{distinct} points. That is, a polynomial \(f(x)\) of degree \(d\)
+can be uniquely constructed by the points:
+\((x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))\). Let's call this
+representation \textbf{point representation}.
+
+A more general version of the uniqueness theorem states that a
+polynomial of degree at most \(d\) is uniquely determined by its values
+at \emph{at least} \(d + 1\) \textbf{distinct} points. That means we
+could uniquely represent our polynomial using more than \(d + 1\)
+points.
+
+Now, let's represent our polynomials using the point representation,
+using the values \(x = -5, -4, -3, -2, -1\). Therefore, our polynomial
+can be represented as follows:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+\(x\) & \(A(x)\) & \(B(x)\) & \((x, A(x))\) & \((x, B(x))\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(-5\) & \(48\) & \(56\) & \((-5, 48)\) & \((-5, 56)\) \\
+\(-4\) & \(35\) & \(42\) & \((-4, 35)\) & \((-4, 42)\) \\
+\(-3\) & \(24\) & \(30\) & \((-3, 24)\) & \((-3, 30)\) \\
+\(-2\) & \(15\) & \(20\) & \((-2, 15)\) & \((-2, 20)\) \\
+\(-1\) & \(8\) & \(12\) & \((-1, 8)\) & \((-1, 12)\) \\
+\end{longtable}
+}
+
+Now, on to the interesting part. It turns out that
+\(C(x_i) =A(x_i) \ast B(x_i)\). That is, if you multiply the evaluation
+\(A(x_i)\) by the evaluation \(B(x_i)\), you get the evaluation
+\(C(x_i)\). See the table below:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0571}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.0857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1571}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1571}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.2857}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 12\tabcolsep) * \real{0.1714}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\(x\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(A(x)\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(B(x)\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\((x, A(x))\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\((x, B(x))\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\(C(x) = A(x) * B(x)\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\((x, C(x))\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(-5\) & \(48\) & \(56\) & \((-5, 48)\) & \((-5, 56)\) & \(2688\) &
+\((-5, 2688)\) \\
+\(-4\) & \(35\) & \(42\) & \((-4, 35)\) & \((-4, 42)\) & \(1470\) &
+\((-4, 1470)\) \\
+\(-3\) & \(24\) & \(30\) & \((-3, 24)\) & \((-3, 30)\) & \(720\) &
+\((-3, 720)\) \\
+\(-2\) & \(15\) & \(20\) & \((-2, 15)\) & \((-2, 20)\) & \(300\) &
+\((-2, 300)\) \\
+\(-1\) & \(8\) & \(12\) & \((-1, 8)\) & \((-1, 12)\) & \(96\) &
+\((-1, 96)\) \\
+\end{longtable}
+}
+
+This means that the points \((x, C(x))\) uniquely represents the
+polynomial \(C = 18 + 39x + 29x^2 - 9x^3 + x^4\).
+
+What does this all mean? We just achieved an \(O(d)\) time polynomial
+multiplication by using the point representation form of the
+polynomials.
+
+Does that mean we just achieved \(O(d)\) for polynomial multiplication?
+Not really.
+
+Given two polynomials \(f(x)\) and \(g(x)\) of the form:
+\(a_0 + a_1x + a_2x^2 + \cdots + a_{d}x^{d}\), here's the full process:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Convert from coefficient to point representation}: we pick a
+  set of \(x\) values and evaluate the polynomials at those points
+  thereby converting the polynomials to the point representation.
+
+  That is, we pick \(x_i = \{x_0, x_1, ... ,x_d \}\). Then, we compute
+  \(f(x_i) = \{f(x_0), f(x_1),...,f(x_d)\}\) and
+  \(g(x_i) = \{g(x_0), g(x_1),...,g(x_d)\}\).
+
+  There's a way of expressing this in a matrix form:
+
+  \[ V = \begin{bmatrix}x_0^0 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ x_1^0 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ x_2^0 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]x_n^0 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} = \begin{bmatrix}1 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ 1 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ 1 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]1 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix}\]
+
+  \[a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_n\end{bmatrix}\]
+
+  \[Va = \begin{bmatrix}a_0x_0^0 + a_1x_0^1 + a_2x_0^2 + \cdots + a_nx_0^n\\ a_0x_1^0 + a_1x_1^1 + a_2x_1^2 + \cdots + a_nx_1^n \\ a_0x_2^0 + a_1x_2^1 + a_2x_2^2 + \cdots + a_nx_2^n \\ \vdots \\ a_0x_n^0 + a_1x_n^1 + a_2x_n^2 + \cdots + a_nx_n^n \end{bmatrix} = \begin{bmatrix} f(x_0) \\ f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \end{bmatrix}\]
+
+  \[ Va = f(x_i)\]
+
+  where \(n\) is at least \(d\), \(V\) is the matrix of \(x_i\) and
+  their powers, \(a\) is a vector of coefficients and \(f(x_i)\) are the
+  evaluations. \(V\) is called the \textbf{vandermonde} matrix.
+
+  This shows that the process of evaluating the polynomial \(f(x_i)\) is
+  a \emph{matrix-vector multiplication} which is an \(O(n^2)\)
+  operation. \(f(x_i)\) can also be written as follows:
+  \[f(x_i) = \sum^{n}_{j=0}a_jx^j_i\]
+
+  Keep this in mind, as this formula for expressing \(f(x_i)\) is
+  important in understanding FFT later.
+
+  Using \(A(x)\) as an example, choosing \(n = 4\) and
+  \(x =\{x_0, x_1, x_2, x_3, x_4\}= \{-5, -4, -3, -2, -1\}\), we have
+  the following:
+
+  \[V = \begin{bmatrix}1 & x_0 & x_0^2 & x_0^3 & x_0^4 \\1 & x_1 & x_1^2 & x_1^3 & x_1^4 \\1 & x_2 & x_2^2 & x_2^3 & x_2^4 \\1 & x_3 & x_3^2 & x_3^3 & x_3^4 \\1 & x_4 & x_4^2 & x_4^3 & x_4^4 \end{bmatrix} = \begin{bmatrix}1 & -5 & -5^2 & -5^3 & -5^4 \\ 1 & -4 & -4^2 & -4^3 & -4^4 \\ 1 & -3 & -3^2 & -3^3 & -3^4 \\ 1 & -2 & -2^2 & -2^3 & -2^4 \\ 1 & -1 & -1^2 & -1^3 & -1^4 \end{bmatrix} = \begin{bmatrix}1 & -5 & 25 & -125 & 625 \\1 & -4 & 16 & -64 & 256 \\1 & -3 & 9 & -27 & 81 \\1 & -2 & 4 & -8 & 16 \\1 & -1 & 1 & -1 & 1\end{bmatrix}\]
+
+  \[a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ a_3 \\ a_4\end{bmatrix} = \begin{bmatrix}3 \\ -4 \\ 1 \\ 0 \\ 0\end{bmatrix}\]
+
+  \[Va = A(x_i) = \begin{bmatrix}A(x_0) \\ A(x_1) \\ A(x_2) \\ A(x_3) \\ A(x_4)\end{bmatrix} = \begin{bmatrix}48 \\ 35 \\ 24 \\ 15 \\ 8 \end{bmatrix}\]
+\item
+  \textbf{Multiply pairwise} (\emph{i.e} \(C(x) = A(x) \ast B(x)\)).
+  This runs in \(O(n)\) time.
+\item
+  \textbf{Convert back from the point represention to the coefficient
+  representation}: This is the reverse of step one. We want to find
+  \(a\), given \(V\) and \(f(x_i)\). To compute this, we find the
+  \textbf{inverse of \(V\)} denoted by \(V^{-1}\) and multiply by
+  \(f(x_i)\). That is:
+
+  \[Va = f(x_i)\]
+
+  \[V^{-1}Va = V^{-1}f(x_i)\]
+
+  \[a = V^{-1}f(x_i)\]
+
+  Using \(A(x)\) as an example:
+
+  \[V^{-1} = \begin{bmatrix}1 & -5 & 10 & -10 & 5 \\ 25/12 & -61/6 & 39/2 & -107/6 & 77/12 \\ 35/24 & -41/6 & 49/4 & -59/6 & 71/24 \\5/12 & -11/6 & 3 & -13/6 & 7/12 \\1/24 & -1/6 & 1/4 & -1/6 & 1/24 \end{bmatrix}\]
+
+  \[A(x_i) = \begin{bmatrix}48 \\ 35 \\ 24 \\ 15 \\ 8 \end{bmatrix}\]
+
+  \[a = V^{-1}A(x_i) = \begin{bmatrix}1 & -5 & 10 & -10 & 5 \\ 25/12 & -61/6 & 39/2 & -107/6 & 77/12 \\ 35/24 & -41/6 & 49/4 & -59/6 & 71/24 \\5/12 & -11/6 & 3 & -13/6 & 7/12 \\1/24 & -1/6 & 1/4 & -1/6 & 1/24 \end{bmatrix} \begin{bmatrix}48 \\ 35 \\ 24 \\ 15 \\ 8 \end{bmatrix} = \begin{bmatrix}3 \\ -4 \\ 1 \\ 0 \\ 0\end{bmatrix}\]
+
+  The best version of this algorithm runs in \(O(n^2)\) time.
+\end{enumerate}
+
+In total, this process still takes \(O(n^2)\) time.
+
+But, what if there was actually a faster way? A way that allows us to do
+polynomial multiplication in less than \(O(n^2)\).
+
+Fast-fourier Transform (FFT) gives us that. FFT allows us to do step one
+and step three in \(O(n\log n)\) time; making the whole process
+\(O(n \log n)\) time.
+
+To understand FFT, we need to understand the concept of \textbf{complex
+numbers} and \textbf{roots of unity}
+
+    \subsubsection{Complex Numbers and Roots of
+Unity}\label{complex-numbers-and-roots-of-unity}
+
+    The magic of FFT is based on the beautiful concept of roots of unity but
+that in turn is only made possible by the unique properties of complex
+numbers. So, here's a deep dive on complex numbers and roots of unity.
+
+Given the polynomial \(P(x) = 1 + x + x^2\), find the roots(\emph{i.e},
+the values of \(x\) for which \(P(x) = 0\)) of the polynomial. The
+simple answer is the roots does not exist.
+
+Using the quadratic formula \(x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}\),
+let's solve anyways: - \(a = 1\), \(b = 1\) and \(c = 1\) -
+\(x = \dfrac{-1 \pm \sqrt{1^2 - 4(1)(1)}}{2(1)} = \dfrac{-1 \pm \sqrt{-3}}{2} = \dfrac{-1}{2} \pm \dfrac{\sqrt{-3}}{2}\)\\
+Therefore, the roots of \(P(x)\) are
+\(\dfrac{-1}{2} + \dfrac{\sqrt{-3}}{2}\) and
+\(\dfrac{-1}{2} - \dfrac{\sqrt{-3}}{2}\).
+
+But, we previously said the polynomial didn't have a root. How come we
+got two roots? The answer lies in the fact that from the beginning we
+have been dealing with real numbers \(\mathbb{R}\) and the roots
+\(\dfrac{-1}{2} + \dfrac{\sqrt{-3}}{2}\) and
+\(\dfrac{-1}{2} - \dfrac{\sqrt{-3}}{2}\) are not real numbers.
+Therefore, the roots does not exist in real space.
+
+If the roots are not real numbers, then what are they? They are complex
+numbers!
+
+Let's further simplify the roots. \(\sqrt{-3}\) can be written
+\(\sqrt{3} * \sqrt{-1}\). But, we know that \(\sqrt{-1}\) is impossible
+to find. It has a special name, the \emph{imaginary unit} denoted as
+\(\mathrm{i}\).
+
+We can rewrite our roots as follows:
+\(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}\) and
+\(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}\). Therefore, a complex
+number \(\mathbb{C}\) is a number of the form: \(a + b\mathrm{i}\) where
+\(a\) and \(b\) are real numbers and \(\mathrm{i}\) is the imaginary
+unit. \(a\) is called the \emph{real part} and \(b\mathrm{i}\) is called
+the \emph{imaginary part}. This form of representing a complex number is
+called the \emph{rectangular form}. You'll see why soon.
+
+The set of real numbers \(\mathbb{R}\) is a proper subset of the complex
+numbers \(\mathbb{C}\) (\emph{i.e}, \(\mathbb{R} \subset \mathbb{C}\)).
+Every real number can be written as a complex number where \(b = 0\)
+(\emph{e.g} \(5 = 5 + 0\mathrm{i}\)).
+
+One way to describe a real number is as follows: a real number is any
+number that can be located on the infinite number line. That means, real
+numbers are represented on a number line as shown below.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    How do we represent a complex number? The number line would have been a
+good option but it would only be able to take the real part. We need
+diagram that allows us to show both the real part and the imaginary
+part. That's where the \textbf{Argand diagram} comes in!
+
+The Argand diagram is two dimensional plane with the real part on the
+horinzontal line(x-axis) and the imaginary part on the vertical line
+(y-axis).
+
+For example, the complex number \(2 + 3\mathrm{i}\) is represented as
+follows:
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notice how the dotted lines from \(2\) and \(3\) forms a rectangle.
+That's why the form \(a + b\mathrm{i}\) is called the \emph{rectangular
+form}.
+
+Imagine we were given the diagram with just the line from the origin as
+shown below. Would we be able to identify the complex number?
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notice how the angle forms a \emph{right angle triangle}. The diagram
+below should help.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    What do we know about right angle triangles?
+
+According to the \textbf{Pythagoras Theorem}, in a right angled
+triangle, the square of the length of the hypotenuse(the side opposite
+the right angle) is equal to the sum of the squares of the lengths of
+the other two sides(\emph{opposite} and \emph{adjacent}).
+Mathematically, if a right-angled triangle has sides \(a\) and \(b\),
+and hypotenuse \(c\), then: \(c^2 = a^2 + b^2\).
+
+Having known this; let's adjust out diagram.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the diagram, we can see that we have two unknowns, the hypotenuse
+which will be denoted as \(r\) and the angle \(\theta\).
+
+From pythagoras theorem, we know \(r^2 = a^2 + b^2\).
+Therefore:\[r^2 = 2^2 + 3^2 = 4 + 9 = 13\] \[r = \sqrt{13}\]
+
+Now we know \(r\), how do we find \(\theta\)? Do you remember the
+acronym SOHCAHTOA from high school? This implies:
+\[\sin\theta = \dfrac{\mathrm{opposite}}{\mathrm{hypotenuse}} = \dfrac{b}{r},\qquad b = r\sin\theta\]
+\[\cos\theta = \dfrac{\mathrm{adjacent}}{\mathrm{hypotenuse}} = \dfrac{a}{r},\qquad a = r\cos\theta\]
+\[\tan\theta = \dfrac{\mathrm{opposite}}{\mathrm{adjacent}} = \dfrac{b}{a}, \qquad \theta = \tan^{-1}(\dfrac{b}{a})\]
+
+From this, we can deduce that:
+\(a + b\mathrm{i} = r\cos\theta + \mathrm{i}r\sin\theta = r(\cos\theta + \mathrm{i}\sin\theta)\).
+This form of representing a complex number is called the \emph{polar
+form}.
+
+Now we find \(\theta\) using \(\tan^{-1}(\dfrac{b}{a})\),
+\(\quad \theta = \tan^{-1}(\dfrac{3}{2}) = 0.983\) radians.
+
+We have that \(r = \sqrt{13}\) and \(\theta = 0.983\). Given these two
+values, we represent the complex number \(2 + 3\mathrm{i}\) as
+\(\sqrt{13}(\cos(0.983) + \mathrm{i}\sin(0.983))\). \(0.983\) radians is
+\(56.3^\circ\) in degrees and it's better for visualization as shown
+below.
+
+The polar representation might not look like the simplest way to express
+a complex number but it's going to help us understand roots of unity.
+
+Formally, \(r\) is distance from the point of the complex number to the
+origin and it is called the \emph{modulus} or the \emph{absolute value}.
+\(\theta\) is called the \emph{argument} of the complex number and it is
+the angle that the modulus \(r\) makes from the positive real axis.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let's look at another representation of complex numbers.
+
+Have you ever wondered how calculators computed trignometric functions
+like \(\sin(x)\), \(\cos(x)\) and the exponential function \(e^x\)? The
+answer lies in approximation using power series.
+
+\(\cos(x)\) and \(\sin(x)\) are approximated using the power series
+\(1\ -\frac{x^{2}}{2!} + \frac{x^{4}}{4!} - \frac{x^{6}}{6!} + \frac{x^{8}}{8!} + \cdots\)
+and
+\(x\ -\frac{x^{3}}{3!} + \frac{x^{5}}{5!} - \frac{x^{7}}{7!} + \frac{x^{9}}{9!} + \cdots\)
+respectively. I urge you to verify this using a graph(\emph{i.e} compare
+their graphs against each other while extending the series).
+
+Let's substitute \(\theta\) for \(x\):
+
+\[\cos(\theta) = 1\ - \frac{\theta^{2}}{2!} + \frac{\theta^{4}}{4!} - \frac{\theta^{6}}{6!} + \frac{\theta^{8}}{8!} + \cdots\]
+
+\[\sin(\theta) = \theta\ - \frac{\theta^{3}}{3!} + \frac{\theta^{5}}{5!} - \frac{\theta^{7}}{7!} + \frac{\theta^{9}}{9!} + \cdots\]
+
+Now, let's subsitute this approximation into the polar form:
+
+\[\cos\theta + \mathrm{i}\sin\theta = (1\ - \frac{\theta^{2}}{2!} + \frac{\theta^{4}}{4!} - \frac{\theta^{6}}{6!} + \frac{\theta^{8}}{8!} + \cdots) + \mathrm{i}(\theta\ - \frac{\theta^{3}}{3!} + \frac{\theta^{5}}{5!} - \frac{\theta^{7}}{7!} + \frac{\theta^{9}}{9!} + \cdots)\]
+
+\[ \qquad  \qquad  = (1\ - \frac{\theta^{2}}{2!} + \frac{\theta^{4}}{4!} - \frac{\theta^{6}}{6!} + \frac{\theta^{8}}{8!} + \cdots) + (\mathrm{i}\theta\ - \mathrm{i}\frac{\theta^{3}}{3!} + \mathrm{i}\frac{\theta^{5}}{5!} - \mathrm{i}\frac{\theta^{7}}{7!} + \mathrm{i}\frac{\theta^{9}}{9!} + \cdots)\]
+
+\[ \qquad  \qquad  = 1\ + \mathrm{i}\theta - \frac{\theta^{2}}{2!} - \mathrm{i}\frac{\theta^{3}}{3!} + \frac{\theta^{4}}{4!} + \mathrm{i}\frac{\theta^{5}}{5!} - \frac{\theta^{6}}{6!} - \mathrm{i}\frac{\theta^{7}}{7!} + \frac{\theta^{8}}{8!} + \mathrm{i}\frac{\theta^{9}}{9!} + \cdots\]
+
+Let's look at that of the exponential function \(e^x\). The power series
+for \(e^x\) as follows:
+\[1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \frac{x^6}{6!} + \frac{x^7}{7!} + \frac{x^8}{8!} + \frac{x^9}{9!} \cdots\]
+
+Let's substitute \(\mathrm{i}\theta\) for \(x\):
+\[ e^{\mathrm{i}\theta} = 1 + \mathrm{i}\theta + \frac{(\mathrm{i}\theta)^2}{2!} + \frac{(\mathrm{i}\theta)^3}{3!} + \frac{(\mathrm{i}\theta)^4}{4!} + \frac{(\mathrm{i}\theta)^5}{5!} + \frac{(\mathrm{i}\theta)^6}{6!} + \frac{(\mathrm{i}\theta)^7}{7!} + \frac{(\mathrm{i}\theta)^8}{8!} + \frac{(\mathrm{i}\theta)^9}{9!} + \cdots\]
+
+We will compute the powers of \((\mathrm{i}\theta)\). From indices we
+know that \((\mathrm{i}\theta)^n = \theta^n\mathrm{i}^n\). Let's focus
+on \(\mathrm{i}^n\): - \(\mathrm{i}^1 = \mathrm{i}\) -
+\(\mathrm{i}^2 = \sqrt{-1} \ast \sqrt{-1} = -1\) -
+\(\mathrm{i}^3 = \sqrt{-1} \ast \sqrt{-1} \ast \sqrt{-1} = -1 \ast \sqrt{-1} =  -\mathrm{i}\)
+-
+\(\mathrm{i}^4 = \sqrt{-1} \ast \sqrt{-1} \ast \sqrt{-1} \ast \sqrt{-1} = -1 \ast -1 = 1\)
+- \(\mathrm{i}^5 = \mathrm{i}\) - \(\mathrm{i}^6 = -1\) -
+\(\mathrm{i}^7 = -\mathrm{i}\) - \(\mathrm{i}^8 = 1\) -
+\(\mathrm{i}^9 = \mathrm{i}\)
+
+Do you see the pattern? The values are cyclic in nature; \(\mathrm{i}\)
+to \(1\), it repeats and continues like that. We will come back to this
+but for now let's go back to computing \(e^{\mathrm{i}\theta}\). It now
+becomes:
+\[e^{\mathrm{i}\theta} = 1 + \mathrm{i}\theta - \frac{\theta^2}{2!} - \mathrm{i}\frac{\theta^3}{3!} + \frac{\theta^4}{4!} + \mathrm{i}\frac{\theta^5}{5!} - \frac{\theta^6}{6!} - \mathrm{i}\frac{\theta^7}{7!} + \frac{\theta^8}{8!} + \mathrm{i}\frac{\theta^9}{9!} + \cdots\]
+
+From this we can see that
+\(e^{\mathrm{i}\theta} = \cos(\theta) + \mathrm{i}\sin(\theta)\).
+Therefore, we have our third representation, the \emph{exponential
+form}: \(re^{\mathrm{i}\theta}\).
+
+In summary, we have: - rectangular form: \(a + b\mathrm{i}\) - polar
+form: \(r(\cos\theta + \mathrm{i}\sin\theta)\) - exponential form:
+\(re^{\mathrm{i}\theta}\)
+
+Soon, you will see why exponential and polar form are best suited for
+understanding and working with roots of unity.
+
+Now, back to where this it all started: finding the roots of the
+polynomial \(P(x) = 1 + x + x^2\). We saw that the roots are
+\(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}\) and
+\(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}\).
+
+Let's represent them using the argand diagram.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let's find the modulus \(r\) and the argument \(\theta\) of these roots:
+- For \(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}\): - finding
+\(r\): \(r^2 = a^2 + b^2\), \(\quad a = \dfrac{-1}{2}\),
+\(\quad b =  \dfrac{\sqrt{3}}{2}\),
+\(\quad r^2 = (\dfrac{-1}{2})^2 + (\dfrac{\sqrt{3}}{2})^2 = \dfrac{1}{4} + \dfrac{3}{4} = \dfrac{4}{4} = 1\),
+\(\quad r = 1\) - finding \(\theta\):
+\(\theta = \tan^{-1}(\dfrac{b}{a}) = \tan^{-1}(\dfrac{\dfrac{\sqrt{3}}{2}}{\dfrac{-1}{2}}) = \tan^{-1}(\dfrac{\sqrt{3}}{-1}) = \tan^{-1}(-\sqrt{3}) = -60^\circ\)
+or \(-\dfrac{\pi}{3}\) - For
+\(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}\): - finding \(r\):
+\(r^2 = a^2 + b^2\), \(\quad a = \dfrac{-1}{2}\),
+\(\quad b =  \dfrac{-\sqrt{3}}{2}\),
+\(\quad r^2 = (\dfrac{-1}{2})^2 + (\dfrac{-\sqrt{3}}{2})^2 = \dfrac{1}{4} + \dfrac{3}{4} = \dfrac{4}{4} = 1\),
+\(\quad r = 1\) - finding \(\theta\):
+\(\theta = \tan^{-1}(\dfrac{b}{a}) = \tan^{-1}(\dfrac{\dfrac{-\sqrt{3}}{2}}{\dfrac{-1}{2}}) = \tan^{-1}(\dfrac{-\sqrt{3}}{-1}) = \tan^{-1}(\sqrt{3}) = 60^\circ\)
+or \(\dfrac{\pi}{3}\)
+
+Let's show our \(r\) and \(\theta\) values to our diagram.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    This is our argand diagram represented in respect to \(r\) and
+\(\theta\). But, it's not exactly correct.
+
+Recall that the argument \(\theta\) is ``the angle that the modulus
+makes from the positive real axis''. The key phrase is \emph{from the
+positive real axis}.
+
+Let's show this:
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As you can see, \(\theta\) for
+\(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}\) becomes \(120^\circ\)
+or \(\dfrac{2\pi}{3}\) and \(\theta\) for
+\(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}\) becomes \(240^\circ\)
+or \(\dfrac{4\pi}{3}\).
+
+In exponential form, this will be written as \(e^{2\pi\mathrm{i}/3}\)
+and \(e^{4\pi\mathrm{i}/3}\) respectively as \(r = 1\).
+
+This also helps us see the argument \(\theta\) not just as angle but a
+\emph{rotation} from the positive real axis and this is the mental model
+we need to understand roots of unity.
+
+Let's do a quick experiment: we are going take the roots individually
+and compute their powers up to the third power. Then, we are going to
+see what happens in the argand diagram.
+
+Starting with \(e^{2\pi\mathrm{i}/3}\):
+
+\begin{itemize}
+\tightlist
+\item
+  We compute the zero power: \((e^{2\pi\mathrm{i}/3})^0 = e^{0} = 1\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The first power: \((e^{2\pi\mathrm{i}/3})^1 = e^{2\pi\mathrm{i}/3}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The second power \((e^{2\pi\mathrm{i}/3})^2 = e^{4\pi\mathrm{i}/3}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The third power \((e^{2\pi\mathrm{i}/3})^3 = e^{2\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    Then, for \(e^{4\pi\mathrm{i}/3}\):
+
+\begin{itemize}
+\tightlist
+\item
+  We compute the zero power: \((e^{4\pi\mathrm{i}/3})^0 = e^0 = 1\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The first power: \((e^{4\pi\mathrm{i}/3})^1 = e^{4\pi\mathrm{i}/3}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The second power: \((e^{4\pi\mathrm{i}/3})^2 = e^{8\pi\mathrm{i}/3}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The third power: \((e^{4\pi\mathrm{i}/3})^3 = e^{4\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    What do you notice?
+
+The powers cycles back to \(1\) at the third power. If we continued this
+cycle, you would notice that it doesn't just cycle back to \(1\) at the
+third power but every power that's a multiple of \(3\). I urge you to
+try this out.
+
+Let's try this again for another polynomial.
+
+Given the polynomial \(G(x) = x^4 - 1\), let's the find the roots.
+
+We get that:
+
+\begin{itemize}
+\tightlist
+\item
+  \(G(x) = x^4 - 1 = (x^2 - 1)(x^2 + 1) = (x - 1)(x + 1)(x^2 + 1)\)
+\end{itemize}
+
+Setting them to zero, we have that: - \((x - 1) = 0\), \(x = 1\) -
+\((x + 1) = 0\), \(x = -1\) - \((x^2 + 1) = 0\), \(x^2 = -1\),
+\(x = \pm\sqrt{-1} = \pm\mathrm{i}\)
+
+Therefore, the roots of \(G(x)\) are \(1\), \(-1\), \(-\mathrm{i}\) and
+\(\mathrm{i}\)
+
+Let's show them on the argand diagram.
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    Let's compute the modulus \(r\) and argument \(\theta\) for each of
+them.
+
+\begin{itemize}
+\tightlist
+\item
+  For \(1\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    finding \(r\): \(r^2 = a^2 + b^2\), \(\quad a = 1\),
+    \(\quad b = 0\), \(\quad r^2 = 1^2 + 0^2 = 1\), \(\quad r = 1\)
+  \item
+    finding \(\theta\):
+    \(\theta = \tan^{-1}(\dfrac{b}{a}) = \tan^{-1}(\dfrac{0}{1}) = \tan^{-1}(0) = 0 = 0^\circ\)
+    or \(0\pi\)
+  \end{itemize}
+\item
+  For \(-1\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    finding \(r\): \(r^2 = a^2 + b^2\), \(\quad a = -1\),
+    \(\quad b = 0\), \(\quad r^2 = -1^2 + 0^2 = 1\), \(\quad r = 1\)
+  \item
+    finding \(\theta\):
+    \(\theta = \tan^{-1}(\dfrac{b}{a}) = \tan^{-1}(\dfrac{0}{-1}) = \tan^{-1}(0) = 0 = 0^\circ\).
+    \(0^\circ\) from the positive x-axis is \(180^\circ\) so
+    \(\theta = 180^\circ\) or \(\pi\)
+  \end{itemize}
+\item
+  For \(\mathrm{i}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    finding \(r\): \(r^2 = a^2 + b^2\), \(\quad a = 0\),
+    \(\quad b = 1\), \(\quad r^2 = 0^2 + 1^2 = 1\), \(\quad r = 1\)
+  \item
+    finding \(\theta\):
+    \(\theta = \tan^{-1}(\dfrac{b}{a}) = \tan^{-1}(\dfrac{1}{0}) = 90^\circ\)
+    or \(\dfrac{\pi}{2}\). This looks like we are dividing 1 by 0 but
+    trust me that's not the case. I will leave you to verify this
+    yourself.
+  \end{itemize}
+\item
+  For \(-\mathrm{i}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    finding \(r\): \(r^2 = a^2 + b^2\), \(\quad a = 0\),
+    \(\quad b = -1\), \(\quad r^2 = 0^2 + (-1)^2 = 1\), \(\quad r = 1\)
+  \item
+    finding \(\theta\):
+    \(\theta = \tan^{-1}(\dfrac{b}{a}) = \tan^{-1}(\dfrac{-1}{0}) = \tan^{-1}(0) = -90^\circ\).
+    \(-90^\circ\) from the positive x-axis is \(270\) so
+    \(\theta = 270^\circ\) or \(\dfrac{3\pi}{2}\)
+  \end{itemize}
+\end{itemize}
+
+Converting them to exponential form, being that \(r = 1\) for all roots,
+we have that: - \(1 = e^{0\mathrm{i}} = e^0\) -
+\(-1 = e^{\pi\mathrm{i}}\) - \(\mathrm{i} = e^{\pi\mathrm{i}/{2}}\) -
+\(-\mathrm{i} = e^{3\pi\mathrm{i}/{2}}\)
+
+Now, let's compute the powers of each root up to the fourth power.
+
+Starting with \(e^0\):
+
+\begin{itemize}
+\tightlist
+\item
+  We compute the zero power \((e^0)^0 = e^0\). Notice that all the
+  powers are equal as
+  \((e^0)^0 = (e^0)^1 = (e^0)^2 = (e^0)^3 = (e^0)^4 = e^0\) so we have
+  just one argand diagram showing the point without rotation.
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    For \(e^{\pi\mathrm{i}}\): - We compute the zero power:
+\((e^{\pi\mathrm{i}})^0 = e^0\)
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The first power: \((e^{\pi\mathrm{i}})^1 = e^{\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The second power: \((e^{\pi\mathrm{i}})^2 = e^{2\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_55_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The third power: \((e^{\pi\mathrm{i}})^3 = e^{3\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The fourth power: \((e^{\pi\mathrm{i}})^4 = e^{4\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    For \(e^{\pi\mathrm{i}/{2}}\):
+
+\begin{itemize}
+\tightlist
+\item
+  We compute the zero power: \((e^{\pi\mathrm{i}/{2}})^0 = e^0\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_62_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The first power: \((e^{\pi\mathrm{i}/{2}})^1 = e^{\pi\mathrm{i}/{2}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The second power: \((e^{\pi\mathrm{i}/{2}})^2 = e^{\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_66_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The third power: \((e^{\pi\mathrm{i}/{2}})^3 = e^{3\pi\mathrm{i}/2}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_68_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The fourth power: \((e^{\pi\mathrm{i}/{2}})^4 = e^{2\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_70_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    For \(e^{3\pi\mathrm{i}/{2}}\):
+
+\begin{itemize}
+\tightlist
+\item
+  We compute the zero power: \((e^{3\pi\mathrm{i}/{2}})^0 = e^0\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_73_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The first power:
+  \((e^{3\pi\mathrm{i}/{2}})^1 = e^{3\pi\mathrm{i}/{2}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_75_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The second power: \((e^{3\pi\mathrm{i}/{2}})^2 = e^{3\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_77_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The third power: \((e^{3\pi\mathrm{i}/{2}})^3 = e^{9\pi\mathrm{i}/2}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The fourth power: \((e^{3\pi\mathrm{i}/{2}})^4 = e^{6\pi\mathrm{i}}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_81_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    What do we notice?
+
+\begin{itemize}
+\tightlist
+\item
+  For \(e^0\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    They are no rotations. It just remains at \(1\)
+  \end{itemize}
+\item
+  For \(e^{\pi\mathrm{i}}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It rotates between \(1\) and \(-1\) and it's at point \(1\) at the
+    powers divisible by \(2\)(\(2\) and \(4\)).
+  \end{itemize}
+\item
+  For \(e^{\pi\mathrm{i}/{2}}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It rotates across all roots and meets \(1\) at the fourth power.
+  \end{itemize}
+\item
+  For \(e^{3\pi\mathrm{i}/{2}}\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Same as \(e^{\pi\mathrm{i}/{2}}\)
+  \end{itemize}
+\end{itemize}
+
+Finally, what are roots of unity and why does all this matter?
+
+The \(n\)th roots are unity are simply values of \(x\) that satisfy the
+function \(x^n = 1\) for an arbitrary \(n\) value.
+
+Having known this, notice how the roots \(1\), \(-1\), \(\mathrm{i}\)
+and \(-\mathrm{i}\) all satisfy function \(x^4 = 1\). That is:
+
+\begin{itemize}
+\tightlist
+\item
+  \(1^4 = 1\) and \((e^0)^4 = 1\)
+\item
+  \(-1^4 = 1\) and \((e^{\pi\mathrm{i}})^4 = 1\)
+\item
+  \(\mathrm{i}^4 = 1\) and
+  \((e^{\pi\mathrm{i}/{2}})^4 = e^{2\pi\mathrm{i}} = 1\)
+\item
+  \((-\mathrm{i})^4 = 1\) and
+  \((e^{3\pi\mathrm{i}/{2}})^4 = e^{6\pi\mathrm{i}} = 1\)
+\end{itemize}
+
+And, how \(x^4 - 1 = 0\) is equals \(x^4 = 1\).
+
+These are \(4\)th roots of unity.
+
+But then, what about the polynomial \(P(x) = 1 + x + x^2\), does that
+hold for it too? Let's find out.
+
+Given the polynomial \(x^3 - 1\), let's find the roots.
+
+\begin{itemize}
+\tightlist
+\item
+  \((x^3 - 1) = (x - 1)(1 + x + x^2) = (x - 1)P(x)\)
+\end{itemize}
+
+Setting them to zero, we have that: - \(x - 1 = 0\), \(x = 1\) -
+\(P(x) = 0\), we already know the roots are
+\(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}\) and
+\(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}\).
+
+Therefore, \(1\), \(\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2}\) and
+\(\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2}\) are the \(3\)rd roots
+of unity. That is:
+
+\begin{itemize}
+\tightlist
+\item
+  \(1^3 = 1\) and \((e^0)^3 = 1\)
+\item
+  \((\dfrac{-1}{2} + \dfrac{\sqrt{3}\mathrm{i}}{2})^3 = 1\) and
+  \((e^{2\pi\mathrm{i}/3})^3 = e^{2\pi\mathrm{i}} = 1\)
+\item
+  \((\dfrac{-1}{2} - \dfrac{\sqrt{3}\mathrm{i}}{2})^3 = 1\) and
+  \((e^{4\pi\mathrm{i}/3})^3 = e^{4\pi\mathrm{i}} = 1\)
+\end{itemize}
+
+Let's extract more insights from our argand diagrams.
+
+Notice how in the \(3\)rd roots of unity, \(e^{2\pi\mathrm{i}/3}\) and
+\(e^{4\pi\mathrm{i}/3}\) generates every other root in the set and in
+the \(4\)th roots of unity \(e^{\pi\mathrm{i}/{2}}\) and
+\(e^{3\pi\mathrm{i}/{2}}\) also generates every other other roots in the
+set. For example, - For \(e^{2\pi\mathrm{i}/3}\) in the \(3\)rd roots of
+unity: - \((e^{2\pi\mathrm{i}/3})^ 0 = 1\) -
+\((e^{2\pi\mathrm{i}/3})^ 1 = e^{2\pi\mathrm{i}/3}\) -
+\((e^{2\pi\mathrm{i}/3})^ 2 = e^{4\pi\mathrm{i}/3}\) - For
+\(e^{3\pi\mathrm{i}/{2}}\) in the \(4\)th roots of unity: -
+\((e^{3\pi\mathrm{i}/{2}})^ 0 = 1\) -
+\((e^{3\pi\mathrm{i}/{2}})^ 1 = e^{3\pi\mathrm{i}/{2}}\) -
+\((e^{3\pi\mathrm{i}/{2}})^ 2 = e^{3\pi\mathrm{i}} = e^{\pi\mathrm{i}}\)
+-
+\((e^{3\pi\mathrm{i}/{2}})^ 3 = e^{9\pi\mathrm{i}/{2}} = e^{\pi\mathrm{i}/{2}}\)
+
+When a root generates all other roots in the set, it is called a
+\textbf{primitive root of unity}. This is evident in the diagrams as
+\(e^{\pi\mathrm{i}/{2}}\) and \(e^{3\pi\mathrm{i}/{2}}\) hits every root
+of unity as it rotates around the circle.
+
+There's something that has been recurring ever since we started talking
+about roots of polynomials: the modulus \(r\) has always been \(1\).
+This is not a concidence.
+
+If you interpret \(r\) as the radius of a circle being the \textbf{unit
+circle}(i.e a circle of radius \(1\)) then every root of unity is a
+point on the unit circle hence the name \emph{roots of unity}.
+
+And, there's a general formular for representing every \(n\)th root of
+unity: \[e^{{2\pi\mathrm{i} \ast k}/n}\] where \(n\) is an arbitrary
+value and \(k = 0, 1, \cdots, n - 1\).
+
+For example:
+
+\begin{itemize}
+\tightlist
+\item
+  The \(5\)th roots of unity are
+  \(\{e^{{2\pi\mathrm{i} \ast 0}/5}, e^{{2\pi\mathrm{i}\ast 1}/5}, e^{{2\pi\mathrm{i} \ast 2}/5}, e^{{2\pi\mathrm{i} \ast 3}/5}, e^{{2\pi\mathrm{i} \ast 4}/5}\} = \{e^0, e^{{2\pi\mathrm{i}}/5}, e^{{4\pi\mathrm{i}}/5}, e^{{6\pi\mathrm{i}}/5}, e^{{8\pi\mathrm{i}}/5}\}\)
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_84_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{itemize}
+\tightlist
+\item
+  The \(8\)th roots of unity are \$\{ e\^{}\{\{2\pi\mathrm{i}
+  \ast 0\}/8\}, e\^{}\{\{2\pi\mathrm{i} \ast 1\}/8\},
+  e\^{}\{\{2\pi\mathrm{i} \ast 2\}/8\}, e\^{}\{\{2\pi\mathrm{i}
+  \ast 3\}/8\}, e\^{}\{\{2\pi\mathrm{i} \ast 4\}/8\},
+  e\^{}\{\{2\pi\mathrm{i} \ast 5\}/8\}, e\^{}\{\{2\pi\mathrm{i}
+  \ast 6\}/8\}, e\^{}\{\{2\pi\mathrm{i} \ast 7\}/8\} \} = \{ e\^{}\{0\},
+  e\^{}\{\{\pi\mathrm{i}\}/4\}, e\^{}\{\{\pi\mathrm{i}\}/2\},
+  e\^{}\{\{3\pi\mathrm{i}\}/4\}, e\^{}\{\pi\mathrm{i}\},
+  e\^{}\{\{5\pi\mathrm{i}\}/4\}, e\^{}\{\{3\pi\mathrm{i}\}/2\},
+  e\^{}\{\{7\pi\mathrm{i}\}/4\} \} \$
+\end{itemize}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_86_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    A common way of representing roots of unity is in terms of the primitive
+root of unity. Recall that a primitive root of unity generates all other
+roots of unity.
+
+Given a primitive root of unity \(\omega_n\), the roots of unity are
+\(\{\omega_n^{0}, \omega_n^{1}, ... , \omega_n^{n - 1}\}\) where \(n\)
+is an arbitrary positive number.
+
+For example, from the \(8\)th roots of unity, we pick the primitive root
+\(\omega_8 = e^{{\pi\mathrm{i}}/4}\). That \(8\)th roots of unity are as
+follows:
+\[\{\omega_8^0, \omega_8^1, \omega_8^2, \omega_8^3, \omega_8^4, \omega_8^5, \omega_8^6, \omega_8^7\}\]
+
+    \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+    Another important property of roots of unity is that every root has a
+\emph{complex conjugate} and that complex conjugate is the point
+symmetric to it on the unit circle.
+
+The complex conjugate of a complex number \(a + b\mathrm{i}\) is
+\(a - b\mathrm{i}\) and that of \(a - b\mathrm{i}\) is
+\(a + b\mathrm{i}\). But then, when these are on the unit circle, the
+complex conjugate of any root is simply it's vertical reflexion.
+
+For example, from the \(8\)th roots of unity above, Here are the complex
+conjugates: - \(e^{3\pi\mathrm{i}/4}\) is \(e^{5\pi\mathrm{i}/4}\) -
+\(e^{\pi\mathrm{i}/4}\) is \(e^{7\pi\mathrm{i}/4}\) -
+\(e^{\pi\mathrm{i}/2}\) is \(e^{3\pi\mathrm{i}/2}\)
+
+Here are the \(8\)th roots of unity in rectangular form for
+clarification:
+\(\{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} = \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \}\)
+
+Interestingly, the complex conjugate of any root \(e^{a\mathrm{i}}\) is
+\(e^{-a\mathrm{i}}\). That is:
+
+\begin{itemize}
+\tightlist
+\item
+  \(e^{5\pi\mathrm{i}/4} = e^{-5\pi\mathrm{i}/4} = e^{3\pi\mathrm{i}/4}\)
+\item
+  \(e^{7\pi\mathrm{i}/4} = e^{-7\pi\mathrm{i}/4} = e^{\pi\mathrm{i}/4}\)
+\item
+  \(e^{3\pi\mathrm{i}/2} = e^{-3\pi\mathrm{i}/2} = e^{\pi\mathrm{i}/2}\)
+\end{itemize}
+
+A good mental model for complex conjugates is anticlockwise vs clockwise
+rotations. For example \(e^{3\pi\mathrm{i}/4}\) is the angle \(3\pi/4\)
+in the anticlockwise direction while \(e^{5\pi\mathrm{i}/4}\) is the
+same angle in clockwise direction.
+
+An even better way to interprete this is \emph{performing a rotation and
+undoing that rotation}.
+
+For example, in the diagram below, we have a value \(2\).
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_91_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let's multiply 2 by \(e^{{3\pi\mathrm{i}}/4}\). We have
+\(2e^{{3\pi\mathrm{i}}/4}\).
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_93_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now, let's multiply \(2e^{{3\pi\mathrm{i}}/4}\) by the complex conjugate
+of \(e^{{3\pi\mathrm{i}}/4}\), \(e^{5\pi\mathrm{i}/4}\). That is
+\(2e^{{3\pi\mathrm{i}}/4} * e^{5\pi\mathrm{i}/4} = 2e^{{2\pi\mathrm{i}}}\).
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{ntt_files/ntt_95_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As you can see in the diagrams \(e^{{3\pi\mathrm{i}}/4}\) rotated \(2\)
+by \({3\pi}/4\) and \(e^{{5\pi\mathrm{i}}/4}\) undid that rotation
+taking \(2e^{{3\pi\mathrm{i}}/4}\) back to \(2\).
+
+This is a key concept in next our topic: \textbf{Discrete Fourier
+Transform} as we get closer to understanding FFT.
+
+    \subsubsection{Discrete Fourier Transform
+(DFT)}\label{discrete-fourier-transform-dft}
+
+    Let's go back to where it all started: \emph{Polynomial multiplication}.
+
+Recall, we chose a set of \(x\) values, \(x_i = \{x_0, x_1,..., x_n\}\)
+and evaluated \(f(x_i)\) to get the set of points
+\((x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))\) and we called it the
+\textbf{point representation}.
+
+Now, let's use roots of unit as those set \(x\) values; our evaluation
+points. Given a primitive root of unity \(\omega_n\), we have our roots
+of unit
+\(x_i = \{\omega_n^0, \omega_n^1, \omega_n^2, ..., \omega_n^{n - 1} \}\).
+
+With this, we have the following:
+
+\[ V = \begin{bmatrix} \omega_n^{0*0} & \omega_n^{0*1} & {\omega_n}^{0*2} & \cdots & \omega_n^{0*(n - 1)} \\ \omega_n^{1*0} & \omega_n^{1*1} & \omega_n^{1*2} & \cdots & \omega_n^{1*(n - 1)} \\ \omega_n^{2*0} & \omega_n^{2*1} & \omega_n^{2*2} & \cdots & \omega_n^{2*(n - 1)} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]\omega_n^{(n - 1)*0} & \omega_n^{(n - 1)*1} & \omega_n^{(n - 1)*2} & \cdots & \omega_n^{(n - 1)(n - 1)} \end{bmatrix} = \begin{bmatrix}\omega_n^0 & \omega_n^0 & \omega_n^0 & \cdots & \omega_n^0 \\ \omega_n^0 & \omega_n^1 & \omega_n^2 & \cdots & \omega_n^{n - 1} \\ \omega_n^0 & \omega_n^2 & \omega_n^4 & \cdots & \omega_n^{2n - 2} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em] \omega_n^0 & \omega_n^{n - 1} & \omega_n^{2n - 2} & \cdots & \omega_n^{n^2 - 2n + 1} \end{bmatrix}\]
+
+\[a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_{n - 1}\end{bmatrix}\]
+
+\[Va = \begin{bmatrix}a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\ a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\ a_0\omega_n^0 + a_1\omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1}\omega_n^{2n - 2} \\ \vdots \\ a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} = \begin{bmatrix} f(\omega_n^0) \\ f(\omega_n^1) \\ f(\omega_n^2) \\ \vdots \\ f(\omega_n^{n - 1}) \end{bmatrix}\]
+
+\[ Va = f(x_i)\]
+
+    Breifly, what is DFT? DFT is an algorithm that turns a signal from the
+time domain into the frequency domain. It used in Signal analysis, Image
+Compression and a lot more.
+
+A good way to look at DFT is an algorithm that seeks to get more
+information from individual values that were created out of a
+combination of different measurements of values. For instance, given an
+chord(a chord is a set of notes played together), DFT can be used to get
+the frequency of the individual notes that makes up the chord.
+
+Why do we care about DFT? The DFT algorithm is equalivent to polynomial
+evaluation using roots of unity as we shown above. It runs in \(O(n^2)\)
+time and \textbf{FFT is an optimization of DFT and it run in
+\(O(n\log(n))\) time}.
+
+We are going to see how DFT is used and after that we are going to see
+how FFT is derived from the construction of DFT.
+
+Let's see an example. Using the \(4\)th roots of unity, let's compute
+\(C(x) = A(x) * B(x)\) where \(A(x) = 1 + 2x\), \(B(x) = 3 + 4x\) and
+\(C(x) = 3 + 10x + 8x^2\).
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Step 1}: Pick a primitive root of unity and define the the
+  vandermonde matrix \(V\)
+\end{itemize}
+
+    \[\omega_4 = e^{{3\pi\mathrm{i}}/2}\]
+
+\[\omega_4 = \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} = \{ 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \}\]
+
+\[ V = 
+     \begin{bmatrix}
+     \omega_4^{0*0} & \omega_4^{0*1} & {\omega_4}^{0*2} & \omega_4^{0*3}
+     \\ \omega_4^{1*0} & \omega_4^{1*1} & {\omega_4}^{1*2} & \omega_4^{1*3} 
+     \\ \omega_4^{2*0} & \omega_4^{2*1} & {\omega_4}^{2*2} & \omega_4^{2*3} 
+     \\  \omega_4^{3*0} & \omega_4^{3*1} & {\omega_4}^{3*2} & \omega_4^{3*3}
+     \end{bmatrix} = 
+     \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
+     \\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
+     \\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
+     \\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
+     \end{bmatrix} = 
+     \begin{bmatrix} 1 & 1 & 1 & 1 
+     \\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
+     \\ 1 & e^{3\pi\mathrm{i}} & e^{6\pi\mathrm{i}} & e^{9\pi\mathrm{i}}
+     \\ 1 & e^{{9\pi\mathrm{i}}/2} & e^{9\pi\mathrm{i}} & e^{{27\pi\mathrm{i}}/2}
+     \end{bmatrix}\]
+
+    \begin{itemize}
+\item
+  \textbf{Step 2}: Compute the DFT of \(A(x)\) and \(B(x)\),
+  \(\mathrm{DFT}(A)\) and \(\mathrm{DFT}(B)\) respectively.
+
+  The formula for computing the DFT is
+  \(X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}\) where
+  \(\omega_N = e^{-2\pi i / N}\) and \(N\) is the \(N\)th root of unity.
+
+  This is the same as \(f(x_i) = \sum^{n}_{j=0}a_jx^j_i\) from earlier
+  but updated to show that we are using the roots of unity as our
+  evaluations points.
+
+  \(DFT(A)\):
+
+  \[a = \begin{bmatrix}1 \\ 2 \\ 0 \\ 0 \end{bmatrix}\]
+
+  \[Va = \begin{bmatrix}
+     (1 \cdot 1) + (1 \cdot 2)
+     \\ (1 \cdot 1) + (e^{{3\pi\mathrm{i}}/2} \cdot 2)
+     \\ (1 \cdot 1) + (e^{3\pi\mathrm{i}} \cdot 2)  
+     \\ (1 \cdot 1) + (e^{{9\pi\mathrm{i}}/2} \cdot 2) 
+     \end{bmatrix} = 
+     \begin{bmatrix} 3 
+     \\ 1 + 2e^{{3\pi\mathrm{i}}/2} 
+     \\ 1 + 2e^{3\pi\mathrm{i}} 
+     \\ 1 + 2e^{{9\pi\mathrm{i}}/2}
+     \end{bmatrix}\]
+
+  \(DFT(B)\):
+
+  \[a = \begin{bmatrix}3 \\ 4 \\ 0 \\ 0 \end{bmatrix}\]
+
+  \[Va = \begin{bmatrix}
+     (1 \cdot 3) + (1 \cdot 4)
+     \\ (1 \cdot 3) + (e^{{3\pi\mathrm{i}}/2} \cdot 4) 
+     \\ (1 \cdot 3) + (e^{3\pi\mathrm{i}} \cdot 4) 
+     \\ (1 \cdot 3) + (e^{{9\pi\mathrm{i}}/2} \cdot 4) 
+     \end{bmatrix} = 
+     \begin{bmatrix} 7 
+     \\ 3 + 4e^{{3\pi\mathrm{i}}/2}
+     \\ 3 + 4e^{3\pi\mathrm{i}} 
+     \\ 3 + 4e^{{9\pi\mathrm{i}}/2} 
+     \end{bmatrix}\]
+\end{itemize}
+
+    \begin{itemize}
+\item
+  Step 3: Compute the pairwise multiplication \(DFT(A) \cdot DFT(B)\)
+
+  \(DFT(A) \cdot DFT(B)\):
+\end{itemize}
+
+\[
+     \begin{bmatrix} 3 
+     \\ 1 + 2e^{{3\pi\mathrm{i}}/2} 
+     \\ 1 + 2e^{3\pi\mathrm{i}} 
+     \\ 1 + 2e^{{9\pi\mathrm{i}}/2}
+     \end{bmatrix}
+     \cdot
+     \begin{bmatrix} 7 
+     \\ 3 + 4e^{{3\pi\mathrm{i}}/2}
+     \\ 3 + 4e^{3\pi\mathrm{i}} 
+     \\ 3 + 4e^{{9\pi\mathrm{i}}/2} 
+     \end{bmatrix}
+     = 
+     \begin{bmatrix}
+     21
+     \\ 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
+     \\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
+     \\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
+     \end{bmatrix}
+\]
+
+    \begin{itemize}
+\item
+  Step 4: Compute the inverse DFT of \(DFT(A) \cdot DFT(B)\).
+
+  This takes us back to coefficient form. The formula for this is
+  \[IDFT(DFT(A)\cdot DFT(B)) = x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}\]
+  This simply means we perform the same operation as before but now we
+  pick the positive primitive root of unity and pick
+  \(a = DFT(A).DFT(B)\), then we divide the resulting \(Va\) by N being
+  \(4\) in this case.
+
+  This formula is different from the one we used this process earlier
+  because of the percularities of complex numbers and roots of unity but
+  it's requires less operations. For instance, we don't need to find the
+  inverse of the matrix \(V\).
+
+  \[\omega_4 = e^{{\pi\mathrm{i}}/2}\]
+
+  \[\omega_4 = \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} = \{ 1, e^{{\pi\mathrm{i}}/2}, e^{\pi\mathrm{i}}, e^{{3\pi\mathrm{i}}/2} \}\]
+\end{itemize}
+
+\[ V = 
+     \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
+     \\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
+     \\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
+     \\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
+     \end{bmatrix} = 
+     \begin{bmatrix} 1 & 1 & 1 & 1 
+     \\ 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
+     \\ 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
+     \\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
+     \end{bmatrix}\]
+
+\[a = \begin{bmatrix}
+     21
+     \\ 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
+     \\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
+     \\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
+     \end{bmatrix}\]
+
+    \[Va = \begin{bmatrix} 1 & 1 & 1 & 1 
+     \\ 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
+     \\ 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
+     \\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
+     \end{bmatrix}
+     \cdot
+      \begin{bmatrix}
+     21
+     \\ 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
+     \\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
+     \\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
+     \end{bmatrix}
+     =
+    \begin{bmatrix}
+     21 + (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}) + (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}) + (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}})
+     \\  21 + (e^{{\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
+     \\  21 + (e^{\pi\mathrm{i}}  \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{2\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
+     \\  21 + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{9\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
+     \end{bmatrix}
+     =
+    \begin{bmatrix}
+     12
+     \\ 40
+     \\ 32
+     \\ 0
+     \end{bmatrix}
+     \]
+
+    \[IDFT(DFT(A)\cdot DFT(B)) = \dfrac{1}{N}Va = \dfrac{1}{4}Va = \dfrac{1}{4} \cdot \begin{bmatrix}
+     12
+     \\ 40
+     \\ 32
+     \\ 0
+     \end{bmatrix}
+     =
+     \begin{bmatrix}
+     3
+     \\ 10
+     \\ 8
+     \\ 0
+     \end{bmatrix}
+     \]
+
+    To better understand \(Va\), recall that \(e^{{3\pi\mathrm{i}}/2}\) is
+\(-\mathrm{i}\), \(e^{3\pi\mathrm{i}}\) is \(-1\) and
+\(e^{{9\pi\mathrm{i}}/2}\) is \(\mathrm{i}\)
+
+As you can see, we have successfully performed polynomial multiplication
+using DFT! Finally, let's see how FFT works!
+
+    \subsubsection{How FFT works}\label{how-fft-works}
+
+    FFT is a recursive exploits the structure of the DFT construction and
+two properties of roots of unity.
+
+So far, we have explored DFT using matrices and matrix multiplication.
+But, to better understand FFT you need to view DFT in terms of the
+formulas \(X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}\) and
+\(x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}\) so let's
+do that.
+
+Using same \(A(x)\) and \(B(x)\) from above, let's compute \(DFT\) and
+\(IDFT\) using the formulas
+
+For DFT: \(X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}\)
+
+\begin{itemize}
+\item
+  \(A(x)\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(X[0] = x[0] + x[1] + x[2] + x[3] = 1 + 2 + 0 + 0 = 3\)
+  \item
+    \(X[1] = x[0] + x[1]\omega_4 + x[2]\omega_4^{2} + x[3]\omega_4^{3} = 1 + 2\omega_4\)
+  \item
+    \(X[2] = x[0] + x[1]\omega_4^{2} + x[2]\omega_4^{4} + x[3]\omega_4^{6} = 1 + 2\omega_4^2\)
+  \item
+    \(X[3] = x[0] + x[1]\omega_4^{3} + x[2]\omega_4^{6} + x[3]\omega_4^{9} = 1 + 2\omega_4^3\)
+  \end{itemize}
+\item
+  \(B(x)\):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(X[0] = x[0] + x[1] + x[2] + x[3] = 3 + 4 + 0 + 0 = 7\)
+  \item
+    \(X[1] = x[0] + x[1]\omega_4 + x[2]\omega_4^{2} + x[3]\omega_4^{3} = 3 + 4\omega_4\)
+  \item
+    \(X[2] = x[0] + x[1]\omega_4^{2} + x[2]\omega_4^{4} + x[3]\omega_4^{6} = 3 + 4\omega_4^2\)
+  \item
+    \(X[3] = x[0] + x[1]\omega_4^{3} + x[2]\omega_4^{6} + x[3]\omega_4^{9} = 3 + 4\omega_4^3\)
+  \end{itemize}
+\end{itemize}
+
+For IDFT: \(x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}\)
+- \(x[0] = \dfrac{1}{4}(X[0] + X[1] + X[2] + X[3]) = 3\) -
+\(x[1] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-1} + X[2]\omega_4^{-2} + X[3]\omega_4^{-3}) = 10\)
+-
+\(x[2] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-2} + X[2]\omega_4^{-4} + X[3]\omega_4^{-6}) = 8\)
+-
+\(x[3] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-3} + X[2]\omega_4^{-6} + X[3]\omega_4^{-9}) = 0\)
+
+Secondly, here are the two properties of roots of unity that ultimately
+makes FFT possible.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(-\omega_N^k = \omega_N^{k + N/2}\). This is gotten from the fact
+  that \(\omega_N^{N/2} = -1\)
+\item
+  \(\omega_N^2 = \omega_{N/2}\). For example, \(e^{{\pi\mathrm{i}}/4}\)
+  is a primitive root from the \(8\)th of unity and
+  \((e^{{\pi\mathrm{i}}/4})^2\) is \(e^{{\pi\mathrm{i}}/2}\) being a
+  primitive root from the \(4\)th roots of unity.
+\end{enumerate}
+
+As you probably guessed, these only holds when \(N\) is even.
+
+    Haven set the foundation, let's look at the FFT algorithm step by step.
+
+Starting from the DFT formula:
+\(X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}\)
+
+\begin{itemize}
+\item
+  \textbf{Step 1}: We are going to split the formula into even/odd
+  indices. Setting \(n = 2m\) and \(n = 2m + 1\) so that:
+  \[X[k] = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_N^{k(2m)} + \sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_N^{k(2m + 1)} = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km} + \omega_N^{k}\sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}\]
+
+  Notice the second property at play here.
+\item
+  \textbf{Step 2}: Let's label the
+  parts:\[E[k] = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km}\]\[O[k] = \sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}\]
+  So that: \[X[k] = E[k] + \omega_N^{k}O[k]\]
+\item
+  \textbf{Step 3}: Let's compute: \[X[k] = E[k] + \omega_N^{k}O[k]\]
+  \[X[k + N/2] = E[k] + \omega_N^{k + N/2}O[k]\]From the first property,
+  we can update the as follows:\[X[k] = E[k] + \omega_N^{k}O[k]\]
+  \[X[k + N/2] = E[k] - \omega_N^{k}O[k]\]So, we just have to compute
+  \(E[k]\), \(O[k]\) and \(\omega_N^k\) and use it for both
+  computations, flipping the sign on the second one.
+\item
+  \textbf{Step 4}: We perform same steps recursively for \(E[k]\) and
+  \(O[k]\) until \(N = 1\).
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}
