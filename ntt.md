@@ -77,11 +77,11 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
    There's a way of expressing this in a matrix form:
 
-   $$ V = \begin{bmatrix}x_0^0 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ x_1^0 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ x_2^0 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]x_n^0 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} = \begin{bmatrix}1 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ 1 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ 1 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]1 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix}$$
+   $$ \begin{aligned} V &= \begin{bmatrix}x_0^0 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ x_1^0 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ x_2^0 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]x_n^0 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} \\[6pt] &= \begin{bmatrix}1 & x_0^1 & x_0^2 & \cdots & x_0^{n} \\ 1 & x_1^1 & x_1^2 & \cdots & x_1^{n} \\ 1 & x_2^1 & x_2^2 & \cdots & x_2^{n} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]1 & x^1_{n} & x_{n}^2 & \cdots & x_{n}^{n}\end{bmatrix} \end{aligned} $$
 
    $$a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_n\end{bmatrix}$$
 
-   $$Va = \begin{bmatrix}a_0x_0^0 + a_1x_0^1 + a_2x_0^2 + \cdots + a_nx_0^n\\ a_0x_1^0 + a_1x_1^1 + a_2x_1^2 + \cdots + a_nx_1^n \\ a_0x_2^0 + a_1x_2^1 + a_2x_2^2 + \cdots + a_nx_2^n \\ \vdots \\ a_0x_n^0 + a_1x_n^1 + a_2x_n^2 + \cdots + a_nx_n^n \end{bmatrix} = \begin{bmatrix} f(x_0) \\ f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \end{bmatrix}$$
+   $$\begin{aligned} Va &= \begin{bmatrix}a_0x_0^0 + a_1x_0^1 + a_2x_0^2 + \cdots + a_nx_0^n\\ a_0x_1^0 + a_1x_1^1 + a_2x_1^2 + \cdots + a_nx_1^n \\ a_0x_2^0 + a_1x_2^1 + a_2x_2^2 + \cdots + a_nx_2^n \\ \vdots \\ a_0x_n^0 + a_1x_n^1 + a_2x_n^2 + \cdots + a_nx_n^n \end{bmatrix}\\[6pt] &= \begin{bmatrix} f(x_0) \\ f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \end{bmatrix} \end{aligned} $$
 
    $$ Va = f(x_i)$$
 
@@ -93,7 +93,7 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
    Using $A(x)$ as an example, choosing $n = 4$ and $x =\{x_0, x_1, x_2, x_3, x_4\}= \{-5, -4, -3, -2, -1\}$, we have the following:
 
-   $$V = \begin{bmatrix}1 & x_0 & x_0^2 & x_0^3 & x_0^4 \\1 & x_1 & x_1^2 & x_1^3 & x_1^4 \\1 & x_2 & x_2^2 & x_2^3 & x_2^4 \\1 & x_3 & x_3^2 & x_3^3 & x_3^4 \\1 & x_4 & x_4^2 & x_4^3 & x_4^4 \end{bmatrix} = \begin{bmatrix}1 & -5 & -5^2 & -5^3 & -5^4 \\ 1 & -4 & -4^2 & -4^3 & -4^4 \\ 1 & -3 & -3^2 & -3^3 & -3^4 \\ 1 & -2 & -2^2 & -2^3 & -2^4 \\ 1 & -1 & -1^2 & -1^3 & -1^4 \end{bmatrix} = \begin{bmatrix}1 & -5 & 25 & -125 & 625 \\1 & -4 & 16 & -64 & 256 \\1 & -3 & 9 & -27 & 81 \\1 & -2 & 4 & -8 & 16 \\1 & -1 & 1 & -1 & 1\end{bmatrix}$$
+   $$\begin{aligned} V &= \begin{bmatrix}1 & x_0 & x_0^2 & x_0^3 & x_0^4 \\1 & x_1 & x_1^2 & x_1^3 & x_1^4 \\1 & x_2 & x_2^2 & x_2^3 & x_2^4 \\1 & x_3 & x_3^2 & x_3^3 & x_3^4 \\1 & x_4 & x_4^2 & x_4^3 & x_4^4 \end{bmatrix} \\[6pt] &= \begin{bmatrix}1 & -5 & -5^2 & -5^3 & -5^4 \\ 1 & -4 & -4^2 & -4^3 & -4^4 \\ 1 & -3 & -3^2 & -3^3 & -3^4 \\ 1 & -2 & -2^2 & -2^3 & -2^4 \\ 1 & -1 & -1^2 & -1^3 & -1^4 \end{bmatrix} \\[6pt] &= \begin{bmatrix}1 & -5 & 25 & -125 & 625 \\1 & -4 & 16 & -64 & 256 \\1 & -3 & 9 & -27 & 81 \\1 & -2 & 4 & -8 & 16 \\1 & -1 & 1 & -1 & 1\end{bmatrix} \end{aligned}$$
 
    $$a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ a_3 \\ a_4\end{bmatrix} = \begin{bmatrix}3 \\ -4 \\ 1 \\ 0 \\ 0\end{bmatrix}$$
 
@@ -237,11 +237,7 @@ $$\sin(\theta) = \theta\ - \frac{\theta^{3}}{3!} + \frac{\theta^{5}}{5!} - \frac
 
 Now, let's subsitute this approximation into the polar form:
 
-$$\cos\theta + \mathrm{i}\sin\theta = (1\ - \frac{\theta^{2}}{2!} + \frac{\theta^{4}}{4!} - \frac{\theta^{6}}{6!} + \frac{\theta^{8}}{8!} + \cdots) + \mathrm{i}(\theta\ - \frac{\theta^{3}}{3!} + \frac{\theta^{5}}{5!} - \frac{\theta^{7}}{7!} + \frac{\theta^{9}}{9!} + \cdots)$$
-
-$$ \qquad  \qquad  = (1\ - \frac{\theta^{2}}{2!} + \frac{\theta^{4}}{4!} - \frac{\theta^{6}}{6!} + \frac{\theta^{8}}{8!} + \cdots) + (\mathrm{i}\theta\ - \mathrm{i}\frac{\theta^{3}}{3!} + \mathrm{i}\frac{\theta^{5}}{5!} - \mathrm{i}\frac{\theta^{7}}{7!} + \mathrm{i}\frac{\theta^{9}}{9!} + \cdots)$$
-
-$$ \qquad  \qquad  = 1\ + \mathrm{i}\theta - \frac{\theta^{2}}{2!} - \mathrm{i}\frac{\theta^{3}}{3!} + \frac{\theta^{4}}{4!} + \mathrm{i}\frac{\theta^{5}}{5!} - \frac{\theta^{6}}{6!} - \mathrm{i}\frac{\theta^{7}}{7!} + \frac{\theta^{8}}{8!} + \mathrm{i}\frac{\theta^{9}}{9!} + \cdots$$
+$$\begin{aligned} \cos\theta + \mathrm{i}\sin\theta &= (1\ - \frac{\theta^{2}}{2!} + \frac{\theta^{4}}{4!} - \frac{\theta^{6}}{6!} + \frac{\theta^{8}}{8!} + \cdots) + \mathrm{i}(\theta\ - \frac{\theta^{3}}{3!} + \frac{\theta^{5}}{5!} - \frac{\theta^{7}}{7!} + \frac{\theta^{9}}{9!} + \cdots) \\[6pt]&= (1\ - \frac{\theta^{2}}{2!} + \frac{\theta^{4}}{4!} - \frac{\theta^{6}}{6!} + \frac{\theta^{8}}{8!} + \cdots) + (\mathrm{i}\theta\ - \mathrm{i}\frac{\theta^{3}}{3!} + \mathrm{i}\frac{\theta^{5}}{5!} - \mathrm{i}\frac{\theta^{7}}{7!} + \mathrm{i}\frac{\theta^{9}}{9!} + \cdots) \\[6pt] &= 1\ + \mathrm{i}\theta - \frac{\theta^{2}}{2!} - \mathrm{i}\frac{\theta^{3}}{3!} + \frac{\theta^{4}}{4!} + \mathrm{i}\frac{\theta^{5}}{5!} - \frac{\theta^{6}}{6!} - \mathrm{i}\frac{\theta^{7}}{7!} + \frac{\theta^{8}}{8!} + \mathrm{i}\frac{\theta^{9}}{9!} + \cdots \end{aligned} $$
 
 Let's look at that of the exponential function $e^x$. The power series for $e^x$ as follows:  $$1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \frac{x^6}{6!} + \frac{x^7}{7!} + \frac{x^8}{8!} + \frac{x^9}{9!} \cdots$$
 
@@ -669,7 +665,7 @@ A common way of representing roots of unity is in terms of the primitive root of
 
 Given a primitive root of unity $\omega_n$, the roots of unity are $\{\omega_n^{0}, \omega_n^{1}, ... , \omega_n^{n - 1}\}$ where $n$ is an arbitrary positive number.
 
-For example, from the $8$th roots of unity, we pick the primitive root $\omega_8 = e^{{\pi\mathrm{i}}/4}$. That $8$th roots of unity are as follows: $$\{\omega_8^0, \omega_8^1, \omega_8^2, \omega_8^3, \omega_8^4, \omega_8^5, \omega_8^6, \omega_8^7\}$$
+For example, from the $8$th roots of unity, we pick the primitive root $\omega_8 = e^{{\pi\mathrm{i}}/4}$. That $8$th roots of unity are as follows: $$\omega^k_8 = \{\omega_8^0, \omega_8^1, \omega_8^2, \omega_8^3, \omega_8^4, \omega_8^5, \omega_8^6, \omega_8^7\}$$
 
 ---
 
@@ -682,7 +678,7 @@ For example, from the $8$th roots of unity above, Here are the complex conjugate
 - $e^{\pi\mathrm{i}/4}$ is $e^{7\pi\mathrm{i}/4}$
 - $e^{\pi\mathrm{i}/2}$ is $e^{3\pi\mathrm{i}/2}$
 
-Here are the $8$th roots of unity in rectangular form for clarification: $\{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} = \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \}$
+Here are the $8$th roots of unity in rectangular form for clarification: $$\begin{aligned} \omega_8^k &= \{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} \\ &= \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \} \end{aligned}$$
 
 Interestingly, the complex conjugate of any root $e^{a\mathrm{i}}$ is $e^{-a\mathrm{i}}$. That is:
 
@@ -728,17 +724,15 @@ Let's go back to where it all started: *Polynomial multiplication*.
 
 Recall, we chose a set of $x$ values, $x_i = \{x_0, x_1,..., x_n\}$ and evaluated $f(x_i)$ to get the set of points $(x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))$ and we called it the **point representation**.
 
-Now, let's use roots of unit as those set $x$ values; our evaluation points. Given a primitive root of unity $\omega_n$, we have our roots of unit $x_i = \{\omega_n^0, \omega_n^1, \omega_n^2, ..., \omega_n^{n - 1} \}$.
+Now, let's use roots of unit as those set $x$ values; our evaluation points. Given a primitive root of unity $\omega_n$, we have our roots of unit $w_n^k = \{\omega_n^0, \omega_n^1, \omega_n^2, ..., \omega_n^{n - 1} \}$.
 
 With this, we have the following:
 
-   $$ V = \begin{bmatrix} \omega_n^{0*0} & \omega_n^{0*1} & {\omega_n}^{0*2} & \cdots & \omega_n^{0*(n - 1)} \\ \omega_n^{1*0} & \omega_n^{1*1} & \omega_n^{1*2} & \cdots & \omega_n^{1*(n - 1)} \\ \omega_n^{2*0} & \omega_n^{2*1} & \omega_n^{2*2} & \cdots & \omega_n^{2*(n - 1)} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]\omega_n^{(n - 1)*0} & \omega_n^{(n - 1)*1} & \omega_n^{(n - 1)*2} & \cdots & \omega_n^{(n - 1)(n - 1)} \end{bmatrix} = \begin{bmatrix}\omega_n^0 & \omega_n^0 & \omega_n^0 & \cdots & \omega_n^0 \\ \omega_n^0 & \omega_n^1 & \omega_n^2 & \cdots & \omega_n^{n - 1} \\ \omega_n^0 & \omega_n^2 & \omega_n^4 & \cdots & \omega_n^{2n - 2} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em] \omega_n^0 & \omega_n^{n - 1} & \omega_n^{2n - 2} & \cdots & \omega_n^{n^2 - 2n + 1} \end{bmatrix}$$
+   $$ \begin{aligned} V &= \begin{bmatrix} \omega_n^{0*0} & \omega_n^{0*1} & {\omega_n}^{0*2} & \cdots & \omega_n^{0*(n - 1)} \\ \omega_n^{1*0} & \omega_n^{1*1} & \omega_n^{1*2} & \cdots & \omega_n^{1*(n - 1)} \\ \omega_n^{2*0} & \omega_n^{2*1} & \omega_n^{2*2} & \cdots & \omega_n^{2*(n - 1)} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em]\omega_n^{(n - 1)*0} & \omega_n^{(n - 1)*1} & \omega_n^{(n - 1)*2} & \cdots & \omega_n^{(n - 1)(n - 1)} \end{bmatrix} \\[6pt] &= \begin{bmatrix}\omega_n^0 & \omega_n^0 & \omega_n^0 & \cdots & \omega_n^0 \\ \omega_n^0 & \omega_n^1 & \omega_n^2 & \cdots & \omega_n^{n - 1} \\ \omega_n^0 & \omega_n^2 & \omega_n^4 & \cdots & \omega_n^{2n - 2} \\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\[0.3em] \omega_n^0 & \omega_n^{n - 1} & \omega_n^{2n - 2} & \cdots & \omega_n^{n^2 - 2n + 1} \end{bmatrix} \end{aligned} $$
 
    $$a = \begin{bmatrix}a_0 \\ a_1 \\ a_2 \\ \vdots \\ a_{n - 1}\end{bmatrix}$$
 
-   $$Va = \begin{bmatrix}a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\ a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\ a_0\omega_n^0 + a_1\omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1}\omega_n^{2n - 2} \\ \vdots \\ a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} = \begin{bmatrix} f(\omega_n^0) \\ f(\omega_n^1) \\ f(\omega_n^2) \\ \vdots \\ f(\omega_n^{n - 1}) \end{bmatrix}$$
-
-   $$ Va = f(x_i)$$
+   $$\begin{aligned}  Va &= \begin{bmatrix}a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\ a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\ a_0\omega_n^0 + a_1\omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1}\omega_n^{2n - 2} \\ \vdots \\ a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} \\[6pt] &= \begin{bmatrix} f(\omega_n^0) \\ f(\omega_n^1) \\ f(\omega_n^2) \\ \vdots \\ f(\omega_n^{n - 1}) \end{bmatrix} \\[6pt] &= f(w_n^k) \end{aligned} $$
 
 Breifly, what is DFT? DFT is an algorithm that turns a signal from the time domain into the frequency domain. It used in Signal analysis, Image Compression and a lot more. 
 
@@ -755,25 +749,25 @@ Let's see an example. Using the $4$th roots of unity, let's compute $C(x) = A(x)
 
   $$\omega_4 = e^{{3\pi\mathrm{i}}/2}$$
 
-  $$\omega_4 = \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} = \{ 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \}$$  
+  $$\begin{aligned} \omega_4 &= \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} \\[6pt] &= \{ 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \} \end{aligned} $$  
 
-$$ V = 
+$$ \begin{aligned} V &= 
      \begin{bmatrix}
      \omega_4^{0*0} & \omega_4^{0*1} & {\omega_4}^{0*2} & \omega_4^{0*3}
      \\ \omega_4^{1*0} & \omega_4^{1*1} & {\omega_4}^{1*2} & \omega_4^{1*3} 
      \\ \omega_4^{2*0} & \omega_4^{2*1} & {\omega_4}^{2*2} & \omega_4^{2*3} 
      \\  \omega_4^{3*0} & \omega_4^{3*1} & {\omega_4}^{3*2} & \omega_4^{3*3}
-     \end{bmatrix} = 
+     \end{bmatrix} \\[6pt] &= 
      \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
      \\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
      \\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
      \\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
-     \end{bmatrix} = 
+     \end{bmatrix} \\[6pt] &= 
      \begin{bmatrix} 1 & 1 & 1 & 1 
      \\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
      \\ 1 & e^{3\pi\mathrm{i}} & e^{6\pi\mathrm{i}} & e^{9\pi\mathrm{i}}
      \\ 1 & e^{{9\pi\mathrm{i}}/2} & e^{9\pi\mathrm{i}} & e^{{27\pi\mathrm{i}}/2}
-     \end{bmatrix}$$
+     \end{bmatrix} \end{aligned}$$
 
 - **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively.
 
@@ -785,39 +779,37 @@ $$ V =
 
   $$a = \begin{bmatrix}1 \\ 2 \\ 0 \\ 0 \end{bmatrix}$$
 
-  $$Va = \begin{bmatrix}
+  $$\begin{aligned} Va &= \begin{bmatrix}
      (1 \cdot 1) + (1 \cdot 2)
      \\ (1 \cdot 1) + (e^{{3\pi\mathrm{i}}/2} \cdot 2)
      \\ (1 \cdot 1) + (e^{3\pi\mathrm{i}} \cdot 2)  
      \\ (1 \cdot 1) + (e^{{9\pi\mathrm{i}}/2} \cdot 2) 
-     \end{bmatrix} = 
+     \end{bmatrix} \\[6pt] &= 
      \begin{bmatrix} 3 
      \\ 1 + 2e^{{3\pi\mathrm{i}}/2} 
      \\ 1 + 2e^{3\pi\mathrm{i}} 
      \\ 1 + 2e^{{9\pi\mathrm{i}}/2}
-     \end{bmatrix}$$
+     \end{bmatrix} \end{aligned}$$
 
   $DFT(B)$:
 
   $$a = \begin{bmatrix}3 \\ 4 \\ 0 \\ 0 \end{bmatrix}$$
 
-  $$Va = \begin{bmatrix}
+  $$\begin{aligned} Va &= \begin{bmatrix}
      (1 \cdot 3) + (1 \cdot 4)
      \\ (1 \cdot 3) + (e^{{3\pi\mathrm{i}}/2} \cdot 4) 
      \\ (1 \cdot 3) + (e^{3\pi\mathrm{i}} \cdot 4) 
      \\ (1 \cdot 3) + (e^{{9\pi\mathrm{i}}/2} \cdot 4) 
-     \end{bmatrix} = 
+     \end{bmatrix} \\[6pt] &= 
      \begin{bmatrix} 7 
      \\ 3 + 4e^{{3\pi\mathrm{i}}/2}
      \\ 3 + 4e^{3\pi\mathrm{i}} 
      \\ 3 + 4e^{{9\pi\mathrm{i}}/2} 
-     \end{bmatrix}$$
+     \end{bmatrix} \end{aligned} $$
 
 - Step 3: Compute the pairwise multiplication $DFT(A) \cdot DFT(B)$
 
-  $DFT(A) \cdot DFT(B)$:
-
-$$
+$$\begin{aligned} DFT(A) \cdot DFT(B) &= 
      \begin{bmatrix} 3 
      \\ 1 + 2e^{{3\pi\mathrm{i}}/2} 
      \\ 1 + 2e^{3\pi\mathrm{i}} 
@@ -829,13 +821,14 @@ $$
      \\ 3 + 4e^{3\pi\mathrm{i}} 
      \\ 3 + 4e^{{9\pi\mathrm{i}}/2} 
      \end{bmatrix}
-     = 
+     \\[6pt] &= 
      \begin{bmatrix}
      21
      \\ 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
      \\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
      \\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
      \end{bmatrix}
+     \end{aligned}
 $$
 
 - Step 4: Compute the inverse DFT of $DFT(A) \cdot DFT(B)$.
@@ -846,19 +839,19 @@ $$
 
     $$\omega_4 = e^{{\pi\mathrm{i}}/2}$$
 
-  $$\omega_4 = \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} = \{ 1, e^{{\pi\mathrm{i}}/2}, e^{\pi\mathrm{i}}, e^{{3\pi\mathrm{i}}/2} \}$$  
+  $$ \begin{aligned} \omega_4 &= \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} \\[6pt] &= \{ 1, e^{{\pi\mathrm{i}}/2}, e^{\pi\mathrm{i}}, e^{{3\pi\mathrm{i}}/2} \} \end{aligned}$$  
 
-$$ V = 
+$$\begin{aligned} V &= 
      \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
      \\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
      \\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
      \\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
-     \end{bmatrix} = 
+     \end{bmatrix} \\[6pt] &= 
      \begin{bmatrix} 1 & 1 & 1 & 1 
      \\ 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
      \\ 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
      \\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
-     \end{bmatrix}$$
+     \end{bmatrix} \end{aligned}$$
 
 $$a = \begin{bmatrix}
      21
@@ -867,7 +860,7 @@ $$a = \begin{bmatrix}
      \\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
      \end{bmatrix}$$
 
-$$Va = \begin{bmatrix} 1 & 1 & 1 & 1 
+$$\begin{aligned} Va &= \begin{bmatrix} 1 & 1 & 1 & 1 
      \\ 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
      \\ 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
      \\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
@@ -879,36 +872,36 @@ $$Va = \begin{bmatrix} 1 & 1 & 1 & 1
      \\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
      \\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
      \end{bmatrix}
-     =
+     \\[6pt] &=
     \begin{bmatrix}
      21 + (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}) + (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}) + (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}})
      \\  21 + (e^{{\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
      \\  21 + (e^{\pi\mathrm{i}}  \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{2\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
      \\  21 + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{9\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
      \end{bmatrix}
-     =
+     \\[6pt] &=
     \begin{bmatrix}
      12
      \\ 40
      \\ 32
      \\ 0
      \end{bmatrix}
+     \end{aligned}
      $$
 
-$$IDFT(DFT(A)\cdot DFT(B)) = \dfrac{1}{N}Va = \dfrac{1}{4}Va = \dfrac{1}{4} \cdot \begin{bmatrix}
+$$\begin{aligned}IDFT(DFT(A)\cdot DFT(B)) &= \dfrac{1}{N}Va \\[6pt] &= \dfrac{1}{4}Va \\[6pt] &= \dfrac{1}{4} \cdot \begin{bmatrix}
      12
      \\ 40
      \\ 32
      \\ 0
      \end{bmatrix}
-     =
+     \\[6pt] &=
      \begin{bmatrix}
      3
      \\ 10
      \\ 8
      \\ 0
-     \end{bmatrix}
-     $$
+     \end{bmatrix} \end{aligned}$$
 
 To better understand $Va$, recall that $e^{{3\pi\mathrm{i}}/2}$ is $-\mathrm{i}$, $e^{3\pi\mathrm{i}}$ is $-1$ and $e^{{9\pi\mathrm{i}}/2}$ is $\mathrm{i}$
 
@@ -957,9 +950,35 @@ Haven set the foundation, let's look at the FFT algorithm step by step.
 
 Starting from the DFT formula: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
 
-- **Step 1**: We are going to split the formula into even/odd indices. Setting $n = 2m$ and $n = 2m + 1$ so that: $$X[k] = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_N^{k(2m)} + \sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_N^{k(2m + 1)} = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km} + \omega_N^{k}\sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}$$
+- **Step 1**: We are going to split the formula into even/odd indices. Setting $n = 2m$ and $n = 2m + 1$ so that: $$\begin{aligned}X[k] &= \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_N^{k(2m)} + \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_N^{k(2m + 1)} \\&= \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km} + \omega_N^{k} \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km} \end{aligned}$$
 
   Notice the second property at play here.
-- **Step 2**: Let's label the parts:$$E[k] = \sum_{n=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km}$$$$O[k] = \sum_{n=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}$$ So that: $$X[k] = E[k] + \omega_N^{k}O[k]$$
+- **Step 2**: Let's label the parts:$$E[k] = \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km}$$$$O[k] = \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}$$ So that: $$X[k] = E[k] + \omega_N^{k}O[k]$$
 - **Step 3**: Let's compute: $$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] + \omega_N^{k + N/2}O[k]$$From the first property, we can update the as follows:$$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] - \omega_N^{k}O[k]$$So, we just have to compute $E[k]$, $O[k]$ and $\omega_N^k$ and use it for both computations, flipping the sign on the second one.
 - **Step 4**: We perform same steps recursively for $E[k]$ and $O[k]$ until $N = 1$.
+
+Let's go through an example using $P(x) = 1 + 2x + 3x^2 + 4x^3$ using the $4$th roots of unity.
+
+$x_i = \{1, 2, 3, 4\}$ 
+
+We compute: $$X[0] = E[0] + \omega_4^{0}O[0]$$ $$X[2] = E[0] - \omega_4^0O[0]$$ and $$X[1] = E[1] + \omega_4O[1]$$ $$X[3] = E[1] - \omega_4O[1]$$
+
+So to solve, we just have to compute $E[0]$, $O[0]$, $E[1]$ and $O[1]$.
+
+$$\begin{aligned} E[0] &= \sum_{m=0}^{1} x[2m], \omega_{2}^{0} \\[6pt] &= \sum_{m=0}^{1} x[2m] \\[6pt] &= x[0] + x[2] \\[6pt] &= 1 + 3 \\[6pt] &= 4 \end{aligned}$$
+
+$$\begin{aligned} O[0] &= \sum_{m=0}^{1} x[2m] \\[6pt] &= x[1] + x[3] \\[6pt] &= 2 + 4 \\[6pt] &= 6 \end{aligned}$$
+
+$$\begin{aligned} E[1] &= \sum_{m=0}^{1} x[2m] \omega_{2} \\[6pt] &= \sum_{m=0}^{1} x[2m]\omega_{2} \\[6pt] &= x[0] + x[2]\omega_{2} \\[6pt] &= 1 + (3\cdot-1) \\[6pt] &= -2 \end{aligned}$$
+
+$$\begin{aligned} O[1] &= \sum_{m=0}^{1} x[2m]  \omega_{2} \\[6pt] &= x[1] + x[3]\omega_{2} \\[6pt] &= 2 - 4 \\[6pt] &= -2 \end{aligned}$$
+
+Now, let's use it in $X[k]$:
+
+$$\begin{aligned} X[0] &= E[0] + \omega_4^{0}O[0] \\[6pt] &= E[0] + O[0] \\[6pt] &= 4 + 6 \\[6pt] &= 10 \end{aligned}$$
+
+$$\begin{aligned} X[2] &= E[0] - O[0] \\[6pt] &= 4 - 6 \\[6pt] &= -2 \end{aligned}$$
+
+$$\begin{aligned} X[1] &= E[1] + \omega_4O[1] \\[6pt] &= E[1] + \omega_4O[1] \\[6pt] &= -2 + (\omega_4 \cdot -2) \\[6pt] &= -2 + (e^{{\pi\mathrm{i}}/2} \cdot -2) \\[6pt] &= -2 - 2e^{{\pi\mathrm{i}}/2} \end{aligned}$$
+
+$$\begin{aligned} X[3] &= E[1] - \omega_4O[1] \\[6pt] &= -2 + 2e^{{\pi\mathrm{i}}/2} \end{aligned}$$
