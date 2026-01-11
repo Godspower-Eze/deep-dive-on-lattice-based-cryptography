@@ -781,7 +781,7 @@ $$\begin{aligned} V &=
 
 $$\begin{aligned} V &= 
      \begin{bmatrix} \omega_4^{0 * 0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
-     \\\\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
+     \\\\[3pt] \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
      \\\\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
      \\\\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
      \end{bmatrix} \\\\[2pt] &= 
