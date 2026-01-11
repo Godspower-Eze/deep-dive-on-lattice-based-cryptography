@@ -1089,3 +1089,62 @@ print(xr)
 Lastly, let's briefly look at Number Theoritic Transform and how it relates to FFT.
 
 ## Number Theoritic Transform (NTT)
+
+NTT is simply FFT over modular arithmetic (no complex numbers). We use polynomial multiplication a lot in cryptography so we need FFT and we also work with large numbers but what you notice is that the higher up we go in complex roots of unity you start dealing with small decimal numbers and decimals numbers are not suitable for cryptography. We need certainty and precision but decimal numbers don't offer that. So, NTT is just an adaptation of FFT to modular arithmetic; **finite fields** to be precise.
+
+A finite field is a field with finite elements and a **field** is a set where you add, subtract, multiply and divide by any non-zero element.
+
+An example of a finite field is the set of integers $\bmod$ 11 $\mathbb{Z}_{11}$ $$\mathbb{Z}_{11} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$$
+
+- **Addition**: $3 + 25 \bmod 11 = 6$
+- **Subtraction**: $3 - 23 = -20 \bmod 11 = 2$. What we actually did here is we found the number $x$ such that $20 + x \bmod 11 = 0$ and it's called the **additive inverse**.
+- **Multiplication**: $3 \times 20 \bmod 11 = 5$
+- **Division**: $5 / 2 \bmod 11 = 8$. Similar to subtraction, what we did here was find the number $x$ such $2 \times x \bmod 11 = 1$ and then we multiplied $x$ by 5. $x$ is $6$ in case. $x$ is the **multiplicative inverse** of $2$ and denoted at $2^{-1}$. Keep this in mind.
+
+You can look at $\bmod$ as clock arithmetic. No matter how many times you go around the clock, the time would always be from $0$ to $11$. That's the same here. Every operation you perform gives you a result in the set.
+
+Now, let's look at how NTT works.
+
+The formulas are as follows:
+
+$$NTT = X[k] = \sum_{n = 0}^{N - 1}x[n]\omega^{kn} (\bmod q)$$
+
+$$INTT = x[n] = N^{-1}\sum_{k = 0}^{N - 1}X[k]\omega^{-kn} (\bmod q)$$
+
+where
+
+- $q$ is prime
+- $\omega$ is the primitive root in the $N$-root of unity $\bmod$ $q$
+- $\omega^N \equiv 1 (\bmod q)$
+- $q - 1$ is divisible by $N$ and $N$ is a power of 2.
+
+Let's take an example
+
+- $N = 4$
+- $q = 17$
+- $\omega = 13$
+- $\omega^k = \{ \omega^0, \omega^1, \omega^2, \omega^3 \} = \{ 13^0, 13^1, 13^2, 13^3 \} = = \{ 1, 13, 16, 4 \}$
+- $P(x) = 1 + 2x + 3x^2 + 4x^3$
+
+NTT:
+
+- $X[0] = x[0] + x[1] + x[2] + x[3] = 1 + 2 + 3 + 4 (\bmod 17) = 10$
+- $X[1] = x[0] + x[1]\omega + x[2]\omega^2  + x[3]\omega^3  = (1 + (2\cdot13) + (3\cdot16) + (4\cdot4))  \bmod 17 = 6$
+- $X[2] = x[0] + x[1]\omega^2 + x[2]\omega^4 + x[3]\omega^6 = (1 + (2 \cdot 16) + (3 \cdot 1) + (4 \cdot 16))  \bmod 17 = 15$
+- $X[3] = x[0] + x[1]\omega^3 + x[2]\omega^6 + x[3]\omega^9 = (1 + (2 \cdot 4) + (3 \cdot 16) + (4 \cdot 13)) \bmod 17 = 7$
+  
+INTT:
+- $x[0] = 13(X[0] + X[1] + X[2] + X[3]) = 13(10 + 6 + 15 + 7) \bmod 17 = 1$
+- $x[1] = 13(X[0] + X[1]\omega^{-1} + X[2]\omega^{-2} + X[3]\omega^{-3}) = 13(10 + (6 \cdot 4) + (15 \cdot 16) + (7 \cdot 13)) \bmod 17 = 2$
+- $x[2] = 13(X[0] + X[1]\omega^{-2} + X[2]\omega^{-4} + X[3]\omega^{-6}) = 13(10 + (6 \cdot 16) + (15 \cdot 1) + (7 \cdot 16)) \bmod 17 = 3$
+- $x[3] = 13(X[0] + X[1]\omega^{-3} + X[2]\omega^{-6} + X[3]\omega^{-9}) = 13(10 + (6 \cdot 13) + (15 \cdot 16) + (7 \cdot 4)) \bmod 17 = 4$
+
+Notice how $\omega^k$ cycles back to $1$ at $k = 4$ and continues like that. This is not a coincidence. It's **cyclic** in nature and is part of the structure that makes NTT possible. Also, this works for $N = 2, 8, 16$ with there distinct respective primitive root $\omega$.
+
+Lastly, our example is just DFT translated to NTT. It's still runs in $O(n^2)$ time. **As an exercise, apply FFT on this**.
+
+## Conclusion
+
+I understand this is quite a lot to take in so I advice to follow at your pace and as many times as you need. Feel free to ask questions in the comments too!
+
+In part two, we will be talking more about NTT and how it's used in lattice-based algorithms like ML-KEM and DSA. See you there!
