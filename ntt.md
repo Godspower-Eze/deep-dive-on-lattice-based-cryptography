@@ -4,7 +4,7 @@ The need to make systems and algorithms faster so as to make them more practical
 
 Number-theoretic Transform (NTT) was used in ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism), a lattice-based cryptographic algorithm used in establishing a shared secret key between two parties over a public channel. NTT is an analogue to the beautiful yet powerful Fast-fourier Transform (FTT).
 
-This article is part one of two-part series  titled **Fast-fourier Transform (FTT), Number-theoretic Transform (NTT) and Lattice-based Cryptography**. The goal of this post is to take a deep dive into FFT and NTT while part two will explore how NTT is used in lattice-based algorithms like [ML-KEM](https://github.com/Godspower-Eze/pqc-ml-kem.rs) and [ML-DSA](https://csrc.nist.gov/pubs/fips/204/final).
+This article is part one of two-part series  titled **Fast-fourier Transform (FTT), Number-theoretic Transform (NTT) and Lattice-based Cryptography**. The goal of this post is to take a deep dive into FFT and NTT while part two will explore how NTT is used in lattice-based algorithms like <a href="https://github.com/Godspower-Eze/pqc-ml-kem.rs" target="_blank">ML-KEM</a> and <a href="https://csrc.nist.gov/pubs/fips/204/final" target="_blank">ML-DSA</a>.
 
 As always, we are going to take a discovery approach, building up slowly from the familiar to the unfamiliar.
 
