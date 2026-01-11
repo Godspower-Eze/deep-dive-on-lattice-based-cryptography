@@ -781,7 +781,7 @@ $$\begin{aligned} V &=
 
 - **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively.
 
-  The formula for computing the DFT is $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$ where $\omega_N = e^{-2\pi i / N}$ and $N$ is the $N$th root of unity.
+  The formula for computing the DFT is $X[k] = \sum_{n=0}^{N-1} x[n] \omega_N^{kn}$ where $\omega_N = e^{-2\pi i / N}$ and $N$ is the $N$th root of unity.
 
   This is the same as $f(x_i) = \sum^{n}_{j=0}a_jx^j_i$ from earlier but updated to show that we are using the roots of unity as our evaluations points.
 
@@ -843,7 +843,7 @@ $$
 
 - Step 4: Compute the inverse DFT of $DFT(A) \cdot DFT(B)$.
 
-  This takes us back to coefficient form. The formula for this is $$IDFT(DFT(A)\cdot DFT(B)) = x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$$ This simply means we perform the same operation as before but now we pick the positive primitive root of unity and pick $a = DFT(A).DFT(B)$, then we divide the resulting $Va$ by N being $4$ in this case.
+  This takes us back to coefficient form. The formula for this is $$IDFT(DFT(A)\cdot DFT(B)) = x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] \omega_N^{-kn}$$ This simply means we perform the same operation as before but now we pick the positive primitive root of unity and pick $a = DFT(A).DFT(B)$, then we divide the resulting $Va$ by N being $4$ in this case.
 
   This formula is different from the one we used this process earlier because of the percularities of complex numbers and roots of unity but it's requires less operations. For instance, we don't need to find the inverse of the matrix $V$.
 
@@ -926,11 +926,11 @@ FFT is a recursive algorithm that makes DFT faster by exploiting two properties 
 
 As you probably guessed, these only holds when $N$ is even.
 
-So far, we have explored DFT using matrices and matrix multiplication. But, to better understand FFT you need to view DFT in terms of the formulas $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$ and $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$ so let's do that.
+So far, we have explored DFT using matrices and matrix multiplication. But, to better understand FFT you need to view DFT in terms of the formulas $X[k] = \sum_{n=0}^{N-1} x[n] \omega_N^{kn}$ and $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] \omega_N^{-kn}$ so let's do that.
 
 Using same $A(x)$ and $B(x)$ from above, let's compute $DFT$ and $IDFT$ using the formulas
 
-For DFT: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
+For DFT: $X[k] = \sum_{n=0}^{N-1} x[n] \omega_N^{kn}$
 
 - $A(x)$:
   
@@ -948,7 +948,7 @@ For DFT: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
   - $X[3] = x[0] + x[1]\omega_4^{3} + x[2]\omega_4^{6} + x[3]\omega_4^{9} = 3 + 4\omega_4^3$
 
 
-For IDFT: $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$ 
+For IDFT: $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k] \omega_N^{-kn}$ 
   - $x[0] = \dfrac{1}{4}(X[0] + X[1] + X[2] + X[3]) = 3$
   - $x[1] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-1} + X[2]\omega_4^{-2} + X[3]\omega_4^{-3}) = 10$
   - $x[2] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-2} + X[2]\omega_4^{-4} + X[3]\omega_4^{-6}) = 8$
@@ -956,13 +956,13 @@ For IDFT: $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$
 
 Having set the foundation, let's look at the FFT algorithm step by step.
 
-Starting from the DFT formula: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
+Starting from the DFT formula: $X[k] = \sum_{n=0}^{N-1} x[n] \omega_N^{kn}$
 
-- **Step 1**: We are going to split the formula into even/odd indices. Setting $n = 2m$ and $n = 2m + 1$ so that: $$\begin{aligned} X[k] &= \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_N^{k(2m)} + \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_N^{k(2m + 1)} \\\\ &= \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km} + \omega_N^{k} \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km} \end{aligned}$$
+- **Step 1**: We are going to split the formula into even/odd indices. Setting $n = 2m$ and $n = 2m + 1$ so that: $$\begin{aligned} X[k] &= \sum_{m=0}^{(N/2)-1} x[2m] \omega_N^{k(2m)} + \sum_{m=0}^{(N/2)-1} x[2m + 1] \omega_N^{k(2m + 1)} \\\\ &= \sum_{m=0}^{(N/2)-1} x[2m] \omega_{N/2}^{km} + \omega_N^{k} \sum_{m=0}^{(N/2)-1} x[2m + 1] \omega_{N/2}^{km} \end{aligned}$$
 
   Notice the second property at play here.
-- **Step 2**: Let's label the parts:$$E[k] = \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{km}$$$$O[k] = \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{km}$$ So that: $$X[k] = E[k] + \omega_N^{k}O[k]$$
-- **Step 3**: Let's compute: $$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] + \omega_N^{k + N/2}O[k]$$From the first property, we can update the as follows:$$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] - \omega_N^{k}O[k]$$So, we just have to compute $E[k]$, $O[k]$ and $\omega_N^k$ and use it for both computations, flipping the sign on the second one.
+- **Step 2**: Let's label the parts:$$E[k] = \sum_{m=0}^{(N/2)-1} x[2m] \omega_{N/2}^{km}$$$$O[k] = \sum_{m=0}^{(N/2)-1} x[2m + 1] \omega_{N/2}^{km}$$ So that: $$X[k] = E[k] + \omega_N^{k}O[k]$$
+- **Step 3**: Let's compute: $$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] + \omega_N^{k + N/2}O[k]$$From the first property, we can update the as follows:$$X[k] = E[k] + \omega_N^{k}O[k]$$ $$X[k + N/2] = E[k] - \omega_N^{k}O[k]$$ So, we just have to compute $E[k]$, $O[k]$ and $\omega_N^k$ and use it for both computations, flipping the sign on the second one.
 - **Step 4**: We perform same steps recursively for $E[k]$ and $O[k]$ until $N = 1$.
 
 Let's go through an example using $P(x) = 1 + 2x + 3x^2 + 4x^3$ using the $4$th roots of unity.
@@ -993,15 +993,15 @@ $$\begin{aligned} X[3] &= E[1] - \omega_4O[1] \\\\[2pt] &= -2 + 2e^{{3\pi\mathrm
 
 In the same vein, let's look into inverse FFT.
 
-Starting from the inverse DFT formula: $x[n] = \frac{1}{N} \sum_{m=0}^{N-1} X[m]\, \omega_N^{-mn}$
+Starting from the inverse DFT formula: $x[n] = \frac{1}{N} \sum_{m=0}^{N-1} X[m] \omega_N^{-mn}$
 
-$$\begin{aligned}x[n] &= \dfrac{1}{N}(\sum_{m=0}^{(N/2)-1} X[2m]\, \omega_N^{-n(2m)} + \sum_{m=0}^{(N/2)-1} X[2m + 1]\, \omega_N^{-n(2m + 1)}) \\\\[2pt] &= \dfrac{1}{N}(\sum_{m=0}^{(N/2)-1} X[2m]\, \omega_{N/2}^{-nm} + \omega_{N}^{-n}\sum_{m=0}^{(N/2)-1} X[2m + 1]\, \omega_{N/2}^{-nm}) \end{aligned}$$
+$$\begin{aligned}x[n] &= \dfrac{1}{N}(\sum_{m=0}^{(N/2)-1} X[2m] \omega_N^{-n(2m)} + \sum_{m=0}^{(N/2)-1} X[2m + 1] \omega_N^{-n(2m + 1)}) \\\\[2pt] &= \dfrac{1}{N}(\sum_{m=0}^{(N/2)-1} X[2m] \omega_{N/2}^{-nm} + \omega_{N}^{-n}\sum_{m=0}^{(N/2)-1} X[2m + 1] \omega_{N/2}^{-nm}) \end{aligned}$$
 
 The even and odd parts:
 
-$$E[n] = \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{-nm}$$
+$$E[n] = \sum_{m=0}^{(N/2)-1} x[2m] \omega_{N/2}^{-nm}$$
 
-$$O[n] = \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{-nm}$$
+$$O[n] = \sum_{m=0}^{(N/2)-1} x[2m + 1] \omega_{N/2}^{-nm}$$
 
 Then:
 
