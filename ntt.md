@@ -215,7 +215,7 @@ We have that $r = \sqrt{13}$ and $\theta = 0.983$. Given these two values, we re
 
 The polar representation might not look like the simplest way to express a complex number but it's going to help us understand roots of unity.
 
-Formally, $r$ is distance from the point of the complex number to the origin and it is called the *modulus* or the *absolute value*. $\theta$ is called the *argument* of the complex number and it is the angle that the modulus $r$ makes from the positive real axis.
+Formally, $r$ is the distance from the point of the complex number to the origin and it is called the *modulus* or the *absolute value*. $\theta$ is called the *argument* of the complex number and it is the angle that the modulus $r$ makes from the positive real axis.
 
 
     
@@ -728,11 +728,11 @@ Now, let's use roots of unit as those set $x$ values; our evaluation points. Giv
 
 With this, we have the following:
 
-$$\begin{aligned} V &= \begin{bmatrix} \omega_n^{0*0} & \omega_n^{0*1} & {\omega_n}^{0*2} & \cdots & \omega_n^{0*(n - 1)} \\\\ \omega_n^{1*0} & \omega_n^{1*1} & \omega_n^{1*2} & \cdots & \omega_n^{1*(n - 1)} \\\\ \omega_n^{2*0} & \omega_n^{2*1} & \omega_n^{2*2} & \cdots & \omega_n^{2*(n - 1)} \\\\[0.3em] \vdots & \vdots & \vdots & \ddots & \vdots \\\\[0.3em] \omega_n^{(n - 1)*0} & \omega_n^{(n - 1)*1} & \omega_n^{(n - 1)*2} & \cdots & \omega_n^{(n - 1)(n - 1)} \end{bmatrix} \\\\[2pt] &= \begin{bmatrix}\omega_n^0 & \omega_n^0 & \omega_n^0 & \cdots & \omega_n^0 \\\\ \omega_n^0 & \omega_n^1 & \omega_n^2 & \cdots & \omega_n^{n - 1} \\\\ \omega_n^0 & \omega_n^2 & \omega_n^4 & \cdots & \omega_n^{2n - 2} \\\\[0.3em]\vdots & \vdots & \vdots & \ddots & \vdots \\\\[0.3em] \omega_n^0 & \omega_n^{n - 1} & \omega_n^{2n - 2} & \cdots & \omega_n^{n^2 - 2n + 1} \end{bmatrix} \end{aligned}$$
+$$\begin{aligned} V &= \begin{bmatrix} \omega_n^{0*0} & \omega_n^{0*1} & \omega_n^{0*2} & \cdots & \omega_n^{0*(n - 1)} \\\\ \omega_n^{1 * 0} & \omega_n^{1*1} & \omega_n^{1*2} & \cdots & \omega_n^{1*(n - 1)} \\\\ \omega_n^{2*0} & \omega_n^{2*1} & \omega_n^{2*2} & \cdots & \omega_n^{2*(n - 1)} \\\\[0.3em] \vdots & \vdots & \vdots & \ddots & \vdots \\\\[0.3em] \omega_n^{(n - 1)*0} & \omega_n^{(n - 1)*1} & \omega_n^{(n - 1)*2} & \cdots & \omega_n^{(n - 1)(n - 1)} \end{bmatrix} \\\\[2pt] &= \begin{bmatrix} \omega_n^0 & \omega_n^0 & \omega_n^0 & \cdots & \omega_n^0 \\\\ \omega_n^0 & \omega_n^1 & \omega_n^2 & \cdots & \omega_n^{n - 1} \\\\ \omega_n^0 & \omega_n^2 & \omega_n^4 & \cdots & \omega_n^{2n - 2} \\\\[0.3em] \vdots & \vdots & \vdots & \ddots & \vdots \\\\[0.3em] \omega_n^0 & \omega_n^{n - 1} & \omega_n^{2n - 2} & \cdots & \omega_n^{n^2 - 2n + 1} \end{bmatrix} \end{aligned}$$
 
 $$a = \begin{bmatrix}a_0 \\\\ a_1 \\\\ a_2 \\\\ \vdots \\\\ a_{n - 1}\end{bmatrix}$$
 
-$$\begin{aligned}  Va &= \begin{bmatrix}a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\\\ a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\\\ a_0\omega_n^0 + a_1\omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1}\omega_n^{2n - 2} \\\\ \vdots \\\\ a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} \\\\[2pt] &= \begin{bmatrix} f(\omega_n^0) \\\\ f(\omega_n^1) \\\\ f(\omega_n^2) \\\\ \vdots \\\\ f(\omega_n^{n - 1}) \end{bmatrix} \\\\[2pt] &= f(w_n^k) \end{aligned}$$
+$$\begin{aligned}  Va &= \begin{bmatrix} a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\\\ a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\\\ a_0\omega_n^0 + a_1 \omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1} \omega_n^{2n - 2} \\\\ \vdots \\\\ a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} \\\\[2pt] &= \begin{bmatrix} f(\omega_n^0) \\\\ f(\omega_n^1) \\\\ f(\omega_n^2) \\\\ \vdots \\\\ f(\omega_n^{n - 1}) \end{bmatrix} \\\\[2pt] &= f(w_n^k) \end{aligned}$$
 
 Breifly, what is DFT? DFT is an algorithm that turns a signal from the time domain into the frequency domain. It used in Signal analysis, Image Compression and a lot more. 
 
@@ -747,21 +747,21 @@ Let's see an example. Using the $4$th roots of unity, let's compute $C(x) = A(x)
 
 - **Step 1**: Pick a primitive root of unity and define the the vandermonde matrix $V$ 
 
-  $$\omega_4 = e^{{3\pi\mathrm{i}}/2}$$
+$$\omega_4 = e^{{3\pi\mathrm{i}}/2}$$
 
-  $$\begin{aligned} \omega_4 &= \lbrace \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \rbrace \\\\[2pt] &= \lbrace 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \rbrace \end{aligned} $$  
+$$\begin{aligned} \omega_4 &= \lbrace \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \rbrace \\\\[2pt] &= \lbrace 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \rbrace \end{aligned} $$  
 
 $$ \begin{aligned} V &= 
      \begin{bmatrix}
      \omega_4^{0*0} & \omega_4^{0*1} & {\omega_4}^{0*2} & \omega_4^{0*3}
-     \\\\ \omega_4^{1*0} & \omega_4^{1*1} & {\omega_4}^{1*2} & \omega_4^{1*3} 
-     \\\\ \omega_4^{2*0} & \omega_4^{2*1} & {\omega_4}^{2*2} & \omega_4^{2*3} 
-     \\\\  \omega_4^{3*0} & \omega_4^{3*1} & {\omega_4}^{3*2} & \omega_4^{3*3}
+     \\\\ \omega_4^{1*0} & \omega_4^{1*1} & \omega_4^{1*2} & \omega_4^{1*3} 
+     \\\\ \omega_4^{2*0} & \omega_4^{2*1} & \omega_4^{2*2} & \omega_4^{2*3} 
+     \\\\  \omega_4^{3*0} & \omega_4^{3*1} & \omega_4^{3*2} & \omega_4^{3*3}
      \end{bmatrix} \\\\[2pt] &= 
      \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
-     \\\\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
-     \\\\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
-     \\\\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
+     \\\\ \omega_4^{0} & \omega_4^{1} & \omega_4^{2} & \omega_4^{3}
+     \\\\ \omega_4^{0} & \omega_4^{2} & \omega_4^{4} & \omega_4^{6}
+     \\\\  \omega_4^{0} & \omega_4^{3} & \omega_4^{6} & \omega_4^{9}
      \end{bmatrix} \\\\[2pt] &= 
      \begin{bmatrix} 1 & 1 & 1 & 1 
      \\\\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
