@@ -1153,7 +1153,7 @@ Notice how $\omega^k$ cycles back to $1$ at $k = 4$ and continues like that. Thi
 
 Lastly, our example is just DFT translated to NTT. It's still runs in $O(n^2)$ time. **As an exercise, apply FFT on this**.
 
-## Conclusion
+----
 
 I understand this is quite a lot to take in so I advice to follow at your pace and as many times as you need. Feel free to ask questions in the comments too!
 
