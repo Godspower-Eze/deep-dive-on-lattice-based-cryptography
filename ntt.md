@@ -780,15 +780,15 @@ $$ \begin{aligned} V &=
   $$a = \begin{bmatrix}1 \\\\ 2 \\\\ 0 \\\\ 0 \end{bmatrix}$$
 
   $$\begin{aligned} Va &= \begin{bmatrix}
-     (1 \cdot 1) + (1 \cdot 2)
-     \\\\ (1 \cdot 1) + (e^{{3\pi\mathrm{i}}/2} \cdot 2)
-     \\\\ (1 \cdot 1) + (e^{3\pi\mathrm{i}} \cdot 2)  
+     (1 \cdot 3) + (1 \cdot 4)
+     \\\\ (1 \cdot 1) + (e^{{3\pi\mathrm{i}}/2} \cdot 2) 
+     \\\\ (1 \cdot 1) + (e^{3\pi\mathrm{i}} \cdot 2) 
      \\\\ (1 \cdot 1) + (e^{{9\pi\mathrm{i}}/2} \cdot 2) 
      \end{bmatrix} \\\\[2pt] &= 
-     \begin{bmatrix} 3 
-     \\\\ 1 + 2e^{{3\pi\mathrm{i}}/2} 
+     \begin{bmatrix} 7 
+     \\\\ 1 + 2e^{{3\pi\mathrm{i}}/2}
      \\\\ 1 + 2e^{3\pi\mathrm{i}} 
-     \\\\ 1 + 2e^{{9\pi\mathrm{i}}/2}
+     \\\\ 1 + 2e^{{9\pi\mathrm{i}}/2} 
      \end{bmatrix} \end{aligned} $$
 
   $DFT(B)$:
