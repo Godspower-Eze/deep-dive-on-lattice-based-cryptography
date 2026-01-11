@@ -919,7 +919,12 @@ As you can see, we have successfully performed polynomial multiplication using D
 
 ## How FFT works
 
-FFT is a recursive exploits the structure of the DFT construction and two properties of roots of unity.
+FFT is a recursive algorithm that makes DFT faster by exploiting two properties of roots of unity as follows:
+
+1. $-\omega_N^k = \omega_N^{k + N/2}$. This is gotten from the fact that $\omega_N^{N/2} = -1$
+2. $\omega_N^2 = \omega_{N/2}$. For example, $e^{{\pi\mathrm{i}}/4}$ is a primitive root from the $8$th of unity and $(e^{{\pi\mathrm{i}}/4})^2$ is $e^{{\pi\mathrm{i}}/2}$ being a primitive root from the $4$th roots of unity.
+
+As you probably guessed, these only holds when $N$ is even.
 
 So far, we have explored DFT using matrices and matrix multiplication. But, to better understand FFT you need to view DFT in terms of the formulas $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$ and $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$ so let's do that.
 
@@ -949,14 +954,7 @@ For IDFT: $x[n] = \frac{1}{N} \sum_{k=0}^{N-1} X[k]\, \omega_N^{-kn}$
   - $x[2] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-2} + X[2]\omega_4^{-4} + X[3]\omega_4^{-6}) = 8$
   - $x[3] = \dfrac{1}{4}(X[0] + X[1]\omega_4^{-3} + X[2]\omega_4^{-6} + X[3]\omega_4^{-9}) = 0$
 
-Secondly, here are the two properties of roots of unity that ultimately makes FFT possible.
-
-1. $-\omega_N^k = \omega_N^{k + N/2}$. This is gotten from the fact that $\omega_N^{N/2} = -1$
-2. $\omega_N^2 = \omega_{N/2}$. For example, $e^{{\pi\mathrm{i}}/4}$ is a primitive root from the $8$th of unity and $(e^{{\pi\mathrm{i}}/4})^2$ is $e^{{\pi\mathrm{i}}/2}$ being a primitive root from the $4$th roots of unity.
-
-As you probably guessed, these only holds when $N$ is even.
-
-Haven set the foundation, let's look at the FFT algorithm step by step.
+Having set the foundation, let's look at the FFT algorithm step by step.
 
 Starting from the DFT formula: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
 
@@ -1155,6 +1153,6 @@ Lastly, our example is just DFT translated to NTT. It's still runs in $O(n^2)$ t
 
 ----
 
-I understand this is quite a lot to take in so I advice to follow at your pace and as many times as you need. Feel free to ask questions in the comments too!
+I understand this is quite a lot to take in so I advice you follow at your pace and go through as many times as you need. Feel free to ask questions in the comments too!
 
 In part two, we will be talking more about NTT and how it's used in lattice-based algorithms like ML-KEM and DSA. See you there!
