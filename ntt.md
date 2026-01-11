@@ -734,16 +734,16 @@ $$\begin{aligned} V &=
 \\\\[7pt] \omega_n^{2 * 0} & \omega_n^{2 * 1} & \omega_n^{2 * 2} & \cdots & \omega_n^{2 * (n - 1)}
 \\\\[7pt] \vdots & \vdots & \vdots & \ddots & \vdots 
 \\\\[7pt] \omega_n^{(n - 1)*0} & \omega_n^{(n - 1) * 1} & \omega_n^{(n - 1) * 2} & \cdots & \omega_n^{(n - 1)(n - 1)}
-\end{bmatrix} \\\\[5pt] &=
+\end{bmatrix} \\\\[7pt] &=
 \begin{bmatrix} \omega_n^0 & \omega_n^0 & \omega_n^0 & \cdots & \omega_n^0
 \\\\[7pt] \omega_n^0 & \omega_n^1 & \omega_n^2 & \cdots & \omega_n^{n - 1}
 \\\\[7pt] \omega_n^0 & \omega_n^2 & \omega_n^4 & \cdots & \omega_n^{2n - 2}
 \\\\[7pt] \vdots & \vdots & \vdots & \ddots & \vdots 
 \\\\[7pt] \omega_n^0 & \omega_n^{n - 1} & \omega_n^{2n - 2} & \cdots & \omega_n^{n^2 - 2n + 1} \end{bmatrix} \end{aligned}$$
 
-$$a = \begin{bmatrix}a_0 \\\\ a_1 \\\\ a_2 \\\\ \vdots \\\\ a_{n - 1}\end{bmatrix}$$
+$$a = \begin{bmatrix}a_0 \\\\[7pt] a_1 \\\\[7pt] a_2 \\\\[7pt] \vdots \\\\[7pt] a_{n - 1}\end{bmatrix}$$
 
-$$\begin{aligned}  Va &= \begin{bmatrix} a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\\\ a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\\\ a_0\omega_n^0 + a_1 \omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1} \omega_n^{2n - 2} \\\\ \vdots \\\\ a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} \\\\[2pt] &= \begin{bmatrix} f(\omega_n^0) \\\\ f(\omega_n^1) \\\\ f(\omega_n^2) \\\\ \vdots \\\\ f(\omega_n^{n - 1}) \end{bmatrix} \\\\[2pt] &= f(w_n^k) \end{aligned}$$
+$$\begin{aligned}  Va &= \begin{bmatrix} a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\\\[7pt] a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\\\[7pt] a_0\omega_n^0 + a_1 \omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1} \omega_n^{2n - 2} \\\\[7pt] \vdots \\\\[7pt] a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} \\\\[7pt] &= \begin{bmatrix} f(\omega_n^0) \\\\[7pt] f(\omega_n^1) \\\\[7pt] f(\omega_n^2) \\\\[7pt] \vdots \\\\[7pt] f(\omega_n^{n - 1}) \end{bmatrix} \\\\[7pt] &= f(w_n^k) \end{aligned}$$
 
 Breifly, what is DFT? DFT is an algorithm that turns a signal from the time domain into the frequency domain. It used in Signal analysis, Image Compression and a lot more. 
 
@@ -767,12 +767,12 @@ $$\begin{aligned} V &=
     \\\\[7pt] \omega_4^{1 * 0} & \omega_4^{1 * 1} & \omega_4^{1 * 2} & \omega_4^{1 * 3}
     \\\\[7pt] \omega_4^{2 * 0} & \omega_4^{2 * 1} & \omega_4^{2 * 2} & \omega_4^{2 * 3} 
     \\\\[7pt]  \omega_4^{3 * 0} & \omega_4^{3 * 1} & \omega_4^{3 * 2} & \omega_4^{3 * 3} 
-    \end{bmatrix} \\\\[5pt] &=
+    \end{bmatrix} \\\\[7pt] &=
     \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & \omega_4^{0} & \omega_4^{0}
     \\\\[7pt] \omega_4^{0} & \omega_4^{1} & \omega_4^{2} & \omega_4^{3}
     \\\\[7pt] \omega_4^{0} & \omega_4^{2} & \omega_4^{4} & \omega_4^{6}
     \\\\[7pt]  \omega_4^{0} & \omega_4^{3} & \omega_4^{6} & \omega_4^{9} 
-    \end{bmatrix} \\\\[5pt] &= 
+    \end{bmatrix} \\\\[7pt] &= 
     \begin{bmatrix} 1 & 1 & 1 & 1 
     \\\\[7pt] 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
     \\\\[7pt] 1 & e^{3\pi\mathrm{i}} & e^{6\pi\mathrm{i}} & e^{9\pi\mathrm{i}}
@@ -791,14 +791,14 @@ $$\begin{aligned} V &=
 
   $$\begin{aligned} Va &= \begin{bmatrix}
      (1 \cdot 3) + (1 \cdot 4)
-     \\\\ (1 \cdot 1) + (e^{{3\pi\mathrm{i}}/2} \cdot 2) 
-     \\\\ (1 \cdot 1) + (e^{3\pi\mathrm{i}} \cdot 2) 
-     \\\\ (1 \cdot 1) + (e^{{9\pi\mathrm{i}}/2} \cdot 2) 
-     \end{bmatrix} \\\\[2pt] &= 
+     \\\\[7pt] (1 \cdot 1) + (e^{{3\pi\mathrm{i}}/2} \cdot 2) 
+     \\\\[7pt] (1 \cdot 1) + (e^{3\pi\mathrm{i}} \cdot 2) 
+     \\\\[7pt] (1 \cdot 1) + (e^{{9\pi\mathrm{i}}/2} \cdot 2) 
+     \end{bmatrix} \\\\[7pt] &= 
      \begin{bmatrix} 7 
-     \\\\ 1 + 2e^{{3\pi\mathrm{i}}/2}
-     \\\\ 1 + 2e^{3\pi\mathrm{i}} 
-     \\\\ 1 + 2e^{{9\pi\mathrm{i}}/2} 
+     \\\\[7pt] 1 + 2e^{{3\pi\mathrm{i}}/2}
+     \\\\[7pt] 1 + 2e^{3\pi\mathrm{i}} 
+     \\\\[7pt] 1 + 2e^{{9\pi\mathrm{i}}/2} 
      \end{bmatrix} \end{aligned} $$
 
   $DFT(B)$:
@@ -807,36 +807,36 @@ $$\begin{aligned} V &=
 
   $$\begin{aligned} Va &= \begin{bmatrix}
      (1 \cdot 3) + (1 \cdot 4)
-     \\\\ (1 \cdot 3) + (e^{{3\pi\mathrm{i}}/2} \cdot 4) 
-     \\\\ (1 \cdot 3) + (e^{3\pi\mathrm{i}} \cdot 4) 
-     \\\\ (1 \cdot 3) + (e^{{9\pi\mathrm{i}}/2} \cdot 4) 
-     \end{bmatrix} \\\\[2pt] &= 
+     \\\\[7pt] (1 \cdot 3) + (e^{{3\pi\mathrm{i}}/2} \cdot 4) 
+     \\\\[7pt] (1 \cdot 3) + (e^{3\pi\mathrm{i}} \cdot 4) 
+     \\\\[7pt] (1 \cdot 3) + (e^{{9\pi\mathrm{i}}/2} \cdot 4) 
+     \end{bmatrix} \\\\[7pt] &= 
      \begin{bmatrix} 7 
-     \\\\ 3 + 4e^{{3\pi\mathrm{i}}/2}
-     \\\\ 3 + 4e^{3\pi\mathrm{i}} 
-     \\\\ 3 + 4e^{{9\pi\mathrm{i}}/2} 
+     \\\\[7pt] 3 + 4e^{{3\pi\mathrm{i}}/2}
+     \\\\[7pt] 3 + 4e^{3\pi\mathrm{i}} 
+     \\\\[7pt] 3 + 4e^{{9\pi\mathrm{i}}/2} 
      \end{bmatrix} \end{aligned} $$
 
 - Step 3: Compute the pairwise multiplication $DFT(A) \cdot DFT(B)$
 
 $$\begin{aligned} DFT(A) \cdot DFT(B) &= 
      \begin{bmatrix} 3 
-     \\\\ 1 + 2e^{{3\pi\mathrm{i}}/2} 
-     \\\\ 1 + 2e^{3\pi\mathrm{i}} 
-     \\\\ 1 + 2e^{{9\pi\mathrm{i}}/2}
+     \\\\[7pt] 1 + 2e^{{3\pi\mathrm{i}}/2} 
+     \\\\[7pt] 1 + 2e^{3\pi\mathrm{i}} 
+     \\\\[7pt] 1 + 2e^{{9\pi\mathrm{i}}/2}
      \end{bmatrix}
      \cdot
      \begin{bmatrix} 7 
-     \\\\ 3 + 4e^{{3\pi\mathrm{i}}/2}
-     \\\\ 3 + 4e^{3\pi\mathrm{i}} 
-     \\\\ 3 + 4e^{{9\pi\mathrm{i}}/2} 
+     \\\\[7pt] 3 + 4e^{{3\pi\mathrm{i}}/2}
+     \\\\[7pt] 3 + 4e^{3\pi\mathrm{i}} 
+     \\\\[7pt] 3 + 4e^{{9\pi\mathrm{i}}/2} 
      \end{bmatrix}
-     \\\\[2pt] &= 
+     \\\\[7pt] &= 
      \begin{bmatrix}
      21
-     \\\\ 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
-     \\\\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
-     \\\\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
      \end{bmatrix}
      \end{aligned}
 $$
@@ -853,64 +853,64 @@ $$
 
 $$\begin{aligned} V &= 
      \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
-     \\\\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
-     \\\\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
-     \\\\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
-     \end{bmatrix} \\\\[2pt] &= 
+     \\\\[7pt] \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
+     \\\\[7pt] \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
+     \\\\[7pt]  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
+     \end{bmatrix} \\\\[7pt] &= 
      \begin{bmatrix} 1 & 1 & 1 & 1 
-     \\\\ 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
-     \\\\ 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
-     \\\\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
+     \\\\[7pt] 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
+     \\\\[7pt] 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
+     \\\\[7pt] 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
      \end{bmatrix} \end{aligned}$$
 
 $$a = \begin{bmatrix}
      21
-     \\\\ 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
-     \\\\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
-     \\\\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
      \end{bmatrix}$$
 
 $$\begin{aligned} Va &= \begin{bmatrix} 1 & 1 & 1 & 1 
-     \\\\ 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
-     \\\\ 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
-     \\\\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
+     \\\\[7pt] 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
+     \\\\[7pt] 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
+     \\\\[7pt] 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
      \end{bmatrix}
      \cdot
       \begin{bmatrix}
      21
-     \\\\ 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
-     \\\\ 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
-     \\\\ 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}
+     \\\\[7pt] 3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}
      \end{bmatrix}
-     \\\\[2pt] &=
+     \\\\[7pt] &=
     \begin{bmatrix}
      21 + (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}}) + (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}}) + (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}})
-     \\\\  21 + (e^{{\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
-     \\\\  21 + (e^{\pi\mathrm{i}}  \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{2\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
-     \\\\  21 + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{9\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
+     \\\\[7pt]  21 + (e^{{\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
+     \\\\[7pt]  21 + (e^{\pi\mathrm{i}}  \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{2\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
+     \\\\[7pt]  21 + (e^{{3\pi\mathrm{i}}/2} \cdot (3 + 10e^{{3\pi\mathrm{i}}/2} + 8e^{3\pi\mathrm{i}})) + (e^{3\pi\mathrm{i}} \cdot (3 + 10e^{3\pi\mathrm{i}} + 8e^{6\pi\mathrm{i}})) + (e^{{9\pi\mathrm{i}}/2} \cdot (3 + 10e^{{9\pi\mathrm{i}}/2} + 8e^{9\pi\mathrm{i}}))
      \end{bmatrix}
-     \\\\[2pt] &=
+     \\\\[7pt] &=
     \begin{bmatrix}
      12
-     \\\\ 40
-     \\\\ 32
-     \\\\ 0
+     \\\\[7pt] 40
+     \\\\[7pt] 32
+     \\\\[7pt] 0
      \end{bmatrix}
      \end{aligned}
      $$
 
 $$\begin{aligned}IDFT(DFT(A)\cdot DFT(B)) &= \dfrac{1}{N}Va \\\\[2pt] &= \dfrac{1}{4}Va \\\\[2pt] &= \dfrac{1}{4} \cdot \begin{bmatrix}
      12
-     \\\\ 40
-     \\\\ 32
-     \\\\ 0
+     \\\\[7pt] 40
+     \\\\[7pt] 32
+     \\\\[7pt] 0
      \end{bmatrix}
-     \\\\[2pt] &=
+     \\\\[7pt] &=
      \begin{bmatrix}
      3
-     \\\\ 10
-     \\\\ 8
-     \\\\ 0
+     \\\\[7pt] 10
+     \\\\[7pt] 8
+     \\\\[7pt] 0
      \end{bmatrix} \end{aligned}$$
 
 To better understand $Va$, recall that $e^{{3\pi\mathrm{i}}/2}$ is $-\mathrm{i}$, $e^{3\pi\mathrm{i}}$ is $-1$ and $e^{{9\pi\mathrm{i}}/2}$ is $\mathrm{i}$
