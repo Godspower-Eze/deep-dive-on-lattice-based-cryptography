@@ -763,10 +763,10 @@ $$\omega_4 = e^{{3\pi\mathrm{i}}/2}$$
 $$\begin{aligned} \omega_4 &= \lbrace \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \rbrace \\\\[2pt] &= \lbrace 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \rbrace \end{aligned} $$  
 
 $$\begin{aligned} V &=
-    \begin{bmatrix} \omega_4^{0*0} & \omega_4^{0*1} & \omega_4^{0*2} & \omega_4^{0*3}
-    \\\\ \omega_4^{1*0} & \omega_4^{1*1} & \omega_4^{1*2} & \omega_4^{1*3}
-    \\\\ \omega_4^{2*0} & \omega_4^{2*1} & \omega_4^{2*2} & \omega_4^{2*3} 
-    \\\\  \omega_4^{3*0} & \omega_4^{3*1} & \omega_4^{3*2} & \omega_4^{3*3} 
+    \begin{bmatrix} \omega_4^{0 * 0} & \omega_4^{0 * 1} & \omega_4^{0 * 2} & \omega_4^{0 * 3}
+    \\\\ \omega_4^{1 * 0} & \omega_4^{1 * 1} & \omega_4^{1 * 2} & \omega_4^{1 * 3}
+    \\\\ \omega_4^{2 * 0} & \omega_4^{2 * 1} & \omega_4^{2 * 2} & \omega_4^{2 * 3} 
+    \\\\  \omega_4^{3 * 0} & \omega_4^{3 * 1} & \omega_4^{3 * 2} & \omega_4^{3 * 3} 
     \end{bmatrix} \\\\[2pt] &=
     \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & \omega_4^{0} & \omega_4^{0}
     \\\\ \omega_4^{0} & \omega_4^{1} & \omega_4^{2} & \omega_4^{3}
@@ -780,20 +780,20 @@ $$\begin{aligned} V &=
     \end{bmatrix} \end{aligned}$$
 
 $$\begin{aligned} V &= 
-     \begin{bmatrix} \omega_4^{0 * 0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
-     \\\\[3pt] \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
-     \\\\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
-     \\\\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
+     \begin{bmatrix} \omega_4^{0 * 0} & \omega_4^{0 * 1} & {\omega_4}^{0 * 2} & \omega_4^{0 * 3}
+     \\\\[6pt] \omega_4^{1 * 0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
+     \\\\[6pt] \omega_4^{2 * 0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
+     \\\\[6pt]  \omega_4^{3 * 0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
      \end{bmatrix} \\\\[2pt] &= 
      \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
-     \\\\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
-     \\\\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
-     \\\\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
+     \\\\[6pt] \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
+     \\\\[6pt] \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
+     \\\\[6pt]  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
      \end{bmatrix} \\\\[2pt] &= 
      \begin{bmatrix} 1 & 1 & 1 & 1 
-     \\\\ 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
-     \\\\ 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
-     \\\\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
+     \\\\[6pt] 1 & e^{{\pi\mathrm{i}}/2} & e^{\pi\mathrm{i}} & e^{{3\pi\mathrm{i}}/2}
+     \\\\[6pt] 1 & e^{\pi\mathrm{i}} & e^{2\pi\mathrm{i}} & e^{3\pi\mathrm{i}}
+     \\\\[6pt] 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
      \end{bmatrix} \end{aligned}$$
 
 - **Step 2**: Compute the DFT of $A(x)$ and $B(x)$, $\mathrm{DFT}(A)$ and $\mathrm{DFT}(B)$ respectively.
