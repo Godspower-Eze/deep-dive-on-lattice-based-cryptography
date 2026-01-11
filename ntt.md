@@ -764,19 +764,19 @@ $$\begin{aligned} \omega_4 &= \lbrace \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, 
 
 $$\begin{aligned} V &=
     \begin{bmatrix} \omega_4^{0 * 0} & \omega_4^{0 * 1} & \omega_4^{0 * 2} & \omega_4^{0 * 3}
-    \\\\ \omega_4^{1 * 0} & \omega_4^{1 * 1} & \omega_4^{1 * 2} & \omega_4^{1 * 3}
-    \\\\ \omega_4^{2 * 0} & \omega_4^{2 * 1} & \omega_4^{2 * 2} & \omega_4^{2 * 3} 
-    \\\\  \omega_4^{3 * 0} & \omega_4^{3 * 1} & \omega_4^{3 * 2} & \omega_4^{3 * 3} 
-    \end{bmatrix} \\\\[2pt] &=
+    \\\\[7pt] \omega_4^{1 * 0} & \omega_4^{1 * 1} & \omega_4^{1 * 2} & \omega_4^{1 * 3}
+    \\\\[7pt] \omega_4^{2 * 0} & \omega_4^{2 * 1} & \omega_4^{2 * 2} & \omega_4^{2 * 3} 
+    \\\\[7pt]  \omega_4^{3 * 0} & \omega_4^{3 * 1} & \omega_4^{3 * 2} & \omega_4^{3 * 3} 
+    \end{bmatrix} \\\\[5pt] &=
     \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & \omega_4^{0} & \omega_4^{0}
-    \\\\ \omega_4^{0} & \omega_4^{1} & \omega_4^{2} & \omega_4^{3}
-    \\\\ \omega_4^{0} & \omega_4^{2} & \omega_4^{4} & \omega_4^{6}
-    \\\\  \omega_4^{0} & \omega_4^{3} & \omega_4^{6} & \omega_4^{9} 
-    \end{bmatrix} \\\\[2pt] &= 
+    \\\\[7pt] \omega_4^{0} & \omega_4^{1} & \omega_4^{2} & \omega_4^{3}
+    \\\\[7pt] \omega_4^{0} & \omega_4^{2} & \omega_4^{4} & \omega_4^{6}
+    \\\\[7pt]  \omega_4^{0} & \omega_4^{3} & \omega_4^{6} & \omega_4^{9} 
+    \end{bmatrix} \\\\[5pt] &= 
     \begin{bmatrix} 1 & 1 & 1 & 1 
-    \\\\ 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
-    \\\\ 1 & e^{3\pi\mathrm{i}} & e^{6\pi\mathrm{i}} & e^{9\pi\mathrm{i}}
-    \\\\ 1 & e^{{9\pi\mathrm{i}}/2} & e^{9\pi\mathrm{i}} & e^{{27\pi\mathrm{i}}/2} 
+    \\\\[7pt] 1 & e^{{3\pi\mathrm{i}}/2} & e^{3\pi\mathrm{i}} & e^{{9\pi\mathrm{i}}/2}
+    \\\\[7pt] 1 & e^{3\pi\mathrm{i}} & e^{6\pi\mathrm{i}} & e^{9\pi\mathrm{i}}
+    \\\\[7pt] 1 & e^{{9\pi\mathrm{i}}/2} & e^{9\pi\mathrm{i}} & e^{{27\pi\mathrm{i}}/2} 
     \end{bmatrix} \end{aligned}$$
 
 $$\begin{aligned} V &= 
