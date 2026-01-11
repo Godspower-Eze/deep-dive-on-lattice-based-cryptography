@@ -73,7 +73,7 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
 1. **Convert from coefficient to point representation**: we pick a set of $x$ values and evaluate the polynomials at those points thereby converting the polynomials to the point representation.
 
-   That is, we pick $x_i = \{x_0, x_1, ... ,x_d \}$. Then, we compute $f(x_i) = \{f(x_0), f(x_1),...,f(x_d)\}$ and $g(x_i) = \{g(x_0), g(x_1),...,g(x_d)\}$.
+   That is, we pick $x_i = \lbrace x_0, x_1, ... ,x_d \rbrace$. Then, we compute $f(x_i) = \lbrace f(x_0), f(x_1),...,f(x_d) \rbrace$ and $g(x_i) = \lbraceg (x_0), g(x_1),...,g(x_d) \rbrace$.
 
    There's a way of expressing this in a matrix form:
 
@@ -91,7 +91,7 @@ Given two polynomials $f(x)$ and $g(x)$ of the form: $a_0 + a_1x + a_2x^2 + \cdo
 
    Keep this in mind, as this formula for expressing $f(x_i)$ is important in understanding FFT later.
 
-   Using $A(x)$ as an example, choosing $n = 4$ and $x =\{x_0, x_1, x_2, x_3, x_4\}= \{-5, -4, -3, -2, -1\}$, we have the following:
+   Using $A(x)$ as an example, choosing $n = 4$ and $x =\lbrace x_0, x_1, x_2, x_3, x_4 \rbrace= \lbrace-5, -4, -3, -2, -1 \rbrace$, we have the following:
 
    $$\begin{aligned} V &= \begin{bmatrix}1 & x_0 & x_0^2 & x_0^3 & x_0^4 \\\\ 1 & x_1 & x_1^2 & x_1^3 & x_1^4 \\\\ 1 & x_2 & x_2^2 & x_2^3 & x_2^4 \\\\ 1 & x_3 & x_3^2 & x_3^3 & x_3^4 \\\\ 1 & x_4 & x_4^2 & x_4^3 & x_4^4 \end{bmatrix} \\\\[2pt] &= \begin{bmatrix}1 & -5 & -5^2 & -5^3 & -5^4 \\\\ 1 & -4 & -4^2 & -4^3 & -4^4 \\\\ 1 & -3 & -3^2 & -3^3 & -3^4 \\\\ 1 & -2 & -2^2 & -2^3 & -2^4 \\\\ 1 & -1 & -1^2 & -1^3 & -1^4 \end{bmatrix} \\\\[2pt] &= \begin{bmatrix}1 & -5 & 25 & -125 & 625 \\\\ 1 & -4 & 16 & -64 & 256 \\\\1 & -3 & 9 & -27 & 81 \\\\ 1 & -2 & 4 & -8 & 16 \\\\ 1 & -1 & 1 & -1 & 1\end{bmatrix} \end{aligned}$$
 
@@ -643,7 +643,7 @@ And, there's a general formular for representing every $n$th root of unity: $$e^
 
 For example:
 
-- The $5$th roots of unity are $\{e^{{2\pi\mathrm{i} \ast 0}/5}, e^{{2\pi\mathrm{i}\ast 1}/5}, e^{{2\pi\mathrm{i} \ast 2}/5}, e^{{2\pi\mathrm{i} \ast 3}/5}, e^{{2\pi\mathrm{i} \ast 4}/5}\} = \{e^0, e^{{2\pi\mathrm{i}}/5}, e^{{4\pi\mathrm{i}}/5}, e^{{6\pi\mathrm{i}}/5}, e^{{8\pi\mathrm{i}}/5}\}$
+- The $5$th roots of unity are $\lbrace e^{{2\pi\mathrm{i} \ast 0}/5}, e^{{2\pi\mathrm{i}\ast 1}/5}, e^{{2\pi\mathrm{i} \ast 2}/5}, e^{{2\pi\mathrm{i} \ast 3}/5}, e^{{2\pi\mathrm{i} \ast 4}/5} \rbrace = \lbrace e^0, e^{{2\pi\mathrm{i}}/5}, e^{{4\pi\mathrm{i}}/5}, e^{{6\pi\mathrm{i}}/5}, e^{{8\pi\mathrm{i}}/5} \rbrace$
 
 
     
@@ -651,7 +651,7 @@ For example:
     
 
 
-- The $8$th roots of unity are $\{ e^{{2\pi\mathrm{i} \ast 0}/8}, e^{{2\pi\mathrm{i} \ast 1}/8}, e^{{2\pi\mathrm{i} \ast 2}/8}, e^{{2\pi\mathrm{i} \ast 3}/8}, e^{{2\pi\mathrm{i} \ast 4}/8}, e^{{2\pi\mathrm{i} \ast 5}/8}, e^{{2\pi\mathrm{i} \ast 6}/8}, e^{{2\pi\mathrm{i} \ast 7}/8} \} = \{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} $
+- The $8$th roots of unity are $\lbrace e^{{2\pi\mathrm{i} \ast 0}/8}, e^{{2\pi\mathrm{i} \ast 1}/8}, e^{{2\pi\mathrm{i} \ast 2}/8}, e^{{2\pi\mathrm{i} \ast 3}/8}, e^{{2\pi\mathrm{i} \ast 4}/8}, e^{{2\pi\mathrm{i} \ast 5}/8}, e^{{2\pi\mathrm{i} \ast 6}/8}, e^{{2\pi\mathrm{i} \ast 7}/8} \rbrace = \lbrace e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \rbrace $
 
 
     
@@ -663,9 +663,9 @@ For example:
 
 A common way of representing roots of unity is in terms of the primitive root of unity. Recall that a primitive root of unity generates all other roots of unity.
 
-Given a primitive root of unity $\omega_n$, the roots of unity are $\{\omega_n^{0}, \omega_n^{1}, ... , \omega_n^{n - 1}\}$ where $n$ is an arbitrary positive number.
+Given a primitive root of unity $\omega_n$, the roots of unity are $\lbrace \omega_n^{0}, \omega_n^{1}, ... , \omega_n^{n - 1} \rbrace$ where $n$ is an arbitrary positive number.
 
-For example, from the $8$th roots of unity, we pick the primitive root $\omega_8 = e^{{\pi\mathrm{i}}/4}$. That $8$th roots of unity are as follows: $$\omega^k_8 = \{\omega_8^0, \omega_8^1, \omega_8^2, \omega_8^3, \omega_8^4, \omega_8^5, \omega_8^6, \omega_8^7\}$$
+For example, from the $8$th roots of unity, we pick the primitive root $\omega_8 = e^{{\pi\mathrm{i}}/4}$. That $8$th roots of unity are as follows: $$\omega^k_8 = \lbrace \omega_8^0, \omega_8^1, \omega_8^2, \omega_8^3, \omega_8^4, \omega_8^5, \omega_8^6, \omega_8^7 \rbrace$$
 
 ---
 
@@ -678,7 +678,7 @@ For example, from the $8$th roots of unity above, Here are the complex conjugate
 - $e^{\pi\mathrm{i}/4}$ is $e^{7\pi\mathrm{i}/4}$
 - $e^{\pi\mathrm{i}/2}$ is $e^{3\pi\mathrm{i}/2}$
 
-Here are the $8$th roots of unity in rectangular form for clarification: $$\begin{aligned} \omega_8^k &= \{ e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \} \\\\[3pt] &= \{ 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \} \end{aligned}$$
+Here are the $8$th roots of unity in rectangular form for clarification: $$\begin{aligned} \omega_8^k &= \lbrace e^{0}, e^{{\pi\mathrm{i}}/4}, e^{{\pi\mathrm{i}}/2}, e^{{3\pi\mathrm{i}}/4}, e^{\pi\mathrm{i}}, e^{{5\pi\mathrm{i}}/4}, e^{{3\pi\mathrm{i}}/2}, e^{{7\pi\mathrm{i}}/4} \rbrace \\\\[3pt] &= \lbrace 1, \dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, \mathrm{i}, -\dfrac{\sqrt{2}}{2} + \mathrm{i}\dfrac{\sqrt{2}}{2}, -1, -\dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2}, - \mathrm{i}, \dfrac{\sqrt{2}}{2} - \mathrm{i}\dfrac{\sqrt{2}}{2} \rbrace \end{aligned}$$
 
 Interestingly, the complex conjugate of any root $e^{a\mathrm{i}}$ is $e^{-a\mathrm{i}}$. That is:
 
@@ -722,9 +722,9 @@ This is a key concept in next our topic: **Discrete Fourier Transform** as we ge
 
 Let's go back to where it all started: *Polynomial multiplication*.
 
-Recall, we chose a set of $x$ values, $x_i = \{x_0, x_1,..., x_n\}$ and evaluated $f(x_i)$ to get the set of points $(x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))$ and we called it the **point representation**.
+Recall, we chose a set of $x$ values, $x_i = \lbrace x_0, x_1,..., x_n \rbrace$ and evaluated $f(x_i)$ to get the set of points $(x_0, f(x_0)), (x_1, f(x_1)),...,(x_d, f(x_d))$ and we called it the **point representation**.
 
-Now, let's use roots of unit as those set $x$ values; our evaluation points. Given a primitive root of unity $\omega_n$, we have our roots of unit $w_n^k = \{\omega_n^0, \omega_n^1, \omega_n^2, ..., \omega_n^{n - 1} \}$.
+Now, let's use roots of unit as those set $x$ values; our evaluation points. Given a primitive root of unity $\omega_n$, we have our roots of unit $w_n^k = \lbrace \omega_n^0, \omega_n^1, \omega_n^2, ..., \omega_n^{n - 1} \rbrace$.
 
 With this, we have the following:
 
@@ -749,7 +749,7 @@ Let's see an example. Using the $4$th roots of unity, let's compute $C(x) = A(x)
 
   $$\omega_4 = e^{{3\pi\mathrm{i}}/2}$$
 
-  $$\begin{aligned} \omega_4 &= \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} \\\\[2pt] &= \{ 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \} \end{aligned} $$  
+  $$\begin{aligned} \omega_4 &= \lbrace \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \rbrace \\\\[2pt] &= \lbrace 1, e^{{3\pi\mathrm{i}}/2}, e^{3\pi\mathrm{i}}, e^{{9\pi\mathrm{i}}/2} \rbrace \end{aligned} $$  
 
 $$ \begin{aligned} V &= 
      \begin{bmatrix}
@@ -839,7 +839,7 @@ $$
 
     $$\omega_4 = e^{{\pi\mathrm{i}}/2}$$
 
-  $$ \begin{aligned} \omega_4 &= \{ \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \} \\[2pt] &= \{ 1, e^{{\pi\mathrm{i}}/2}, e^{\pi\mathrm{i}}, e^{{3\pi\mathrm{i}}/2} \} \end{aligned}$$  
+  $$ \begin{aligned} \omega_4 &= \lbrace \omega_4^{0}, \omega_4^{1}, \omega_4^{2}, \omega_4^{3} \rbrace \\\\[2pt] &= \lbrace 1, e^{{\pi\mathrm{i}}/2}, e^{\pi\mathrm{i}}, e^{{3\pi\mathrm{i}}/2} \rbrace \end{aligned}$$  
 
 $$\begin{aligned} V &= 
      \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
@@ -959,7 +959,7 @@ Starting from the DFT formula: $X[k] = \sum_{n=0}^{N-1} x[n]\, \omega_N^{kn}$
 
 Let's go through an example using $P(x) = 1 + 2x + 3x^2 + 4x^3$ using the $4$th roots of unity.
 
-$x_i = \{1, 2, 3, 4\}$ 
+$x_i = \lbrace 1, 2, 3, 4 \rbrace$ 
 
 We compute: $$X[0] = E[0] + \omega_4^{0}O[0]$$ $$X[2] = E[0] - \omega_4^0O[0]$$ and $$X[1] = E[1] + \omega_4O[1]$$ $$X[3] = E[1] - \omega_4O[1]$$
 
@@ -1001,7 +1001,7 @@ $$x[n] = \dfrac{1}{N}(E[n] + \omega_N^{-n}O[n])$$
 
 $$x[n + N/2] = \dfrac{1}{N}(E[n] - \omega_N^{-n}O[n])$$
 
-Let's continue from the last example. We got the DFT as $\{ 10, -2 - 2e^{{3\pi\mathrm{i}}/2}, -2, -2 + 2e^{{3\pi\mathrm{i}}/2} \}$. Let's compute the inverse DFT using inverse FFT.
+Let's continue from the last example. We got the DFT as $\lbrace 10, -2 - 2e^{{3\pi\mathrm{i}}/2}, -2, -2 + 2e^{{3\pi\mathrm{i}}/2} \rbrace$. Let's compute the inverse DFT using inverse FFT.
 
 $$x[0] = \dfrac{1}{4}(E[0] + \omega_4^{-0}O[0])$$
 
@@ -1094,7 +1094,7 @@ NTT is simply FFT over modular arithmetic (no complex numbers). We use polynomia
 
 A finite field is a field with finite elements and a **field** is a set where you add, subtract, multiply and divide by any non-zero element.
 
-An example of a finite field is the set of integers $\bmod$ 11 $\mathbb{Z}_{11}$ $$\mathbb{Z}_{11} = \{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$$
+An example of a finite field is the set of integers $\bmod$ 11 $$\mathbb{Z}_{11} = \lbrace 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 \rbrace$$
 
 - **Addition**: $3 + 25 \bmod 11 = 6$
 - **Subtraction**: $3 - 23 = -20 \bmod 11 = 2$. What we actually did here is we found the number $x$ such that $20 + x \bmod 11 = 0$ and it's called the **additive inverse**.
@@ -1123,7 +1123,7 @@ Let's take an example
 - $N = 4$
 - $q = 17$
 - $\omega = 13$
-- $\omega^k = \{ \omega^0, \omega^1, \omega^2, \omega^3 \} = \{ 13^0, 13^1, 13^2, 13^3 \} = = \{ 1, 13, 16, 4 \}$
+- $\omega^k = \lbrace \omega^0, \omega^1, \omega^2, \omega^3 \rbrace = \lbrace 13^0, 13^1, 13^2, 13^3 \rbrace = = \lbrace 1, 13, 16, 4 \rbrace$
 - $P(x) = 1 + 2x + 3x^2 + 4x^3$
 
 NTT:
