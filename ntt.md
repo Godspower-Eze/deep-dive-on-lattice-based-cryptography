@@ -745,7 +745,7 @@ $$a = \begin{bmatrix}a_0 \\\\[7pt] a_1 \\\\[7pt] a_2 \\\\[7pt] \vdots \\\\[7pt] 
 
 $$\begin{aligned}  Va &= \begin{bmatrix} a_0\omega_n^0 + a_1\omega_n^0 + a_2\omega_n^0 + \cdots + a_{n - 1}w_n^0 \\\\[7pt] a_0\omega_n^0 + a_1\omega_n^1 + a_2\omega_n^2 + \cdots + a_{n - 1}\omega_n^{n - 1} \\\\[7pt] a_0\omega_n^0 + a_1 \omega_n^2 + a_2\omega_n^4 + \cdots + a_{n - 1} \omega_n^{2n - 2} \\\\[7pt] \vdots \\\\[7pt] a_0\omega_n^0 + a_1\omega_n^{n - 1} + a_2\omega_n^{2n - 2} + \cdots + a_{n - 1}\omega_n^{n^2 - 2n + 1} \end{bmatrix} \\\\[7pt] &= \begin{bmatrix} f(\omega_n^0) \\\\[7pt] f(\omega_n^1) \\\\[7pt] f(\omega_n^2) \\\\[7pt] \vdots \\\\[7pt] f(\omega_n^{n - 1}) \end{bmatrix} \\\\[7pt] &= f(w_n^k) \end{aligned}$$
 
-Breifly, what is DFT? DFT is an algorithm that turns a signal from the time domain into the frequency domain. It used in Signal analysis, Image Compression and a lot more. 
+Briefly, what is DFT? DFT is an algorithm that turns a signal from the time domain into the frequency domain. It used in Signal analysis, Image Compression and a lot more. 
 
 A good way to look at DFT is an algorithm that seeks to get more information from individual values that were created out of a combination of different measurements of values. For instance, given an chord(a chord is a set of notes played together), DFT can be used to get the frequency of the individual notes that makes up the chord.
 
