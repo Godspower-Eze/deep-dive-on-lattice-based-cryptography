@@ -8,7 +8,7 @@ This article is part one of two-part series  titled **Fast-fourier Transform (FT
 
 As always, we are going to take a discovery approach, building up slowly from the familiar to the unfamiliar.
 
-## Fast-fourier Transform (FFT)
+## Polynomial Multiplication
 
 Given two polynomials $A$ and $B$ of degree 2 :
 - $A = 3 - 4x + x^2$
@@ -126,7 +126,7 @@ Fast-fourier Transform (FFT) gives us that. FFT allows us to do step one and ste
 
 To understand FFT, we need to understand the concept of **complex numbers** and **roots of unity**
 
-### Complex Numbers and Roots of Unity
+## Complex Numbers and Roots of Unity
 
 The magic of FFT is based on the beautiful concept of roots of unity but that in turn is only made possible by the unique properties of complex numbers. So, here's a deep dive on complex numbers and roots of unity.
 
@@ -718,7 +718,7 @@ As you can see in the diagrams $e^{{3\pi\mathrm{i}}/4}$ rotated $2$ by ${3\pi}/4
 
 This is a key concept in next our topic: **Discrete Fourier Transform** as we get closer to understanding FFT.
 
-### Discrete Fourier Transform (DFT)
+## Discrete Fourier Transform (DFT)
 
 Let's go back to where it all started: *Polynomial multiplication*.
 
@@ -907,7 +907,7 @@ To better understand $Va$, recall that $e^{{3\pi\mathrm{i}}/2}$ is $-\mathrm{i}$
 
 As you can see, we have successfully performed polynomial multiplication using DFT! Finally, let's see how FFT works!
 
-### How FFT works
+## How FFT works
 
 FFT is a recursive exploits the structure of the DFT construction and two properties of roots of unity.
 
@@ -963,13 +963,13 @@ $x_i = \{1, 2, 3, 4\}$
 
 We compute: $$X[0] = E[0] + \omega_4^{0}O[0]$$ $$X[2] = E[0] - \omega_4^0O[0]$$ and $$X[1] = E[1] + \omega_4O[1]$$ $$X[3] = E[1] - \omega_4O[1]$$
 
-So to solve, we just have to compute $E[0]$, $O[0]$, $E[1]$ and $O[1]$.
+To solve we just have to compute $E[0]$, $O[0]$, $E[1]$ and $O[1]$.
 
-$$\begin{aligned} E[0] &= \sum_{m=0}^{1} x[2m], \omega_{2}^{0} \\[6pt] &= \sum_{m=0}^{1} x[2m] \\[6pt] &= x[0] + x[2] \\[6pt] &= 1 + 3 \\[6pt] &= 4 \end{aligned}$$
+$$\begin{aligned} E[0] &= \sum_{m=0}^{1} x[2m] \omega_{2}^{0} \\[6pt] &= \sum_{m=0}^{1} x[2m] \\[6pt] &= x[0] + x[2] \\[6pt] &= 1 + 3 \\[6pt] &= 4 \end{aligned}$$
 
 $$\begin{aligned} O[0] &= \sum_{m=0}^{1} x[2m] \\[6pt] &= x[1] + x[3] \\[6pt] &= 2 + 4 \\[6pt] &= 6 \end{aligned}$$
 
-$$\begin{aligned} E[1] &= \sum_{m=0}^{1} x[2m] \omega_{2} \\[6pt] &= \sum_{m=0}^{1} x[2m]\omega_{2} \\[6pt] &= x[0] + x[2]\omega_{2} \\[6pt] &= 1 + (3\cdot-1) \\[6pt] &= -2 \end{aligned}$$
+$$\begin{aligned} E[1] &= \sum_{m=0}^{1} x[2m]\omega_{2}^k \\[6pt] &= x[0] + x[2]\omega_{2} \\[6pt] &= 1 + (3\cdot-1) \\[6pt] &= -2 \end{aligned}$$
 
 $$\begin{aligned} O[1] &= \sum_{m=0}^{1} x[2m]  \omega_{2} \\[6pt] &= x[1] + x[3]\omega_{2} \\[6pt] &= 2 - 4 \\[6pt] &= -2 \end{aligned}$$
 
@@ -979,6 +979,113 @@ $$\begin{aligned} X[0] &= E[0] + \omega_4^{0}O[0] \\[6pt] &= E[0] + O[0] \\[6pt]
 
 $$\begin{aligned} X[2] &= E[0] - O[0] \\[6pt] &= 4 - 6 \\[6pt] &= -2 \end{aligned}$$
 
-$$\begin{aligned} X[1] &= E[1] + \omega_4O[1] \\[6pt] &= E[1] + \omega_4O[1] \\[6pt] &= -2 + (\omega_4 \cdot -2) \\[6pt] &= -2 + (e^{{\pi\mathrm{i}}/2} \cdot -2) \\[6pt] &= -2 - 2e^{{\pi\mathrm{i}}/2} \end{aligned}$$
+$$\begin{aligned} X[1] &= E[1] + \omega_4O[1] \\[6pt] &= E[1] + \omega_4O[1] \\[6pt] &= -2 + (\omega_4 \cdot -2) \\[6pt] &= -2 + (e^{{3\pi\mathrm{i}}/2} \cdot -2) \\[6pt] &= -2 - 2e^{{3\pi\mathrm{i}}/2} \end{aligned}$$
 
-$$\begin{aligned} X[3] &= E[1] - \omega_4O[1] \\[6pt] &= -2 + 2e^{{\pi\mathrm{i}}/2} \end{aligned}$$
+$$\begin{aligned} X[3] &= E[1] - \omega_4O[1] \\[6pt] &= -2 + 2e^{{3\pi\mathrm{i}}/2} \end{aligned}$$
+
+In the same vein, let's look into inverse FFT.
+
+Starting from the inverse DFT formula: $x[n] = \frac{1}{N} \sum_{m=0}^{N-1} X[m]\, \omega_N^{-mn}$
+
+$$\begin{aligned}x[n] &= \dfrac{1}{N}(\sum_{m=0}^{(N/2)-1} X[2m]\, \omega_N^{-n(2m)} + \sum_{m=0}^{(N/2)-1} X[2m + 1]\, \omega_N^{-n(2m + 1)}) \\[6pt] &= \dfrac{1}{N}(\sum_{m=0}^{(N/2)-1} X[2m]\, \omega_{N/2}^{-nm} + \omega_{N}^{-n}\sum_{m=0}^{(N/2)-1} X[2m + 1]\, \omega_{N/2}^{-nm}) \end{aligned}$$
+
+The even and odd parts:
+
+$$E[n] = \sum_{m=0}^{(N/2)-1} x[2m]\, \omega_{N/2}^{-nm}$$
+
+$$O[n] = \sum_{m=0}^{(N/2)-1} x[2m + 1]\, \omega_{N/2}^{-nm}$$
+
+Then:
+
+$$x[n] = \dfrac{1}{N}(E[n] + \omega_N^{-n}O[n])$$ 
+
+$$x[n + N/2] = \dfrac{1}{N}(E[n] - \omega_N^{-n}O[n])$$
+
+Let's continue from the last example. We got the DFT as $\{ 10, -2 - 2e^{{3\pi\mathrm{i}}/2}, -2, -2 + 2e^{{3\pi\mathrm{i}}/2} \}$. Let's compute the inverse DFT using inverse FFT.
+
+$$x[0] = \dfrac{1}{4}(E[0] + \omega_4^{-0}O[0])$$
+
+$$x[2] = \dfrac{1}{4}(E[0] - \omega_4^{-0}O[0])$$ and 
+
+$$x[1] = \dfrac{1}{4}(E[1] + \omega_4^{-1}O[1])$$
+
+$$x[3] = \dfrac{1}{4}(E[1] - \omega_4^{-1}O[1])$$
+
+We will compute $E[0]$, $O[0]$, $E[1]$ and $O[1]$.
+
+$$\begin{aligned} E[0] &= \sum_{m=0}^{1} X[2m] \\[6pt] &= X[0] + X[2] \\[6pt] &= 10 - 2 \\[6pt] &= 8 \end{aligned}$$
+
+$$\begin{aligned} O[0] &= \sum_{m=0}^{1} X[2m] \\[6pt] &= X[1] + X[3] \\[6pt] &= -2 - 2e^{{3\pi\mathrm{i}}/2} -2 + 2e^{{3\pi\mathrm{i}}/2} \\[6pt] &= -4 \end{aligned}$$
+
+$$\begin{aligned} E[1] &= \sum_{m=0}^{1} X[2m] \omega_{2}^{-m} \\[6pt] &= X[0] + X[2]\omega_{2}^{-1} \\[6pt] &= 10 + (-2\cdot-1) \\[6pt] &= 12 \end{aligned}$$
+
+$$\begin{aligned} O[1] &= \sum_{m=0}^{1} X[2m]  \omega_{2}^{-m} \\[6pt] &= X[1] + X[3]\omega_{2}^{-1} \\[6pt] &= -2 - 2e^{{3\pi\mathrm{i}}/2} + (-2 + 2e^{{3\pi\mathrm{i}}/2}\cdot -1) \\[6pt] &= -2 - 2e^{{3\pi\mathrm{i}}/2} + 2 - 2e^{{3\pi\mathrm{i}}/2} \\[6pt] &= -4e^{{3\pi\mathrm{i}}/2}  \end{aligned}$$
+
+Now, let's use it in $x[n]$:
+
+$$\begin{aligned} x[0] &= \dfrac{1}{4}(E[0] + \omega_4^{0}O[0]) \\[6pt] &= \dfrac{1}{4}(E[0] + O[0]) \\[6pt] &= \dfrac{1}{4}(8 - 4) \\[6pt] &= \dfrac{1}{4}(4) \\[6pt] &= 1 \end{aligned}$$
+
+$$\begin{aligned} x[2] &= \dfrac{1}{4}(E[0] - O[0]) \\[6pt] &= \dfrac{1}{4}(8 + 4) \\[6pt] &= \dfrac{1}{4}(12) \\[6pt] &= 3 \end{aligned}$$
+
+$$\begin{aligned} x[1] &= \dfrac{1}{4}(E[1] + \omega_4^{-1}O[1]) \\[6pt] &= \dfrac{1}{4}(12 + (\omega_4^{-1} \cdot -4e^{{3\pi\mathrm{i}}/2})) \\[6pt] &= \dfrac{1}{4}(12 + (e^{{\pi\mathrm{i}}/2} \cdot -4e^{{3\pi\mathrm{i}}/2})) \\[6pt] &= \dfrac{1}{4}(12 - 4) \\[6pt] &= \dfrac{1}{4}(8) \\[6pt] &= 2 \end{aligned}$$
+
+$$\begin{aligned} x[3] &= \dfrac{1}{4}(E[1] - \omega_4^{-1}O[1]) \\[6pt] &= -\dfrac{1}{4}(12 - (\omega_4^{-1} \cdot -4e^{{3\pi\mathrm{i}}/2})) \\[6pt] &= \dfrac{1}{4}(12 - (e^{{\pi\mathrm{i}}/2} \cdot -4e^{{3\pi\mathrm{i}}/2})) \\[6pt] &= \dfrac{1}{4}(12 + 4) \\[6pt] &= \dfrac{1}{4}(16) \\[6pt] &= 4 \end{aligned}$$
+
+As you can see FFT and inverse FFT are the same algorithm with changes in the primitive root and division by $N$ at end.
+
+Note that this only works when $N$ is power of 2. There are other versions of FFT that deal with other numbers but that's out of the scope right now and this is recursive algorithm so we keep perform them on the even/odd parts until $N$ is 1.
+
+Below is an implementation of both algorithms in python
+
+```python
+def fft(x):
+    N = len(x)
+    if N == 1:
+        return x
+
+    wN = cmath.exp(-2j * cmath.pi / N)
+
+    even = fft(x[0::2])
+    odd  = fft(x[1::2])
+
+    X = [0] * N
+    w = 1
+    for k in range(N // 2):
+        t = w * odd[k]
+        X[k] = even[k] + t
+        X[k + N // 2] = even[k] - t
+        w *= wN
+
+    return X
+
+def ifft(X):
+    N = len(X)
+    if N == 1:
+        return X
+
+    wN = cmath.exp(2j * cmath.pi / N)
+
+    even = ifft(X[0::2])
+    odd  = ifft(X[1::2])
+
+    x = [0] * N
+    w = 1
+    for k in range(N // 2):
+        t = w * odd[k]
+        x[k] = even[k] + t
+        x[k + N // 2] = even[k] - t
+        w *= wN
+
+    return [v / 2 for v in x]   # divide by 2 at each level → 1/N total
+
+x = [1, 2, 3, 4]
+X = fft(x)
+xr = ifft(X)
+
+print(X)
+print(xr)
+```
+
+Lastly, let's briefly look at Number Theoritic Transform and how it relates to FFT.
+
+## Number Theoritic Transform (NTT)
