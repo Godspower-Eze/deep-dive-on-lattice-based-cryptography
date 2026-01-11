@@ -780,7 +780,7 @@ $$\begin{aligned} V &=
     \end{bmatrix} \end{aligned}$$
 
 $$\begin{aligned} V &= 
-     \begin{bmatrix} \omega_4^{0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
+     \begin{bmatrix} \omega_4^{0 * 0} & \omega_4^{0} & {\omega_4}^{0} & \omega_4^{0}
      \\\\ \omega_4^{0} & \omega_4^{1} & {\omega_4}^{2} & \omega_4^{3}
      \\\\ \omega_4^{0} & \omega_4^{2} & {\omega_4}^{4} & \omega_4^{6}
      \\\\  \omega_4^{0} & \omega_4^{3} & {\omega_4}^{6} & \omega_4^{9}
